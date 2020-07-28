@@ -1,0 +1,2 @@
+@echo off
+arduino-builder -hardware "%cd%" -tools "%cd%\tools" -tools "%cd%\tools-builder" -built-in-libraries "%cd%\libraries" -fqbn=arduino:avr:%1 -build-cache "%cd%\cache" -build-path "%cd%\build" "%cd%\ino\sketch.ino"

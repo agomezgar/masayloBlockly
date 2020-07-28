@@ -1,0 +1,111 @@
+@CHARSET "UTF-8";
+#toptitle {
+    -webkit-app-region: drag;
+	height: 41px;
+	text-align: center;
+	line-height: 41px;
+	vertical-align: middle;
+	background: #d9534f;
+	padding: none;
+	margin: 0px
+}
+#title {
+	position: fixed;
+	left: 5px;
+	color: white
+}
+#title-bar-btns {
+	-webkit-app-region: no-drag;
+	position: fixed;
+	right: 0px
+}
+#divfenetre {
+	background: #fff;
+    position: absolute;
+    top: 45px;
+    bottom: 0px;
+    width: 100%
+}
+#blockly_l{
+	background: #fff;
+	float: left;
+	width: 55%
+}
+#btn_group {
+	background: #fff;
+	position: absolute;
+	left: 5px;
+}
+#blockly{
+	background: #fff;
+	position: absolute;
+    top: 37px;
+    bottom: 0px;
+	padding: 5px;
+}
+#blockly_r{
+	background: #fff;
+	float: right;
+	height: 100%;
+	width: 45%
+}
+#generatorPre {
+	font-size: 15px;
+    position: absolute;
+	border: 1px solid #d9534f;
+}
+pre {
+	font-size: 15px;
+	border: 1px solid #d9534f;
+	overflow:auto
+}
+.tooltip-inner{
+	background-color: #d9534f;
+}
+.my_select{
+	height: 22px;  
+	border-top-right-radius: 3px; 
+	border-bottom-right-radius: 3px;
+	border-left-width: 0px;
+	color: gray
+}
+.btn_color {
+	color: gray;
+}
+.btn-minmaxred { 
+  color: #fff; 
+  width: 40px;
+  height: 40px;
+  background: #d9534f; 
+  border-color: #d9534f; 
+  line-height: 0px;
+  padding:0;
+}
+.btn-quitred { 
+  color: #fff; 
+  width: 40px;
+  height: 40px;
+  background: #d9534f; 
+  border-color: #d9534f; 
+  line-height: 0px;
+  padding:0;
+}
+.blocklyToolboxDiv {
+	opacity: 0.8 
+}
+.blocklyTreeRow {
+	height: 30px !important;
+	line-height: 30px !important
+}
+.blocklyScrollbarHandle {
+	fill: #d9534f;
+}
+.blocklyScrollbarBackground:hover+.blocklyScrollbarHandle, .blocklyScrollbarHandle:hover {
+	fill: #d9534f;
+}
+.blocklyFlyout .blocklyScrollbarHandle {
+	fill: #d9534f;
+}
+.blocklyFlyout .blocklyScrollbarBackground:hover+.blocklyScrollbarHandle, .blocklyFlyout .blocklyScrollbarHandle:hover {
+	fill: #d9534f;
+}
