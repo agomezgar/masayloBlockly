@@ -127,7 +127,7 @@
   "url": "https://github.com/agomezgar/masayloBlockly"
  },
  "devDependencies": {
-  "electron": "7.2.4",
+  "electron": "4.1.1",
   "electron-builder": "20.39.0"
  },
  "dependencies": {
