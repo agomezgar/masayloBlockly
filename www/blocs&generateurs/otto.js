@@ -14,7 +14,7 @@ Blockly.Blocks['otto9_home'] = {init: function() {
     this.setInputsInline(false);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-  this.setColour("#ff0000");
+  this.setColour("#32d900");
     this.setTooltip(Blockly.Msg.OTTO9_HOME_TOOLTIP);
     this.setHelpUrl(Blockly.Msg.OTTO9_DIY_URL);  }
 };

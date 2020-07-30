@@ -40,11 +40,11 @@
   "asar": false,
   "directories": {
    "buildResources": "./build",
-   "output": "../dist"
+   "output": "./dist"
   },
   "nsis": {
-   "installerIcon": "build/install.ico",
-   "uninstallerIcon": "build/app.ico",
+   "installerIcon": "build/installM.ico",
+   "uninstallerIcon": "build/appM.ico",
    "oneClick": false,
    "perMachine": true,
    "deleteAppDataOnUninstall": true,
@@ -58,7 +58,7 @@
     "portable",
     "zip"
    ],
-   "icon": "build/app.ico"
+   "icon": "build/appM2.ico"
   },
   "fileAssociations": [
    {
@@ -113,18 +113,18 @@
   "publish": [
    {
     "provider": "github",
-    "repo": "blocklino",
-    "owner": "fontainejp",
+    "repo": "masayloBlockly",
+    "owner": "agomezgar",
     "releaseType": "release"
    }
   ]
  },
  "repository": {
   "type": "git",
-  "url": "https://github.com/fontainejp/blocklino"
+  "url": "https://github.com/agomezgar/masayloBlockly"
  },
  "bugs": {
-  "url": "https://github.com/fontainejp/blocklino/issues"
+  "url": "https://github.com/agomezgar/masayloBlockly"
  },
  "devDependencies": {
   "electron": "4.1.1",

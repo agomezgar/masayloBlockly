@@ -5,7 +5,7 @@ BlocklyDuino.selectedToolbox = "toolbox_arduino_all";
 BlocklyDuino.selectedCard = "uno";
 BlocklyDuino.content = "on";
 BlocklyDuino.contentHTML = "on";
-BlocklyDuino.theme = "sqlserver";
+BlocklyDuino.theme = "masaylo";
 BlocklyDuino.size = "14px";
 BlocklyDuino.workspace = null;
 BlocklyDuino.loadOnce = "";
@@ -46,7 +46,7 @@ BlocklyDuino.loadFile = function() {
 		BlocklyDuino.loadBlocks();
 	}
 	if (urlFile.endsWith(".py")) {
-		$.get(urlFile, function(data) { 
+		$.get(urlFile, function(data) {
 			if (content=="on") $('#codeORblock').bootstrapToggle("off")
 			editor.session.setMode("ace/mode/python");
 			editor.setOptions({
@@ -58,7 +58,7 @@ BlocklyDuino.loadFile = function() {
 		}, 'text')
 	}
 	if (urlFile.endsWith(".ino")) {
-		$.get(urlFile, function(data) { 
+		$.get(urlFile, function(data) {
 			if (content=="on") $('#codeORblock').bootstrapToggle("off")
 			editor.session.setMode("ace/mode/c_cpp");
 			editor.setOptions({
@@ -183,14 +183,14 @@ BlocklyDuino.loadConfig = function() {
 	if (prog == "python") {
 		$('#btn_bin').addClass("hidden")
 	}
-	if ((theme === undefined)||(theme=="sqlserver")) {
+	if ((theme === undefined)||(theme=="masaylo")) {
 		$('#theme').val(BlocklyDuino.theme);
-		BlocklyDuino.theme_sqlserver();
+		BlocklyDuino.theme_masaylo();
 		window.localStorage.theme = BlocklyDuino.theme;
 	} else {
 		$('#theme').val("monokai");
-		BlocklyDuino.theme_monokai();		
-		editor.setTheme('ace/theme/monokai');	
+		BlocklyDuino.theme_monokai();
+		editor.setTheme('ace/theme/monokai');
 		window.localStorage.theme = "monokai";
 	}
 	if (size === undefined) {
@@ -237,7 +237,7 @@ BlocklyDuino.change_card = function() {
 						var new_toolbox = "toolbox_microbit";
 					} else {
 						var new_toolbox = "toolbox_lycee";
-					}					
+					}
 					window.localStorage.prog = new_prog;
 					window.localStorage.toolbox = new_toolbox;
 					BlocklyDuino.workspace.clear();
@@ -311,7 +311,7 @@ BlocklyDuino.Redo = function() {
 		Blockly.mainWorkspace.undo(1)
 	} else {
 		editor.redo()
-	}	
+	}
 }
 BlocklyDuino.search = function() {
 	editor.execCommand("find")
@@ -325,7 +325,7 @@ BlocklyDuino.bindFunctions = function() {
 	$('.modal-child').on('show.bs.modal', function () {
 		var modalParent = $(this).attr('data-modal-parent');
 		$(modalParent).css('opacity', 0)
-	}); 
+	});
 	$('.modal-child').on('hidden.bs.modal', function () {
 		var modalParent = $(this).attr('data-modal-parent');
 		$(modalParent).css('opacity', 1)
@@ -353,7 +353,7 @@ BlocklyDuino.bindFunctions = function() {
 	$('#toolboxes').on("focus", function() {
 		BlocklyDuino.selectedToolbox = $(this).val();
 	});
-	$('#toolboxes').on("change", BlocklyDuino.changeToolboxDefinition);	
+	$('#toolboxes').on("change", BlocklyDuino.changeToolboxDefinition);
 	$('#configModal').on('hidden.bs.modal', function(e) {
 		BlocklyDuino.loadToolboxDefinition(BlocklyDuino.selectedToolbox);
 	});
@@ -438,11 +438,37 @@ BlocklyDuino.theme_sqlserver = function () {
 	document.getElementById("btn_about").className = document.getElementById("btn_about").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
 	document.getElementById("btn_undo").className = document.getElementById("btn_undo").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
 	document.getElementById("btn_redo").className = document.getElementById("btn_redo").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
-	document.getElementById("btn_print").className = document.getElementById("btn_print").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );	
-	document.getElementById("btn_flash").className = document.getElementById("btn_flash").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );	
-	document.getElementById("btn_saveino").className = document.getElementById("btn_saveino").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );	
-	document.getElementById("btn_copy").className = document.getElementById("btn_copy").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );	
-	document.getElementById("btn_search").className = document.getElementById("btn_search").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );	
+	document.getElementById("btn_print").className = document.getElementById("btn_print").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_flash").className = document.getElementById("btn_flash").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_saveino").className = document.getElementById("btn_saveino").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_copy").className = document.getElementById("btn_copy").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_search").className = document.getElementById("btn_search").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_tint").className = document.getElementById("btn_tint").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_term").className = document.getElementById("btn_term").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_verify").className = document.getElementById("btn_verify").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_bin").className = document.getElementById("btn_bin").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_games").className = document.getElementById("btn_games").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+}
+BlocklyDuino.theme_masaylo = function () {
+	document.getElementById("theme_css").href = "css/blocklino_masaylo.css";
+	document.getElementById("btn_preview").className = document.getElementById("btn_preview").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_new").className = document.getElementById("btn_new").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_example").className = document.getElementById("btn_example").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_fakeload").className = document.getElementById("btn_fakeload").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_saveXML").className = document.getElementById("btn_saveXML").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_config").className = document.getElementById("btn_config").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_html").className = document.getElementById("btn_html").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_factory").className = document.getElementById("btn_factory").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_card").className = document.getElementById("btn_card").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_usb").className = document.getElementById("btn_usb").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_about").className = document.getElementById("btn_about").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_undo").className = document.getElementById("btn_undo").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_redo").className = document.getElementById("btn_redo").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_print").className = document.getElementById("btn_print").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_flash").className = document.getElementById("btn_flash").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_saveino").className = document.getElementById("btn_saveino").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_copy").className = document.getElementById("btn_copy").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
+	document.getElementById("btn_search").className = document.getElementById("btn_search").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
 	document.getElementById("btn_tint").className = document.getElementById("btn_tint").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
 	document.getElementById("btn_term").className = document.getElementById("btn_term").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
 	document.getElementById("btn_verify").className = document.getElementById("btn_verify").className.replace( /(?:^|\s)btn-secondary(?!\S)/g , ' btn-default' );
@@ -456,7 +482,7 @@ BlocklyDuino.apply_theme = function () {
 	if (new_theme == "monokai") {
 		BlocklyDuino.theme_monokai()
 	} else {
-		BlocklyDuino.theme_sqlserver()
+		BlocklyDuino.theme_masaylo()
 	}
 }
 BlocklyDuino.checkAll = function () {
@@ -464,7 +490,7 @@ BlocklyDuino.checkAll = function () {
         $('#modal-body-config input:checkbox[id^=checkbox_]').each(function() {
             this.checked = true;
         });
-    } 
+    }
       else {
       $('#modal-body-config input:checkbox[id^=checkbox_]').each(function() {
             this.checked = false;
@@ -532,7 +558,7 @@ BlocklyDuino.buildToolbox = function() {
 		}
 		window.localStorage.toolboxids = loadIds;
 	}
-	var xmlValue = '<xml id="toolbox">';	
+	var xmlValue = '<xml id="toolbox">';
 	var xmlids = loadIds.split(",");
 	for (var i = 0; i < xmlids.length; i++) {
 		if ($('#'+xmlids[i]).length) {
@@ -551,7 +577,7 @@ BlocklyDuino.loadToolboxDefinition = function(toolboxFile) {
 	}).done(function(data){
 		var toolboxXml = '<xml id="toolbox" style="display: none">' + $(data).find('toolbox').html() + '</xml>';
 		$("#toolbox").remove();
-		$('body').append(toolboxXml);	
+		$('body').append(toolboxXml);
 		$("xml").find("category").each(function() {
 			if (!$(this).attr('id')) {
 				$(this).attr('id', $(this).attr('name'));

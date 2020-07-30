@@ -10,7 +10,7 @@ Code.LANGUAGE_RTL = ['ar', 'fa', 'he'];
 Code.getLang = function() {
   var lang = window.localStorage.lang;
   if (lang === undefined) {
-    lang = 'en'
+    lang = 'es'
 	window.localStorage.lang = lang;
   }
   return lang

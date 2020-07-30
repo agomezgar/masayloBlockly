@@ -31,6 +31,7 @@
 	<script src="blocs&generateurs/FRESNEL/arduino_conversion_blocs.js"></script>
 	<script src="blocs&generateurs/FRESNEL/Addon_Arduino.js"></script>
 	<script src="blocs&generateurs/masaylo.js"></script>
+	<script src="blocs&generateurs/otto.js"></script>
 	<script src="blocs&generateurs/FRESNEL/Bitwise_operators_blocs.js"></script>
 	<script src="blocs&generateurs/FRESNEL/Fresnel_serial_console.js"></script>
 	<script src="blocs&generateurs/FRESNEL/Fresnel_LCD.js"></script>
@@ -56,13 +57,14 @@
 	<link rel="stylesheet" href="css/bootstrap.min.3.3.6.css">
 	<link rel="stylesheet" href="css/bootstrap.toggle.min.css">
 	<link rel="stylesheet" href="css/fontawesome.css">
-	<link id="theme_css" rel="stylesheet" href="css/blocklino_sqlserver.css">
+	<link id="theme_css" rel="stylesheet" href="css/blocklino_masaylo.css">
 	<link rel="stylesheet" href="css/prettify.min.css">
 </head>
 <body onload="BlocklyDuino.init()">
 	<div class="loading"></div>
 	<div id="toptitle">
 		<div id="title">
+			<span><img src="media/logoCabecera.png" width="48" height="48"></span
             <strong><span id="span_title1"></span></strong><span id="span_title2"></span><em><span id="span_file"></span></em>
 		</div>
         <div id="title-bar-btns">
@@ -153,13 +155,13 @@
 				<select class="my_select" id="portserie" onchange="BlocklyDuino.save_com();"></select>
 			</div>
 			<div class="btn-group">
-				<button id="btn_verify" class="btn btn-default btn_color" data-toggle="tooltip" data-placement="bottom" title="VERIFIER">
+				<button id="btn_verify" class="btn btn-default btn_color" data-toggle="tooltip" data-placement="bottom" title="COMPILAR">
 					<i class="fa fa-check fa-1_5x"></i>
 				</button>
-				<button id="btn_flash" class='btn btn-default btn_color' data-toggle="tooltip" data-placement="bottom" title="TELEVERSER">
+				<button id="btn_flash" class='btn btn-default btn_color' data-toggle="tooltip" data-placement="bottom" title="CARGAR">
 					<i class="fa fa-arrow-right fa-1_5x"></i>
 				</button>
-				<button id="btn_bin" class='btn btn-default btn_color' data-toggle="tooltip" data-placement="bottom" title="EXPORTER les binaires">
+				<button id="btn_bin" class='btn btn-default btn_color' data-toggle="tooltip" data-placement="bottom" title="EXPORTAR binarios">
 					<i class="fa fa-code-fork fa-1_5x"></i>
 				</button>
 			</div>
@@ -525,10 +527,10 @@
 				<label id="span_languageMenu"></label>
 				<select id="languageMenu"></select><br><br>
 				<label id="span_theme"></label>
-				<select id="theme">
+				<!-- <select id="theme">
 					<option value="monokai">Sombre</option>
 					<option value="sqlserver" selected="selected">Clair</option>
-				</select><br><br>
+				</select><br><br> -->
 				<label id="span_fontsize"></label>
 				<select id="fontsize">
 					<option value="12px">12</option>
@@ -541,18 +543,18 @@
 				<div id="divToolbox">
 					<label id="labelToolboxDefinition"></label>
 					<select id="toolboxes">
-						<option value="toolbox_6">Débutant</option>
-						<option value="toolbox_arduino_all" selected="selected">Initié</option>
-						<option value="toolbox_microbit">Confirmé</option>
-						<option value="toolbox_lycee">Expert</option>
-						<option value="toolbox_fresnel_all">Maître</option>
+						<option value="toolbox_6" selected="selected">Primerizo</option>
+						<!-- <option value="toolbox_arduino_all" selected="selected">Initié</option>
+						<option value="toolbox_microbit">Confirmé</option> -->
+						<option value="toolbox_arduino_all">Experto</option>
+						<!-- <option value="toolbox_fresnel_all">Maître</option> -->
 					</select>
 				</div>
 			</div>
 		  <input type="checkbox" name="select_all" id="select_all"><span id="span_select_all"></span>
 		  <div class="modal-body" id="modal-body-config"></div>
 		  <div class="modal-footer">
-			<button id="btn_reset" type="button" class="btn btn-danger"><i class='fa fa-trash-o fa-lg'></i> Vider le cache</button>
+			<button id="btn_reset" type="button" class="btn btn-danger"><i class='fa fa-trash-o fa-lg'></i> Vaciar memoria caché</button>
 			<button id="btn_valid_config" type="button" class="btn btn-primary"></button>
 		  </div>
 		</div>
