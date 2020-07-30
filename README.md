@@ -1,4 +1,4 @@
-# <img src="https://github.com/agomezgar/masaylo/blob/master/Images/montaje/7acabado.png" alt="Masaylo icon"> MASAYLO
+# <img src="https://github.com/agomezgar/masayloBlockly/blob/master/www/media/logoCabecera.png" alt="Masaylo icon"> MASAYLO
 All has been done with the best of wills. Thanks to @fontainejp for his great work. Learning and understanding because of him an @cparrapa. This document must be improved along incoming months.
 
 
