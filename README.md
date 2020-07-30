@@ -1,4 +1,5 @@
-# <img src="https://github.com/agomezgar/masayloBlockly/blob/master/www/media/logoCabecera.png" alt="Masaylo icon"> MASAYLO
+# <img src="https://github.com/agomezgar/masayloBlockly/blob/master/www/media/logoCabecera.png" alt="Masaylo icon"> <br>
+<h1>MASAYLOBLOCKLY. Robótica en el aula</h1>
 All has been done with the best of wills. Thanks to @fontainejp for his great work. Learning and understanding because of him an @cparrapa. This document must be improved along incoming months.
 
 
