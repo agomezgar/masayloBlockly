@@ -1,7 +1,7 @@
 'use strict';
 
 var BlocklyDuino = {};
-BlocklyDuino.selectedToolbox = "toolbox_arduino_all";
+BlocklyDuino.selectedToolbox = "toolbox_6";
 BlocklyDuino.selectedCard = "nano";
 BlocklyDuino.content = "on";
 BlocklyDuino.contentHTML = "on";

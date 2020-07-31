@@ -175,6 +175,7 @@ var profile = {
 		voltage: "5V",
 		inout: "20"
 	},
+	
 	nanooptiboot: {
 	    description: "Arduino Nano",
 	    BUILTIN_LED: 13,
@@ -196,6 +197,7 @@ var profile = {
 		voltage: "5V",
 		inout: "20"
 	},
+
 	nona4809: {
 	    description: "Arduino Nano Every",
 	    BUILTIN_LED: 13,

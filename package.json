@@ -36,7 +36,7 @@
   "publier": "build --win --ia32 -p always"
  },
  "build": {
-  "appId": "com.electron.masaylo",
+  "appId": "com.electron.blocklino",
   "asar": false,
   "directories": {
    "buildResources": "./build",
@@ -50,7 +50,7 @@
    "deleteAppDataOnUninstall": true,
    "allowToChangeInstallationDirectory": true,
    "runAfterFinish": true,
-   "include": "build/masaylo.nsh"
+   "include": "build/blocklino.nsh"
   },
   "win": {
    "target": [

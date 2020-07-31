@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <toolbox>
-	<parametre id="defaultCategories">CAT_LOGIC,CAT_MATH,CAT_VARIABLES,CAT_ANALOGIQUE,CAT_ARDUINO,CAT_ARDUINO_TIME,CAT_servo,CAT_MASAYLO,CAT_OTTO,CAT_OTTOH,CAT_del,CAT_DFPLAYER</parametre>
+	<parametre id="defaultCategories">CAT_ESCORNABOT,CAT_LOGIC,CAT_MATH,CAT_VARIABLES,CAT_ANALOGIQUE,CAT_ARDUINO,CAT_ARDUINO_TIME,CAT_servo,CAT_MASAYLO,CAT_OTTO,CAT_OTTOH,CAT_del,CAT_DFPLAYER</parametre>
     <category name="CAT_ARDUINO" colour="#2d2d64">
 		<block type="base_begin"></block>
 		<block type="base_end"></block>
@@ -25,6 +25,20 @@
 			<block type="masaylo_blackright"></block>
 			<block type="masaylo_blankleft"></block>
 			<block type="masaylo_blankright"></block>
+
+	</category>
+	<category name="CAT_ESCORNABOT" colour="#C39BD3">
+			<block type="escornabot_init"></block>
+			<block type="escornabot_spin"></block>
+			<block type="escornabot_distance"></block>
+			<block type="escornabot_turnspin"></block>
+			<block type="escornabot_turnangle"></block>
+			<block type="escornabot_stop"></block>
+			<block type="escornabot_beep"></block>
+			<block type="escornabot_ledon"></block>
+			<block type="escornabot_ledoff"></block>
+			<block type="escornabot_getbutton"></block>
+
 	</category>
 	<category name="CAT_OTTO" colour="#32D900">
 		<block type="otto9_home"></block>
