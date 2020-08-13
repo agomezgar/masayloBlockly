@@ -1,0 +1,27 @@
+[
+  {
+    "Sourcefile": "",
+    "Include": "",
+    "Includepath": "D:\\Descargas\\dist\\win-ia32-unpacked\\compilation\\arduino\\arduino\\avr\\cores\\arduino"
+  },
+  {
+    "Sourcefile": "",
+    "Include": "",
+    "Includepath": "D:\\Descargas\\dist\\win-ia32-unpacked\\compilation\\arduino\\arduino\\avr\\variants\\eightanaloginputs"
+  },
+  {
+    "Sourcefile": "D:\\Descargas\\dist\\win-ia32-unpacked\\compilation\\arduino\\build\\sketch\\sketch.ino.cpp",
+    "Include": "Masaylo.h",
+    "Includepath": "D:\\Descargas\\dist\\win-ia32-unpacked\\compilation\\arduino\\libraries\\Masaylo"
+  },
+  {
+    "Sourcefile": "D:\\Descargas\\dist\\win-ia32-unpacked\\compilation\\arduino\\build\\sketch\\sketch.ino.cpp",
+    "Include": "",
+    "Includepath": ""
+  },
+  {
+    "Sourcefile": "D:\\Descargas\\dist\\win-ia32-unpacked\\compilation\\arduino\\libraries\\Masaylo\\Masaylo.cpp",
+    "Include": "",
+    "Includepath": ""
+  }
+]

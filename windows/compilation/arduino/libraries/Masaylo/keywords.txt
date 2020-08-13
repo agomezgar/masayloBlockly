@@ -1,0 +1,29 @@
+#######################################
+# Syntax Coloring Map For Masaylo
+#######################################
+# Class
+#######################################
+
+Masaylo			KEYWORD1
+
+#######################################
+# Methods and Functions
+#######################################	
+
+init			KEYWORD2
+BT			KEYWORD2
+ultrasonidos		KEYWORD2
+irIzq			KEYWORD2
+irDer			KEYWORD2
+infrarrojos		KEYWORD2
+adelante		KEYWORD2
+atras			KEYWORD2
+izquierda		KEYWORD2
+derecha			KEYWORD2
+alto			KEYWORD2
+distancia		KEYWORD2
+nIzquierda		KEYWORD2
+nDerecha		KEYWORD2
+bIzquierda		KEYWORD2
+bDerecha		KEYWORD2
+
