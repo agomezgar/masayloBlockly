@@ -27,7 +27,7 @@
 			<block type="masaylo_blankright"></block>
 
 	</category>
-	<category name="CAT_ESCORNABOT" colour="#C39BD3">
+	<category name="CAT_ESCORNABOT" colour="#FFEA2A">
 			<block type="escornabot_init"></block>
 			<block type="escornabot_spin"></block>
 			<block type="escornabot_distance"></block>
@@ -72,6 +72,21 @@
 			<block type="otto9_getnoise"></block>
 			<block type="otto9_gyro"></block>
 			<block type="otto9_getg"></block>
+			<block type="otto9_mouth"></block>
+			<block type="otto9_matrix_brightness">
+			<value name="brightness"><shadow type="math_number"><field name="NUM">15</field></shadow></value>
+			</block>
+			<block type="otto9_matrix_text"></block>
+			<block type="otto9_mouth#">
+				<value name="mouth"><shadow type="math_number">	<field name="NUM">10</field></shadow></value>
+		</block>
+			<block type="otto9_matrix"></block>
+			<block type="otto9_matrixp">
+				<value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+			<value name="Y"><shadow type="math_number">	<field name="NUM">0</field>	</shadow>	</value>
+			</block>
+			<block type="otto9_clear"></block>
+			<block type="otto9_matrix8x8"></block>
 	</category>
 		<category name="CAT_ARDUINO_IN" colour="#00929f">
 		<block type="digital_read"></block>

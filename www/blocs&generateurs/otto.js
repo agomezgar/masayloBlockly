@@ -1338,6 +1338,11 @@ Blockly.Blocks["otto9_matrix8x8"] = {  init: function() {
 },
 };
 Blockly.Arduino.otto9_matrix8x8 = function() {
+  Blockly.Arduino.definitions_['otto9_matrix_def'] = '#define DIN_PIN A3\n'
+  + '#define CS_PIN A2\n'
+  + '#define CLK_PIN A1\n'
+  + '#define LED_DIRECTION 1';
+  Blockly.Arduino.setups_['otto9_matrix']='Otto.initMATRIX( DIN_PIN, CS_PIN, CLK_PIN, LED_DIRECTION);';
 var code = '';
 for (var i=0; i<64; i++) {
 

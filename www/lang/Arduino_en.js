@@ -34,6 +34,7 @@ Blockly.Msg.CAT_numerique = "- Digital";
 Blockly.Msg.CAT_analogique = "~ Analog";
 Blockly.Msg.CAT_wifi = "＠ Wifi";
 Blockly.Msg.CAT_TAB = "▦ Table";
+Blockly.Msg.CAT_ARDUINO_BASICS="∞ Arduino basics"
 Blockly.Msg.CAT_list = "▤ List";
 Blockly.Msg.CAT_servo = "↷ Servo";
 Blockly.Msg.CAT_del = "☄ LED";

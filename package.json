@@ -1,6 +1,6 @@
 {
  "name": "Masaylo",
- "version": "1.0.0",
+ "version": "1.0.2",
  "description": "Entorno de desarrollo para programación en robótica",
  "author": "Antonio Gómez García y Lola Nogueras Atance, about a great job made by Fontaine Jean Philippe",
  "license": "CC0-1.0",
@@ -32,11 +32,11 @@
  "scripts": {
   "postinstall": "electron-builder install-app-deps",
   "start": "electron .",
-  "compiler": "build --win --ia32",
-  "publier": "build --win --ia32 -p always"
+  "compiler": "build --win --x64",
+  "publier": "build --win --x64 -p always"
  },
  "build": {
-  "appId": "com.electron.blocklino",
+  "appId": "com.electron.masaylo",
   "asar": false,
   "directories": {
    "buildResources": "./build",
@@ -50,13 +50,12 @@
    "deleteAppDataOnUninstall": true,
    "allowToChangeInstallationDirectory": true,
    "runAfterFinish": true,
-   "include": "build/blocklino.nsh"
+   "include": "build/masaylo.nsh"
   },
   "win": {
    "target": [
     "nsis",
-    "portable",
-    "zip"
+    "portable"
    ],
    "icon": "build/appM2.ico"
   },
@@ -65,7 +64,7 @@
     "ext": "bloc",
     "name": "BLOC File",
     "role": "Editor",
-    "icon": "build/bloc.ico"
+    "icon": "build/appM2.ico"
    },
    {
     "ext": "bf",

@@ -25,6 +25,8 @@ Blockly.Msg.CAT_del = "- LED";
 Blockly.Msg.CAT_LOGIC = "Control";
 Blockly.Msg.CAT_MATH = "Math";
 Blockly.Msg.CAT_TEXT = "Text";
+Blockly.Msg.CAT_ARDUINO_BASICS="Arduino Basics"
+
 Blockly.Msg.CAT_VARIABLES = "Variable";
 Blockly.Msg.CAT_FUNCTIONS = "Function";
 Blockly.Msg.CAT_ARDUINO = "Structure";

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <toolbox>
-	<parametre id="defaultCategories">CAT_MASAYLO,CAT_OTTO,CAT_OTTOH,CAT_ESCORNABOT,CAT_LOGIC,CAT_MATH,CAT_ARDUINO,CAT_ARDUINO_TIME,CAT_servo,CAT_ultrason</parametre>
+	<parametre id="defaultCategories">CAT_MASAYLO,CAT_OTTO,CAT_OTTOH,CAT_ESCORNABOT,CAT_ARDUINO_BASICS,CAT_LOGIC,CAT_MATH,CAT_ARDUINO,CAT_ARDUINO_TIME,CAT_VARIABLES,CAT_servo</parametre>
     <category name="CAT_ARDUINO" colour="#2d2d64">
 		<block type="base_begin"></block>
 		<block type="base_end"></block>
@@ -22,7 +22,7 @@
 			<block type="masaylo_blankleft"></block>
 			<block type="masaylo_blankright"></block>
 	</category>
-	<category name="CAT_ESCORNABOT" colour="#C39BD3">
+	<category name="CAT_ESCORNABOT" colour="#FFEA2A">
 			<block type="escornabot_init"></block>
 			<block type="escornabot_spin"></block>
 			<block type="escornabot_distance"></block>
@@ -53,7 +53,7 @@
 	<category name="CAT_OTTOH" colour="#747F8A">
 			<block type="otto9_homeh"></block>
 			<block type="otto9_calibrationh"></block>
-			<block type="otto9_eeprom"></block>
+			<!-- <block type="otto9_eeprom"></block> -->
 			<block type="otto9_moveh"></block>
 			<block type="otto9_danceh"></block>
 			<block type="otto9_doh"></block>
@@ -66,16 +66,37 @@
 			<block type="otto9_getnoise"></block>
 			<block type="otto9_gyro"></block>
 			<block type="otto9_getg"></block>
+			<block type="otto9_mouth"></block>
+			<block type="otto9_matrix_brightness">
+			<value name="brightness"><shadow type="math_number"><field name="NUM">15</field></shadow></value>
+			</block>
+			<block type="otto9_matrix_text"></block>
+			<block type="otto9_mouth#">
+				<value name="mouth"><shadow type="math_number">	<field name="NUM">10</field></shadow></value>
+		</block>
+			<block type="otto9_matrix"></block>
+			<block type="otto9_matrixp">
+				<value name="X"><shadow type="math_number"><field name="NUM">0</field></shadow></value>
+			<value name="Y"><shadow type="math_number">	<field name="NUM">0</field>	</shadow>	</value>
+			</block>
+			<block type="otto9_clear"></block>
+			<block type="otto9_matrix8x8"></block>
 	</category>
-	<category name="CAT_ARDUINO_TIME" colour="#00929f">
-			<block type="base_delay">
-					<value name="DELAY_TIME">
-				<shadow type="math_number">
-					<field name="NUM">1</field>
-				</shadow>
-			</value></block>
-	</category>
-	<category name="CAT_LOGIC" colour="#ffb400">
+	<category name="CAT_ARDUINO_BASICS" colour="#00989D">
+		<block type="digital_read"></block>
+		<block type="inout_analog_read"></block>
+		<block type="play"></block>
+		<block type="tone"></block>
+		<block type="notone"></block>
+		<block type="inout_digital_write"></block>
+		<block type="inout_analog_write"></block>
+		<block type="toggle"></block>
+		<block type="base_delay">
+				<value name="DELAY_TIME">
+			<shadow type="math_number">
+				<field name="NUM">1</field>
+			</shadow>
+		</value></block>
 		<block type="controls_if"></block>
 		<block type="controls_repeat_ext">
 		<value name="TIMES">
@@ -84,35 +105,34 @@
 				</shadow>
 			</value>
 		</block>
+		<block type="math_number"></block>
+<block type="inout_angle_maths"></block>
+		<block type="logic_compare">
+		<value name="B">
+		<shadow type="math_number">
+			<field name="NUM">10</field>
+		</shadow>
+	</value>
+	</block>
+	<block type="servo_move">
+		<value name="DEGREE">
+		<shadow type="inout_angle_maths">
+			<field name="NUM">90</field>
+		</shadow>
+	</value>
+	<value name="PIN">
+		<shadow type="math_number">
+			<field name="NUM">2</field>
+		</shadow>
+	</value>
+</block>
 	</category>
-    <category name="CAT_MATH" colour="#008000">
-        <block type="math_number"></block>
-		<block type="inout_angle_maths"></block>
-        <block type="logic_compare">
-				<value name="B">
-				<shadow type="math_number">
-					<field name="NUM">10</field>
-				</shadow>
-			</value>
-			</block>
-    </category>
+
+
+
 	<category name="CAT_VARIABLES" custom="VARIABLE" colour="#ff5700"></category>
 
-	<category name="CAT_servo" colour="#2d2dd1">
-			<block type="servo_move">
-				<value name="DEGREE">
-				<shadow type="inout_angle_maths">
-					<field name="NUM">90</field>
-				</shadow>
-			</value>
-			<value name="PIN">
-				<shadow type="math_number">
-					<field name="NUM">2</field>
-				</shadow>
-			</value>
-		</block>
 
-	</category>
 
 
 </toolbox>
