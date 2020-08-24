@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html lang="fr">
+<html lang="es">
 <head>
 	<meta charset="utf-8">
-	<title> BLOCKLINO </title>
+	<title> MASAYLO BLOCKLY </title>
 	<!-- JavaScript -->
 	<script src="js/blockly.min.js"></script>
 	<script src="js/type.js"></script>
@@ -300,16 +300,16 @@
 													<td bgcolor="#000000" align="center" nowrap>
 														<b>
 														<input type="button" onClick="reduceVal('R');reduceVal('G');reduceVal('B');" value="- " style="width:22px;height:22px;border:1px solid;border-color:white gray gray white; background-color:silver;font-size:15px;cursor:pointer;">
-														&nbsp;&nbsp;&nbsp;&nbsp; <font style="font-family:Verdana,Helvetica,Sans-serif;font-size:15px;color:white;">Tout</font>
+														&nbsp;&nbsp;&nbsp;&nbsp; <font style="font-family:Verdana,Helvetica,Sans-serif;font-size:15px;color:white;">Todo</font>
 														&nbsp;&nbsp;&nbsp;
 														<input type="button" onClick="increaseVal('R');increaseVal('G');increaseVal('B');" value="+ " style="width:22px;height:22px;border:1px solid;border-color:white gray gray white; background-color:silver;font-size:15px;cursor:pointer;">
 														</b>
 													</td>
 													<td bgcolor="#000000" align="center">
-														<input type="button" value="  Montrer  " onclick="convert2Dec(document.converter.hexR.value,document.converter.hexG.value,document.converter.hexB.value,'')" style="width:100px;height:22px;border:1px solid;border-color:white gray gray white; background-color:silver;font-size:15px;cursor:pointer;">
+														<input type="button" value="  Mostrar  " onclick="convert2Dec(document.converter.hexR.value,document.converter.hexG.value,document.converter.hexB.value,'')" style="width:100px;height:22px;border:1px solid;border-color:white gray gray white; background-color:silver;font-size:15px;cursor:pointer;">
 													</td>
 													<td bgcolor="#000000" align="center">
-														<input type="button" value="  Montrer  " onclick="convert2Hex(document.converter.decR.value,document.converter.decG.value,document.converter.decB.value,'')" style="width:100px;height:22px;border:1px solid;border-color:white gray gray white; background-color:silver;font-size:15px;cursor:pointer;">
+														<input type="button" value="  Mostrar  " onclick="convert2Hex(document.converter.decR.value,document.converter.decG.value,document.converter.decB.value,'')" style="width:100px;height:22px;border:1px solid;border-color:white gray gray white; background-color:silver;font-size:15px;cursor:pointer;">
 													</td>
 								</tr>
 								<tr height="40px">
@@ -322,7 +322,7 @@
 														<input type="text" name="hexString" size="6" maxlength="6" style="border:2px solid gray;margin-bottom:3px;">
 													</td>
 													<td bgcolor="#000000" align="center">
-														<input type="button" value="  Montrer   " onclick="showHex(document.converter.hexString.value)" style="width:100px;height:22px;border:1px solid;border-color:white gray gray white; background-color:silver;font-size:15px;cursor:pointer;">
+														<input type="button" value="  Mostrar   " onclick="showHex(document.converter.hexString.value)" style="width:100px;height:22px;border:1px solid;border-color:white gray gray white; background-color:silver;font-size:15px;cursor:pointer;">
 													</td>
 								</tr>
 								<tr height="40px">
@@ -697,6 +697,6 @@
 	var editor = ace.edit("content_code");
 	editor.session.setTabSize(2);
 	editor.setShowPrintMargin(false);
-	require('../resources/app/index.js')
+	require('../index')
 </script>
 </html>

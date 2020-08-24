@@ -33,7 +33,7 @@ window.addEventListener('load', function load(event){
 	document.getElementById('span_version2').textContent = appVersion
 	$.ajax({
 	    cache: false,
-	    url: chemin + "/../config.json",
+	    url: chemin + "/config.json",
 	    dataType: "json",
 	    success : function(data) {
 			$.each(data, function(i, update){
@@ -50,16 +50,49 @@ window.addEventListener('load', function load(event){
 	})
 	checkBox.addEventListener('change', function(event){
 		if (event.target.checked) {
-			fs.writeFile(chemin+'/../config.json', '{ "update": "true" }', function(err){
+			fs.writeFile(chemin+'/config.json', '{ "update": "true" }', function(err){
 				if (err) return console.log(err)
 			})
 		} else {
-			fs.writeFile(chemin+'/../config.json', '{ "update": "false" }', function(err){
+			fs.writeFile(chemin+'/config.json', '{ "update": "false" }', function(err){
 				if (err) return console.log(err)
 			})
 		}
 	})
-	sp.list(function(err,ports){
+	sp.list().then(ports=>{
+		var opt = document.createElement('option')
+		opt.value = "com"
+		opt.text = Blockly.Msg.com1
+		portserie.appendChild(opt)
+		ports.forEach(function(port) {
+			if (port.vendorId){
+				var opt = document.createElement('option')
+				opt.value = port.path
+				opt.text = port.path
+				portserie.appendChild(opt)
+			}
+		})
+		localStorage.setItem("nb_com",ports.length)
+		if (portserie.options.length > 1) {
+			portserie.selectedIndex = 1
+			localStorage.setItem("com",portserie.options[1].value)
+		} else {
+			localStorage.setItem("com","com")
+		}
+	});
+	// Promise approach
+sp.list().then(ports => {
+	var messageUSB = document.getElementById('usb')
+	if (ports.length === 0) {
+		messageUSB.innerHTML = "Aucun port n'est disponible"
+	} else {
+		tableHTML = tableify(ports)
+		messageUSB.innerHTML = tableHTML
+	}
+  });
+	
+	//Former version
+	/* sp.list(function(err,ports){
 		var opt = document.createElement('option')
 		opt.value = "com"
 		opt.text = Blockly.Msg.com1
@@ -79,8 +112,8 @@ window.addEventListener('load', function load(event){
 		} else {
 			localStorage.setItem("com","com")
 		}
-	})
-	sp.list(function(err,ports){
+	}) */
+/* 	sp.list(function(err,ports){
 		var messageUSB = document.getElementById('usb')
 		if (ports.length === 0) {
 			messageUSB.innerHTML = "Aucun port n'est disponible"
@@ -88,9 +121,11 @@ window.addEventListener('load', function load(event){
 			tableHTML = tableify(ports)
 			messageUSB.innerHTML = tableHTML
 		}
-	})
+	}) */
 	$('#portserie').mouseover(function(){
-		sp.list(function(err,ports) {
+
+
+		sp.list().then(ports=> {
 			var nb_com = localStorage.getItem("nb_com"), menu_opt = portserie.getElementsByTagName('option')
 			if(ports.length > nb_com){
 				ports.forEach(function(port){
@@ -112,8 +147,8 @@ window.addEventListener('load', function load(event){
 				localStorage.setItem("com","com")
 				localStorage.setItem("nb_com",ports.length)
 			}
-		})
-	})
+		});
+	});
 	$('#btn_quit').on('click', function(){
 		window.close()
 	})
@@ -188,13 +223,13 @@ window.addEventListener('load', function load(event){
 		messageDiv.style.color = '#000000'
 		messageDiv.innerHTML = Blockly.Msg.check + '<i class="fa fa-spinner fa-pulse fa-1_5x fa-fw"></i>'
 		if (prog == "python") {
-			fs.writeFile(chemin+'/../compilation/python/py/sketch.py', data, function(err){
+			fs.writeFile(chemin+'/compilation/python/py/sketch.py', data, function(err){
 				if (err) return console.log(err)
 			})
-			exec('python -m pyflakes ./py/sketch.py', {cwd: chemin+'/../compilation/python'}, function(err, stdout, stderr){
+			exec('python -m pyflakes /py/sketch.py', {cwd: chemin+'/compilation/python'}, function(err, stdout, stderr){
 				if (stderr) {
 					var erreur = stderr.toString().replace("Error: Command failed: python -m pyflakes","")
-					var error = erreur.replace("./py/sketch.py","")
+					var error = erreur.replace("/py/sketch.py","")
 					messageDiv.style.color = '#ff0000'
 					messageDiv.innerHTML = "ERREURS" + "<br>" + error 
 					btn_close_message.style.display = "inline"
@@ -203,13 +238,14 @@ window.addEventListener('load', function load(event){
 				itsOK(0)
 			})
 		} else {
-			fs.writeFile(chemin+'/../compilation/arduino/ino/sketch.ino', data, function(err){
+			
+			fs.writeFile(chemin+'/compilation/arduino/ino/sketch.ino', data, function(err){
 				if (err) return console.log(err)
 			})
 			if ( cpu == "cortexM0" ) {
-				exec('verify_microbit.bat ' + carte, {cwd: chemin+'/../compilation/arduino'}, function(err, stdout, stderr){
+				exec('verify_microbit.bat ' + carte, {cwd: chemin+'/compilation/arduino'}, function(err, stdout, stderr){
 					if (stderr) {
-						fs.realpath(chemin+'/../compilation/arduino/ino/sketch.ino' , function(err, path){
+						fs.realpath(chemin+'/compilation/arduino/ino/sketch.ino' , function(err, path){
 							if (err) console.log(err)
 							var erreur = stderr.toString().replace("exit status 1","")
 							var error = erreur.split(path)
@@ -226,9 +262,9 @@ window.addEventListener('load', function load(event){
 					itsOK(0)
 				})
 			} else {
-				exec('verify.bat ' + carte, {cwd: chemin+'/../compilation/arduino'}, function(err, stdout, stderr){
+				exec('verify.bat ' + carte, {cwd: chemin+'/compilation/arduino'}, function(err, stdout, stderr){
 					if (stderr) {
-						fs.realpath(chemin+'/../compilation/arduino/ino/sketch.ino' , function(err, path){
+						fs.realpath(chemin+'/compilation/arduino/ino/sketch.ino' , function(err, path){
 							if (err) return console.log(err)
 							var erreur = stderr.toString().replace("exit status 1","")
 							var error = erreur.replace(/error:/g,"").replace(/token/g,"")
@@ -276,7 +312,7 @@ window.addEventListener('load', function load(event){
 		messageDiv.innerHTML = Blockly.Msg.upload + '<i class="fa fa-spinner fa-pulse fa-1_5x fa-fw"></i>'
 		if ( prog == "python" ) {
 			if ( cpu == "cortexM0" ) {
-				var cheminFirmware = chemin+"/../compilation/python/firmware.hex"
+				var cheminFirmware = chemin+"/compilation/python/firmware.hex"
 				var fullHexStr = ""
 				exec('wmic logicaldisk get volumename', function(err, stdout){
 					if (err) return console.log(err)
@@ -315,7 +351,7 @@ window.addEventListener('load', function load(event){
 					btn_close_message.style.display = "inline"
 				}
 			} else {
-				exec( 'python -m ampy -p ' + com + ' -b 115200 -d 1 run --no-output ./py/sketch.py', {cwd: chemin+'/../compilation/python'} , function(err, stdout, stderr){
+				exec( 'python -m ampy -p ' + com + ' -b 115200 -d 1 run --no-output /py/sketch.py', {cwd: chemin+'/compilation/python'} , function(err, stdout, stderr){
 					if (stderr) return console.log(stderr)
 					if (err) {
 						messageDiv.style.color = '#ff0000'
@@ -328,7 +364,7 @@ window.addEventListener('load', function load(event){
 			}
 		} else {
 			if ( cpu == "cortexM0" ) {
-				exec('flash_microbit.bat ', {cwd: chemin+'/../compilation/arduino'} , function(err, stdout, stderr){
+				exec('flash_microbit.bat ', {cwd: chemin+'/compilation/arduino'} , function(err, stdout, stderr){
 					if (stderr) console.log(stderr)
 					localStorage.setItem('detail', stdout.toString())
 					if (err) {
@@ -340,7 +376,7 @@ window.addEventListener('load', function load(event){
 					itsOK(1)
 				})
 			} else {
-				exec('flash.bat ' + cpu + ' ' + prog + ' '+ com + ' ' + speed, {cwd: chemin+'/../compilation/arduino'} , function(err, stdout, stderr){
+				exec('flash.bat ' + cpu + ' ' + prog + ' '+ com + ' ' + speed, {cwd: chemin+'/compilation/arduino'} , function(err, stdout, stderr){
 					var erreur = stderr.toString().replace(/##################################################/g,"").replace(/|/g,"")
 					var errors = erreur.split("avrdude:")
 					localStorage.setItem('detail', errors)
@@ -371,15 +407,16 @@ window.addEventListener('load', function load(event){
 	})
 	$('#btn_saveXML').on('click', function(){
 		if (localStorage.getItem("content") == "on") {
+			
 			ipcRenderer.send('save-bloc') 
 		} else {
 			if (localStorage.getItem("prog") == "python") { ipcRenderer.send('save-py') } else { ipcRenderer.send('save-ino') }
 		}
 	})
 	$('#btn_reset').on('click', function(){
-		fs.stat(chemin+"/../compilation/arduino/ino/sketch.ino", function(err,stats){
+		fs.stat(chemin+"/compilation/arduino/ino/sketch.ino", function(err,stats){
 			if (err) return console.log(err)
-			fs.unlink(chemin+"/../compilation/arduino/ino/sketch.ino", function(err){
+			fs.unlink(chemin+"/compilation/arduino/ino/sketch.ino", function(err){
 				if (err) return console.log(err)
 			})
 		})
@@ -427,6 +464,7 @@ window.addEventListener('load', function load(event){
 		if (path === null) {
 			return
 		} else {
+			
 			var xml = Blockly.Xml.workspaceToDom(Blockly.mainWorkspace)
 			var toolbox = localStorage.getItem("toolbox")
 			if (!toolbox) {
@@ -480,9 +518,9 @@ window.addEventListener('load', function load(event){
 			var file = path.split("\\")
 			var id = file.length - 1 
 			document.getElementById('span_file').textContent = " - " + file[id]
-			fs.copyFile(chemin+'/../compilation/arduino/build/sketch.ino.with_bootloader.hex', res[0]+'_with_bootloader.hex', (err) => {if (err) throw err})
-			fs.copyFile(chemin+'/../compilation/arduino/build/sketch.ino.hex', res[0]+'.hex', (err) => {if (err) throw err})
-			fs.copyFile(chemin+'/../compilation/arduino/ino/sketch.ino', res[0]+'.ino', (err) => {if (err) throw err})
+			fs.copyFile(chemin+'/compilation/arduino/build/sketch.ino.with_bootloader.hex', res[0]+'_with_bootloader.hex', (err) => {if (err) throw err})
+			fs.copyFile(chemin+'/compilation/arduino/build/sketch.ino.hex', res[0]+'.hex', (err) => {if (err) throw err})
+			fs.copyFile(chemin+'/compilation/arduino/ino/sketch.ino', res[0]+'.ino', (err) => {if (err) throw err})
 		}
 	})
 	ipcRenderer.on('saved-png', function(event, path){
@@ -529,7 +567,7 @@ window.addEventListener('load', function load(event){
 		var code = '<?xml version="1.0" encoding="utf-8" ?>\n<toolbox>'
 		code += document.getElementById('toolbox').innerHTML
 		code += "</toolbox>"
-		fs.writeFile(chemin+"/../www/toolbox/"+tool+".xml", code, function(err){
+		fs.writeFile(chemin+"/www/toolbox/"+tool+".xml", code, function(err){
 			if (err) return console.log(err)
 		})
 		eval(appendData)

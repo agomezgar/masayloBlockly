@@ -5,17 +5,24 @@ var mainWindow, termWindow, factoryWindow, promptWindow, promptOptions, promptAn
 autoUpdater.autoDownload = false
 autoUpdater.logger = null
 function createWindow() {
-	mainWindow = new BrowserWindow({width: 1000, height: 625, icon: '../../www/media/icon.png', frame: false, movable: true})
+	mainWindow = new BrowserWindow({ width: 1000, height: 625, icon: './www/media/icon.png', frame: false, movable: true,        webPreferences: {
+		nodeIntegration: true
+	}})
 	if (process.platform == 'win32' && process.argv.length >= 2) {
+		console.log(path.join(__dirname, './www/index.html'));
 		var file = process.argv[1]
 		if (file.endsWith(".bloc")||file.endsWith(".ino")||file.endsWith(".py")) {
-			mainWindow.loadURL(path.join(__dirname, '../../www/index.html?url='+file))
+			mainWindow.loadURL(path.join(__dirname, './www/index.html?url='+file))
 		}
         if (file.endsWith(".www")||file.endsWith(".html")) {
-			mainWindow.loadURL(path.join(__dirname, '../../www/ffau.html?url='+file))
+			mainWindow.loadURL(path.join(__dirname, './www/ffau.html?url='+file))
 		}
+		console.log('cargando...');
+		mainWindow.loadURL(path.join(__dirname, './www/index.html'))
+
 	} else {
-		mainWindow.loadURL(path.join(__dirname, '../../www/index.html'))
+		console.log('no es windows?')
+		mainWindow.loadURL(path.join(__dirname, './www/index.html'))
 	}
 	mainWindow.setMenu(null)
 	mainWindow.on('closed', function () {
@@ -23,48 +30,60 @@ function createWindow() {
 	})
 }
 function createTerm() {
-	termWindow = new BrowserWindow({width: 640, height: 560, 'parent': mainWindow, resizable: false, movable: true, frame: false, modal: true}) 
-	termWindow.loadURL(path.join(__dirname, "../../www/term.html"))
+	termWindow = new BrowserWindow({ webPreferences: {
+		nodeIntegration: true
+	  },width: 640, height: 560, 'parent': mainWindow, resizable: false, movable: true, frame: false, modal: true}) 
+	termWindow.loadURL(path.join(__dirname, "./www/term.html"))
 	termWindow.setMenu(null)
 	termWindow.on('closed', function () { 
 		termWindow = null 
 	})
 }
 function createRepl() {
-	termWindow = new BrowserWindow({width: 640, height: 515, 'parent': mainWindow, resizable: false, movable: true, frame: false, modal: true}) 
-	termWindow.loadURL(path.join(__dirname, "../../www/repl.html"))
+	termWindow = new BrowserWindow({ webPreferences: {
+		nodeIntegration: true
+	  },width: 640, height: 515, 'parent': mainWindow, resizable: false, movable: true, frame: false, modal: true}) 
+	termWindow.loadURL(path.join(__dirname, "./www/repl.html"))
 	termWindow.setMenu(null)
 	termWindow.on('closed', function () { 
 		termWindow = null 
 	})
 }
 function createfactory() {
-	factoryWindow = new BrowserWindow({width: 1000, height: 625, 'parent': mainWindow, resizable: true, movable: true, frame: false})
-	factoryWindow.loadURL(path.join(__dirname, "../../www/factory.html"))
+	factoryWindow = new BrowserWindow({webPreferences: {
+		nodeIntegration: true
+	  },width: 1000, height: 625, 'parent': mainWindow, resizable: true, movable: true, frame: false})
+	factoryWindow.loadURL(path.join(__dirname, "./www/factory.html"))
 	factoryWindow.setMenu(null)
 	factoryWindow.on('closed', function () { 
 		factoryWindow = null 
 	})
 }
 function createHTML() {
-	htmlWindow = new BrowserWindow({width: 1000, height: 625, resizable: true, movable: true, frame: false})
-	htmlWindow.loadURL(path.join(__dirname, "../../www/ffau.html"))
+	htmlWindow = new BrowserWindow({webPreferences: {
+		nodeIntegration: true
+	  },width: 1000, height: 625, resizable: true, movable: true, frame: false})
+	htmlWindow.loadURL(path.join(__dirname, "./www/ffau.html"))
 	htmlWindow.setMenu(null)
 	htmlWindow.on('closed', function () { 
 		htmlWindow = null 
 	})
 }
 function createGames() {
-	gamesWindow = new BrowserWindow({width: 1000, height: 625, icon: '../../www/media/gamepad.png', resizable: true, movable: true})
-	gamesWindow.loadURL(path.join(__dirname, "../../www/games/index.html"))
+	gamesWindow = new BrowserWindow({webPreferences: {
+		nodeIntegration: true
+	  },width: 1000, height: 625, icon: './www/media/gamepad.png', resizable: true, movable: true})
+	gamesWindow.loadURL(path.join(__dirname, "./www/games/index.html"))
 	gamesWindow.on('closed', function () { 
 		gamesWindow = null 
 	})
 }
 function promptModal(options, callback) {
 	promptOptions = options
-	promptWindow = new BrowserWindow({width:360, height: 135, 'parent': mainWindow, resizable: false, movable: true, frame: false, modal: true})
-	promptWindow.loadURL(path.join(__dirname, "../../www/modalVar.html"))
+	promptWindow = new BrowserWindow({webPreferences: {
+		nodeIntegration: true
+	  },width:360, height: 135, 'parent': mainWindow, resizable: false, movable: true, frame: false, modal: true})
+	promptWindow.loadURL(path.join(__dirname, "./www/modalVar.html"))
 	promptWindow.on('closed', function () { 
 		promptWindow = null 
 		callback(promptAnswer)
@@ -77,6 +96,7 @@ function refresh(mainWindow = BrowserWindow.getFocusedWindow()) {
 	mainWindow.webContents.reloadIgnoringCache()
 }
 app.on('ready',  function() {
+	console.log('creating window');
 	createWindow()
 	globalShortcut.register('F8', open_console)
 	globalShortcut.register('F5', refresh)
@@ -115,7 +135,7 @@ ipcMain.on("appendBlock", function(event, data1, data2, data3) {
     mainWindow.webContents.send('BlockAppended', data1, data2, data3)
 })
 ipcMain.on("reload", function(event) {
-	mainWindow.loadURL(path.join(__dirname, '../../www/index.html'))
+	mainWindow.loadURL(path.join(__dirname, './www/index.html'))
 })
 ipcMain.on("openDialog", function(event, data) {
     event.returnValue = JSON.stringify(promptOptions, null, '')
@@ -141,16 +161,7 @@ ipcMain.on('save-bin', function(event) {
 		event.sender.send('saved-bin', filename)
 	})
 })
-ipcMain.on('save-png', function(event) {
-	dialog.showSaveDialog(mainWindow,{
-		title: 'Enregistrer au format .PNG',
-		defaultPath: 'Capture',
-		filters: [{ name: 'Images', extensions: ['png'] }]
-	},
-	function(filename){
-		event.sender.send('saved-png', filename)
-	})
-})
+
 ipcMain.on('save-png-html', function(event) {
 	dialog.showSaveDialog(htmlWindow,{
 		title: 'Enregistrer au format .PNG',
@@ -161,26 +172,8 @@ ipcMain.on('save-png-html', function(event) {
 		event.sender.send('saved-png-html', filename)
 	})
 })
-ipcMain.on('save-png-factory', function(event) {
-	dialog.showSaveDialog(factoryWindow,{
-		title: 'Enregistrer au format .PNG',
-		defaultPath: 'Capture',
-		filters: [{ name: 'Images', extensions: ['png'] }]
-	},
-	function(filename){
-		event.sender.send('saved-png-factory', filename)
-	})
-})
-ipcMain.on('save-ino', function(event) {
-	dialog.showSaveDialog(mainWindow,{
-		title: 'Enregistrer au format .INO',
-		defaultPath: 'Programme',
-		filters: [{ name: 'Arduino', extensions: ['ino'] }]
-	},
-	function(filename){
-		event.sender.send('saved-ino', filename)
-	})
-})
+
+
 ipcMain.on('save-py', function(event) {
 	dialog.showSaveDialog(mainWindow,{
 		title: 'Enregistrer au format .PY',
@@ -193,12 +186,41 @@ ipcMain.on('save-py', function(event) {
 })
 ipcMain.on('save-bloc', function(event) {
 	dialog.showSaveDialog(mainWindow,{
-		title: 'Enregistrer au format .BLOC',
-		defaultPath: 'Programme',
+		title: 'Guardar en formato .BLOC',
+		defaultPath: 'Programa',
 		filters: [{ name: 'Blocklino', extensions: ['bloc'] }]
+	}).then((result)=>{
+		
+	event.sender.send('saved-bloc',result.filePath)
+})
+})
+ipcMain.on('save-png-factory', function(event) {
+	dialog.showSaveDialog(factoryWindow,{
+		title: 'Guardar imagen en formato .PNG',
+		defaultPath: 'Imagen',
+		filters: [{ name: 'Images', extensions: ['png'] }]
 	},
 	function(filename){
-		event.sender.send('saved-bloc', filename)
+		event.sender.send('saved-png-factory', filename)
+	})
+})
+ipcMain.on('save-ino', function(event) {
+	dialog.showSaveDialog(mainWindow,{
+		title: 'Guardar en formato .INO',
+		defaultPath: 'Programa',
+		filters: [{ name: 'Arduino', extensions: ['ino'] }]
+	}
+	).then((result)=>{
+		event.sender.send('saved-ino',result.filePath)
+	})
+})
+ipcMain.on('save-png', function(event) {
+	dialog.showSaveDialog(mainWindow,{
+		title: 'Guardar en formato .PNG',
+		defaultPath: 'Imagen',
+		filters: [{ name: 'Images', extensions: ['png'] }]
+	}).then((result)=>{
+		event.sender.send('saved-png',result.filePath)
 	})
 })
 ipcMain.on('save-html', function(event) {

@@ -1,8 +1,8 @@
 <!DOCTYPE HTML>
-<html lang="fr">
+<html lang="es">
 <head>
 	<meta charset="utf-8">
-	<title> Moniteur série </title>
+	<title> Monitor serie </title>
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.3.3.6.css"/>
 	<link rel="stylesheet" type="text/css" href="css/fontawesome.css"/>
 	<link rel="stylesheet" type="text/css" href="css/term.css"/>
@@ -10,7 +10,7 @@
 <body>
 	<div id="title-bar">
         <div id="title">
-			<span class="fa fa-search fa-1_75x fa-fw"></span> Moniteur série
+			<span class="fa fa-search fa-1_75x fa-fw"></span> Monitor serie
 		</div>
         <div id="title-bar-btns">
 			<button id="btn_quit" type="button" class="btn btn-quitBlue"><span class="fa fa-times fa-1_75x"></span></button>
@@ -19,25 +19,45 @@
 	<div id="divfenetre">
 		<div class="form-group" style="padding-left:5px;padding-right:5px;">
 			<div class="input-group input-group-md icon-addon addon-md">
-				<input type="text" placeholder="Texte" name="" id="schbox" class="form-control">
+				<input type="text" placeholder="Texto" name="" id="schbox" class="form-control">
 				<span class="input-group-btn">
-					<button id="btn_envoi" type="button" class="btn btn-info">Envoyer</button>
+					<button id="btn_envoi" type="button" class="btn btn-info">Enviar</button>
 				</span>
 			</div>
 		</div>
-		<div id="fenetre_term"> </div>
+		<div id="fenetre_term">
+			
+		</div>
+		<div class="col-xs-3">
+			<select id="velocidad" class="form-control" onchange="localStorage.setItem('baudrate',document.getElementById('velocidad').value);">
+				<option value="300">300 baudios</option>
+				<option value="600">600 baudios</option>
+				<option value="1200">1200 baudios</option>
+				<option value="2400">2400 baudios</option>
+				<option value="4800">4800 baudios</option>
+				<option value="9600" selected>9600 baudios</option>
+				<option value="14400">14400 baudios</option>
+				<option value="19200">19200 baudios</option>
+				<option value="28800">28800 baudios</option>
+				<option value="31250">31250 baudios</option>
+				<option value="38400">38400 baudios</option>
+				<option value="57600">57600 baudios</option>
+				<option value="115200">115200 baudios</option>
+			</select>
+		</div>
 		<div style="padding-right:5px;text-align:right;">
 			<button id="btn_efface" type="button" class="btn btn-info">
-				<span class='fa fa-eraser'></span> Effacer
+				<span class='fa fa-eraser'></span> Borrar
 			</button>
 			<button id="btn_csv" type="button" class="btn btn-info">
-				<span class='fa fa-eject'></span> Exporter
+				<span class='fa fa-eject'></span> Exportar
 			</button>
 			<button id="btn_connect" type="button" class="btn btn-info"> 
-				<span class='fa fa-play'></span> Démarrer
+				<span class='fa fa-play'></span> Iniciar
 			</button>
 		</div>
 	</div>
 </body>
-<script>require('../resources/app/term.js')</script>
+
+ <script>require('../term')</script>
 </html>

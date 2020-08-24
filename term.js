@@ -1,10 +1,15 @@
 var { ipcRenderer } = require("electron")
-var remote = require('electron').remote 
+var remote = require('electron')
 var fs = require('fs')
-
+const {BrowserWindow} = require('electron').remote
 window.addEventListener('load', function load(event) {
-	var window = remote.getCurrentWindow() 
-	var connexion = false
+	var win = remote;
+	var connexion = false;
+	if (localStorage.getItem('baudrate')==null){
+		alert('no se había definido velocidad de conexión. Se pone por defecto a 9600 baudios');
+		localStorage.setItem("baudrate","9600");
+	}
+	
 	document.getElementById('btn_envoi').disabled=true
 	document.getElementById('btn_efface').onclick = function() {
 		document.getElementById('fenetre_term').textContent = ''
@@ -12,7 +17,8 @@ window.addEventListener('load', function load(event) {
 	document.getElementById('btn_envoi').onclick = function() {
 		var entree = document.getElementById('schbox').value
 		if (s_p.isOpen) {
-			document.getElementById('fenetre_term').innerHTML += entree+"<br>"
+			
+			document.getElementById('fenetre_term').innerHTML += entree+"<br>";
 			s_p.write(entree)
 		}
 	}
@@ -20,25 +26,34 @@ window.addEventListener('load', function load(event) {
 		window.close()
 	}
 	document.getElementById('btn_connect').onclick = function(event) {
-		var SerialPort = require("serialport")
-		var line = require('@serialport/parser-readline')
+		
+		var SerialPort = require("serialport");
+		var line = SerialPort.parsers.Readline;
 		var moniteur = document.getElementById('fenetre_term')
 		var baud = parseInt(localStorage.getItem("baudrate"))
+		
 		var com = localStorage.getItem("com")
+		
 		s_p = new SerialPort(com,{baudRate:baud, autoOpen:false})
+		
 		var parser = s_p.pipe(new line({ delimiter: '\n' }))
 		if (connexion){
-			document.getElementById('btn_connect').innerHTML="<span class='fa fa-play'> Démarrer</span>"
+			
+			document.getElementById('btn_connect').innerHTML="<span class='fa fa-play'> Arrancar</span>"
 			document.getElementById('btn_envoi').disabled=true
-			s_p.close(function (err) { moniteur.innerHTML += 'arrêt<br>' })
+			s_p.close(function (err) { moniteur.innerHTML += 'paro<br>' })
 			connexion = false
 		} else {
-			document.getElementById('btn_connect').innerHTML="<span class='fa fa-pause'> Arrêter</span>"
+			document.getElementById('btn_connect').innerHTML="<span class='fa fa-pause'> Parar</span>"
+			
 			document.getElementById('btn_envoi').disabled=false
-			s_p.open(function (err) { moniteur.innerHTML += 'démarrage de la communication<br>' })
+			s_p.open(function (err) { moniteur.innerHTML += 'puesta en marcha de la comunicación<br>' })
 			connexion = true
+	
 			parser.on('data', function(data){
+			
 				if (connexion){
+					
 					moniteur.innerHTML += data + "<br>"
 					moniteur.scrollTop = moniteur.scrollHeight;
 					moniteur.animate({scrollTop: moniteur.scrollHeight})
