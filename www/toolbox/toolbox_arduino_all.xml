@@ -38,6 +38,7 @@
 			<block type="escornabot_ledon"></block>
 			<block type="escornabot_ledoff"></block>
 			<block type="escornabot_getbutton"></block>
+			<block type="escornabot_app"></block>
 
 	</category>
 	<category name="CAT_OTTO" colour="#32D900">
@@ -55,6 +56,8 @@
 		<block type="otto9_getnoise"></block>
 		<block type="otto9_gyro"></block>
 		<block type="otto9_getg"></block>
+				<block type="otto9_app"></block>
+
 	</category>
 	<category name="CAT_OTTOH" colour="#747F8A">
 			<block type="otto9_homeh"></block>
@@ -97,7 +100,7 @@
 		<block type="inout_analog_write"></block>
 		<block type="toggle"></block>
 	</category>
-	<category name="CAT_ARDUINO_TIME" colour="#00929f">
+	<category name="CAT_ARDUINO_TIME" colour="#bbbbbb">
 		<block type="base_delay">
 		<value name="DELAY_TIME"><shadow type="math_number">	<field name="NUM">1</field>	</shadow></value></block>
 		<block type="tempo_sans_delay">
@@ -106,7 +109,7 @@
 		<block type="millis"></block>
         <block type="inout_pulsein"></block>
 	</category>
-	<category name="CAT_LOGIC" colour="#ffb400">
+	<category name="CAT_LOGIC" colour="#727272">
 		<block type="controls_if"></block>
         <block type="controls_repeat_ext">
 		<value name="TIMES"><shadow type="math_number"><field name="NUM">2</field></shadow></value>
@@ -144,7 +147,7 @@
         <block type="text_isEmpty"></block>
     </category>
 	<category name="CAT_FUNCTIONS" custom="PROCEDURE" colour="#FF0000"></category>
-	<category name="CAT_VARIABLES" custom="VARIABLE" colour="#ff5700"></category>
+	<category name="CAT_VARIABLES" custom="VARIABLE" colour="#ff5723"></category>
 	<category name="CAT_list" colour="#804000">
 		<block type="list_create"></block>
 		<block type="array_create_with"></block>

@@ -216,3 +216,24 @@ Blockly.Arduino['escornabot_getbutton'] = function(block) {
   var code = 'mirobot.pushButton()==' + boton;
   return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
+// Intentando crear un botón para poner el código del escornabot
+Blockly.Blocks['escornabot_app'] = {init: function() {
+  this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/escorniPulsador.png', 48, 48, "*"))   .appendField('Escornabot autónomo');
+  this.setInputsInline(false);
+  this.setColour("#C39BF2");
+  this.setTooltip(Blockly.Msg.ESCORNABOT_APP_TOOLTIP);
+  this.setHelpUrl(Blockly.Msg.ESCORNABOT_APP_URL);
+}
+};
+
+Blockly.Arduino['escornabot_app'] = function(block) {
+Blockly.Arduino.includes_['escornabot_lib'] = '#include "Bot.h" \nBot ESCORNABOT;\n'
+
+
+
+Blockly.Arduino.setups_['escornabot_init']='  ESCORNABOT.init();\n'
+
+var code = ' ESCORNABOT.loop();\n'
+
+return code;
+};

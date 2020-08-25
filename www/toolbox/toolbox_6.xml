@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <toolbox>
-	<parametre id="defaultCategories">CAT_MASAYLO,CAT_OTTO,CAT_OTTOH,CAT_ESCORNABOT,CAT_ARDUINO_BASICS,CAT_LOGIC,CAT_MATH,CAT_ARDUINO,CAT_ARDUINO_TIME,CAT_VARIABLES,CAT_servo</parametre>
+	<parametre id="defaultCategories">CAT_MASAYLO,CAT_OTTO,CAT_OTTOH,CAT_ESCORNABOT,CAT_ARDUINO_BASICS,CAT_LOGIC,CAT_MATH,CAT_ARDUINO,CAT_VARIABLES,CAT_servo</parametre>
     <category name="CAT_ARDUINO" colour="#2d2d64">
 		<block type="base_begin"></block>
 		<block type="base_end"></block>
 		<block type="base_loop"></block>
 	</category>
-	<category name="CAT_MASAYLO" colour="#747F8A">
+	<category name="CAT_MASAYLO" colour="#f5b041">
 			<block type="masaylo_arranca"></block>
 			<block type="masaylo_arranca_personalizado"></block>
 			<block type="masaylo_velocidad"></block>
@@ -22,7 +22,7 @@
 			<block type="masaylo_blankleft"></block>
 			<block type="masaylo_blankright"></block>
 	</category>
-	<category name="CAT_ESCORNABOT" colour="#FFEA2A">
+	<category name="CAT_ESCORNABOT" colour="#C39BD3">
 			<block type="escornabot_init"></block>
 			<block type="escornabot_spin"></block>
 			<block type="escornabot_distance"></block>
@@ -33,6 +33,7 @@
 			<block type="escornabot_ledon"></block>
 			<block type="escornabot_ledoff"></block>
 			<block type="escornabot_getbutton"></block>
+			<block type="escornabot_app"></block>
 	</category>
 	<category name="CAT_OTTO" colour="#32D900">
 		<block type="otto9_home"></block>
@@ -49,6 +50,7 @@
 		<block type="otto9_getnoise"></block>
 		<block type="otto9_gyro"></block>
 		<block type="otto9_getg"></block>
+		<block type="otto9_app"></block>
 	</category>
 	<category name="CAT_OTTOH" colour="#747F8A">
 			<block type="otto9_homeh"></block>
@@ -83,53 +85,51 @@
 			<block type="otto9_matrix8x8"></block>
 	</category>
 	<category name="CAT_ARDUINO_BASICS" colour="#00989D">
+	
 		<block type="digital_read"></block>
 		<block type="inout_analog_read"></block>
-		<block type="play"></block>
-		<block type="tone"></block>
-		<block type="notone"></block>
 		<block type="inout_digital_write"></block>
 		<block type="inout_analog_write"></block>
 		<block type="toggle"></block>
-		<block type="base_delay">
-				<value name="DELAY_TIME">
-			<shadow type="math_number">
-				<field name="NUM">1</field>
-			</shadow>
-		</value></block>
-		<block type="controls_if"></block>
-		<block type="controls_repeat_ext">
-		<value name="TIMES">
-				<shadow type="math_number">
-					<field name="NUM">2</field>
-				</shadow>
-			</value>
-		</block>
 		<block type="math_number"></block>
-<block type="inout_angle_maths"></block>
-		<block type="logic_compare">
-		<value name="B">
-		<shadow type="math_number">
-			<field name="NUM">10</field>
-		</shadow>
-	</value>
-	</block>
-	<block type="servo_move">
-		<value name="DEGREE">
-		<shadow type="inout_angle_maths">
-			<field name="NUM">90</field>
-		</shadow>
-	</value>
-	<value name="PIN">
-		<shadow type="math_number">
-			<field name="NUM">2</field>
-		</shadow>
-	</value>
-</block>
+		<block type="inout_onoff"></block>
+				<block type="base_delay">
+		<value name="DELAY_TIME"><shadow type="math_number">	<field name="NUM">1</field>	</shadow></value></block>
+
+	
 	</category>
+		<category name="CAT_ARDUINO_TIME" colour="#bbbbbb">
+		<block type="base_delay">
+		<value name="DELAY_TIME"><shadow type="math_number">	<field name="NUM">1</field>	</shadow></value></block>
+		<block type="tempo_sans_delay">
+		<value name="DELAY_TIME"><shadow type="math_number">	<field name="NUM">1</field></shadow></value></block>
+		<block type="millis_start"></block>
+		<block type="millis"></block>
+        <block type="inout_pulsein"></block>
+	</category>
+<category name="CAT_MATH" colour="#008000">
+        <block type="math_number"></block>
+		<block type="inout_angle_maths"></block>
+        <block type="logic_compare">
+		<value name="B"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+		</block>
+        <block type="math_arithmetic"></block>
+		
+    </category>
 
-
-
+<category name="CAT_LOGIC" colour="#727272">
+		<block type="controls_if"></block>
+        <block type="controls_repeat_ext">
+		<value name="TIMES"><shadow type="math_number"><field name="NUM">2</field></shadow></value>
+		</block>
+        <block type="controls_whileUntil"></block>
+      
+		<block type="inout_onoff"></block>
+        <block type="logic_operation"></block>
+		
+        <block type="logic_negate"></block>
+        <block type="logic_null"></block>
+	</category>
 	<category name="CAT_VARIABLES" custom="VARIABLE" colour="#ff5700"></category>
 
 

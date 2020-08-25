@@ -12,7 +12,7 @@ Blockly.Blocks.controls.HUE = "#727272";
 Blockly.Blocks.math.HUE = "#00CC00";
 Blockly.Blocks.procedures.HUE = "#FF0000";
 Blockly.Blocks.texts.HUE = "#FD6C9E";
-Blockly.Blocks.variables.HUE = "#FFA500";
+Blockly.Blocks.variables.HUE = "#FF5723";
 Blockly.Blocks.tab.HUE = "#804000";
 
 // controle

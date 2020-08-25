@@ -13,7 +13,7 @@ Blockly.Blocks['masaylo_arranca'] = {init: function() {
     this.setInputsInline(false);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-  this.setColour("#747F8A");
+  this.setColour("#f5b041");
     this.setTooltip(Blockly.Msg.MASAYLO_START_TOOLTIP);
     this.setHelpUrl(Blockly.Msg.MASAYLO_URL);  }
 };
@@ -35,7 +35,7 @@ Blockly.Blocks['masaylo_arranca_personalizado']={init:function(){
   this.setInputsInline(false);
   this.setPreviousStatement(true);
   this.setNextStatement(true);
-  this.setColour("#747F8A");
+  this.setColour("#f5b041");
   this.setTooltip(Blockly.Msg.MASAYLO_STARTPERS_TOOLTIP);
   this.setHelpUrl(Blockly.Msg.MASAYLO_STARTPERS_URL);}
 };
@@ -60,7 +60,7 @@ Blockly.Blocks['masaylo_velocidad'] = {init: function() {
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-    this.setColour("#747f8a");
+    this.setColour("#f5b041");
 }
 };
 
@@ -117,7 +117,7 @@ Blockly.Blocks['masaylo_adelante'] = {init: function() {
     this.setInputsInline(false);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-  this.setColour("#747F8A");
+  this.setColour("#f5b041");
     this.setTooltip(Blockly.Msg.MASAYLO_FORWARD_TOOLTIP);
     }
 };
@@ -136,7 +136,7 @@ Blockly.Blocks['masaylo_atras'] = {init: function() {
     this.setInputsInline(false);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-  this.setColour("#747F8A");
+  this.setColour("#f5b041");
     this.setTooltip(Blockly.Msg.MASAYLO_BACKWARD_TOOLTIP);
     }
 };
@@ -155,7 +155,7 @@ Blockly.Blocks['masaylo_izquierda'] = {init: function() {
     this.setInputsInline(false);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-  this.setColour("#747F8A");
+  this.setColour("#f5b041");
     this.setTooltip(Blockly.Msg.MASAYLO_LEFT_TOOLTIP);
     }
 };
@@ -174,7 +174,7 @@ Blockly.Blocks['masaylo_derecha'] = {init: function() {
     this.setInputsInline(false);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-  this.setColour("#747F8A");
+  this.setColour("#f5b041");
     this.setTooltip(Blockly.Msg.MASAYLO_RIGHT_TOOLTIP);
     }
 };
@@ -193,7 +193,7 @@ Blockly.Blocks['masaylo_alto'] = {init: function() {
     this.setInputsInline(false);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-  this.setColour("#747F8A");
+  this.setColour("#f5b041");
     this.setTooltip(Blockly.Msg.MASAYLO_STOP_TOOLTIP);
     }
 };
@@ -214,7 +214,7 @@ Blockly.Blocks['masaylo_BT_INIT'] = {init: function() {
     this.setInputsInline(false);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
-  this.setColour("#747F8A");
+  this.setColour("#f5b041");
     this.setTooltip(Blockly.Msg.MASAYLO_BT_TOOLTIP);
      }
 };
@@ -235,7 +235,7 @@ Blockly.Blocks['masaylo_getdistance'] = {init: function() {
     this.appendDummyInput().appendField(new Blockly.FieldImage('media/us.png', 48, 48, "*")).appendField(Blockly.Msg.OTTO9_GETDISTANCE_TEXT);
     this.setInputsInline(true);
     this.setOutput(true, "Number");
-    this.setColour("#2a93e8");
+    this.setColour("#f5b041");
     this.setTooltip(Blockly.Msg.MASAYLO_GETDISTANCE_TOOLTIP);
   }
 };
@@ -252,7 +252,7 @@ Blockly.Blocks['masaylo_blackleft'] = {init: function() {
 
     this.setInputsInline(true);
     this.setOutput(true);
-    this.setColour("#2a93e8");
+    this.setColour("#f5b041");
     this.setTooltip(Blockly.Msg.MASAYLO_GETBLACKLEFT_TOOLTIP);
   }
 };
@@ -269,7 +269,7 @@ Blockly.Blocks['masaylo_blackright'] = {init: function() {
 
     this.setInputsInline(true);
     this.setOutput(true);
-    this.setColour("#2a93e8");
+    this.setColour("#f5b041");
     this.setTooltip(Blockly.Msg.MASAYLO_GETBLACKRIGHT_TOOLTIP);
   }
 };
@@ -286,7 +286,7 @@ Blockly.Blocks['masaylo_blankright'] = {init: function() {
 
     this.setInputsInline(true);
     this.setOutput(true);
-    this.setColour("#2a93e8");
+    this.setColour("#f5b041");
     this.setTooltip(Blockly.Msg.MASAYLO_GETBLANKRIGHT_TOOLTIP);
   }
 };
@@ -303,7 +303,7 @@ Blockly.Blocks['masaylo_blankleft'] = {init: function() {
 
     this.setInputsInline(true);
     this.setOutput(true);
-    this.setColour("#2a93e8");
+    this.setColour("#f5b041");
     this.setTooltip(Blockly.Msg.MASAYLO_GETBLANKLEFT_TOOLTIP);
   }
 };
