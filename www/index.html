@@ -4,6 +4,12 @@
 	<meta charset="utf-8">
 	<title> MASAYLO BLOCKLY </title>
 	<!-- JavaScript -->
+	    <script>
+        window.nodeRequire = require;
+        delete window.require;
+        delete window.exports;
+        delete window.module;
+    </script>
 	<script src="js/blockly.min.js"></script>
 	<script src="js/type.js"></script>
 	<script src="js/types.js"></script>
