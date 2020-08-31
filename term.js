@@ -62,11 +62,14 @@ window.addEventListener('load', function load(event) {
 		}
 	}
 	document.getElementById('btn_csv').onclick = function(event) {
+	
 		ipcRenderer.send('save-csv')
 	}
 	ipcRenderer.on('saved-csv', function(event, path){
-		var code = document.getElementById('fenetre_term').innerHTML
-		code = code.split('<br>').join('\n')
+	
+		var code = document.getElementById('fenetre_term').innerHTML;
+		code = code.split('<br>').join('\n');
+		console.log('guardando term');
 		if (path === null) {
 			return
 		} else {

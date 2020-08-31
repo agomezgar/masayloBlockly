@@ -254,13 +254,14 @@ ipcMain.on('save-bf', function(event) {
 	})
 })
 ipcMain.on('save-csv', function(event) {
-	dialog.showSaveDialog(mainWindow,{
-		title: 'Exporter les données au format CSV',
-		defaultPath: 'Programme',
+	
+dialog.showSaveDialog(mainWindow,{
+		title: 'Exportar datos en formato CSV',
+		defaultPath: 'Programa',
 		filters: [{ name: 'donnees', extensions: ['csv'] }]
-	},
-	function(filename){
-		event.sender.send('saved-csv', filename)
+	}).then((result)=>{
+		event.sender.send('saved-csv', result.filePath);
+
 	})
 })
 ipcMain.on('addMedias', function(event) {
