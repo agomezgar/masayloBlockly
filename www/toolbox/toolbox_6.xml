@@ -33,6 +33,13 @@
 			<block type="escornabot_ledon"></block>
 			<block type="escornabot_ledoff"></block>
 			<block type="escornabot_getbutton"></block>
+			<block type="escornabot_us_init"></block>
+			<block type="escornabot_getus"></block>
+			<block type="escornabot_ir_init"></block>
+			<block type="escornabot_blackLeft"></block>
+			<block type="escornabot_blackRight"></block>
+			<block type="escornabot_whiteLeft"></block>
+			<block type="escornabot_whiteRight"></block>
 			<block type="escornabot_app"></block>
 	</category>
 	<category name="CAT_OTTO" colour="#32D900">

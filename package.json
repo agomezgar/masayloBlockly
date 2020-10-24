@@ -1,6 +1,6 @@
 {
  "name": "MasayloBlockly",
- "version": "1.0.3",
+ "version": "1.0.4",
  "description": "Entorno de desarrollo para programación en robótica",
  "author": "Antonio Gómez García y Lola Nogueras Atance, about a great job made by Fontaine Jean Philippe",
  "license": "CC0-1.0",
@@ -38,7 +38,7 @@
  "build": {
   "appId": "com.electron.masayloBlockly",
   "files": [
-      "./compilation/**/*",
+   "./compilation/**/*",
    "./www/**/*",
    "./pilotes/**/*",
    "*.js",
@@ -112,7 +112,6 @@
      "**/*"
     ]
    },
-
    "README.md",
    "LICENSE.md",
    "config.json"
