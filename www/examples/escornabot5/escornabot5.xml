@@ -1,0 +1,46 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_6</toolbox>
+  <block type="escornabot_init" id="aLM:_TT71DmjR9WZ1~}K" x="93" y="54">
+    <field name="escornabot_mode_choice"></field>
+    <next>
+      <block type="escornabot_ir_init" id="hNrCD5:Q#Gu82F.[F_6j">
+        <field name="Izquierda">11</field>
+        <field name="Derecha">12</field>
+        <next>
+          <block type="controls_if" id="VwOf_rrwvtm,beSrDRcI">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="escornabot_whiteLeft" id="i{6@:(;O[S^E7Sjo_TFu"></block>
+            </value>
+            <statement name="DO0">
+              <block type="escornabot_turnangle" id="~WoQQ%dsrCoUB#Y@8G:2">
+                <field name="angle">15</field>
+                <field name="escornabot_spin_velocity">10</field>
+              </block>
+            </statement>
+            <statement name="ELSE">
+              <block type="controls_if" id="D|-_i17X]G~/df)rChN;">
+                <mutation else="1"></mutation>
+                <value name="IF0">
+                  <block type="escornabot_whiteRight" id="yHYF2JioUg}eg,cAA^Xn"></block>
+                </value>
+                <statement name="DO0">
+                  <block type="escornabot_turnangle" id="]!9GY]Xa*bm$YH.dz*|f">
+                    <field name="angle">-15</field>
+                    <field name="escornabot_spin_velocity">10</field>
+                  </block>
+                </statement>
+                <statement name="ELSE">
+                  <block type="escornabot_distance" id="`?`iQvIQS01y(6FvXzS3">
+                    <field name="distance">4</field>
+                    <field name="escornabot_spin_velocity">10</field>
+                  </block>
+                </statement>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

@@ -1,0 +1,20 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_6</toolbox>
+  <block type="toggle" id="W!ss7vff9^A%hq8K/fo3" x="166" y="239">
+    <value name="PIN">
+      <block type="math_number" id="*uRyms]`i.Qexy@s?o/|">
+        <field name="NUM">13</field>
+      </block>
+    </value>
+    <next>
+      <block type="base_delay" id="DrLwpVo$d2Q#w$#-C0_H">
+        <field name="unite">s</field>
+        <value name="DELAY_TIME">
+          <shadow type="math_number" id="z$q{DV30-C#J^Id2s4AC">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+    </next>
+  </block>
+</xml>

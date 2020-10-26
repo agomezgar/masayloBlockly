@@ -1,0 +1,121 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_6</toolbox>
+  <block type="escornabot_init" id="7]XB:JNMWBGC]8#(M.h9" x="-939" y="-397">
+    <field name="escornabot_mode_choice"></field>
+    <next>
+      <block type="escornabot_ledon" id="k*K!D}hw^Aa%b7|2]-#!">
+        <field name="escornabot_led_choice">1</field>
+        <next>
+          <block type="base_delay" id="p63F*?=cPw$tSNhhL?|W">
+            <field name="unite">s</field>
+            <value name="DELAY_TIME">
+              <shadow type="math_number" id="r{|rB~09~@y:L|ll%+oP">
+                <field name="NUM">0.12</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="escornabot_ledoff" id="h[[8u:(zXs73t]7A]+j/">
+                <field name="escornabot_led_choice">1</field>
+                <next>
+                  <block type="base_delay" id=".G?cH.2N{:o3n?icv;)p">
+                    <field name="unite">s</field>
+                    <value name="DELAY_TIME">
+                      <shadow type="math_number" id="oJ3,5t-k7?@bxA#(tJp=">
+                        <field name="NUM">0.12</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="escornabot_ledon" id="`g1S@CG59$eG]B1^H03Z">
+                        <field name="escornabot_led_choice">2</field>
+                        <next>
+                          <block type="base_delay" id="1(6]Rtocsy,3z5L9m_jF">
+                            <field name="unite">s</field>
+                            <value name="DELAY_TIME">
+                              <shadow type="math_number" id="hzI?!#q()Vjcn{cA,[1e">
+                                <field name="NUM">0.12</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="escornabot_ledoff" id="@,:npVAXct$vhtU7)bG(">
+                                <field name="escornabot_led_choice">2</field>
+                                <next>
+                                  <block type="base_delay" id="]u8Ug_eY?i!$*p:%_y[Y">
+                                    <field name="unite">s</field>
+                                    <value name="DELAY_TIME">
+                                      <shadow type="math_number" id="3Gk[]kFe_BkH`P?9f2ak">
+                                        <field name="NUM">0.12</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="escornabot_ledon" id="-=-IK5}(%Bz=+uw^%J_4">
+                                        <field name="escornabot_led_choice">3</field>
+                                        <next>
+                                          <block type="base_delay" id="Le3){75#I%J]6n9je}ci">
+                                            <field name="unite">s</field>
+                                            <value name="DELAY_TIME">
+                                              <shadow type="math_number" id="6|mMUi]2~t!#=)zj;N4Q">
+                                                <field name="NUM">0.12</field>
+                                              </shadow>
+                                            </value>
+                                            <next>
+                                              <block type="escornabot_ledoff" id="UzuN(]t@h$a/6twQU`F5">
+                                                <field name="escornabot_led_choice">3</field>
+                                                <next>
+                                                  <block type="base_delay" id="HTr}9H=_^fqrWpPclVKA">
+                                                    <field name="unite">s</field>
+                                                    <value name="DELAY_TIME">
+                                                      <shadow type="math_number" id="{|9ZT?E}R4pKHiLKDVxU">
+                                                        <field name="NUM">0.12</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <next>
+                                                      <block type="escornabot_ledon" id="{vPXj08-cfBkYM(,Dt?%">
+                                                        <field name="escornabot_led_choice">4</field>
+                                                        <next>
+                                                          <block type="base_delay" id="l`[o~f9ax?rs4x=c8o|A">
+                                                            <field name="unite">s</field>
+                                                            <value name="DELAY_TIME">
+                                                              <shadow type="math_number" id="FU;yJ3cDR0/#;Kt6c=Ls">
+                                                                <field name="NUM">0.12</field>
+                                                              </shadow>
+                                                            </value>
+                                                            <next>
+                                                              <block type="escornabot_ledoff" id="fe(A?L}`Svg=sZ-(nb}w">
+                                                                <field name="escornabot_led_choice">4</field>
+                                                                <next>
+                                                                  <block type="escornabot_beep" id="!;laC:kCRH-U,?6r07`d">
+                                                                    <field name="time">200</field>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

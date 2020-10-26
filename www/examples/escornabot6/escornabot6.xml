@@ -1,0 +1,116 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_6</toolbox>
+  <block type="escornabot_init" id="aLM:_TT71DmjR9WZ1~}K" x="93" y="54">
+    <field name="escornabot_mode_choice"></field>
+    <next>
+      <block type="variables_set_init" id="~l4fdd0F4WeA(QNl6:h(">
+        <field name="VAR">funciona</field>
+        <field name="VARIABLE_SETTYPE_TYPE">NUMBER</field>
+        <value name="VALUE">
+          <block type="math_number" id="C4:+Cmb!^U=W:ae#]}bi">
+            <field name="NUM">0</field>
+          </block>
+        </value>
+        <next>
+          <block type="escornabot_us_init" id="Qj^PMhFP$7`~iV#tCj6O">
+            <field name="Trigger">11</field>
+            <field name="Echo">12</field>
+            <next>
+              <block type="controls_if" id="nQtbD?$R;4lMujPj||4W">
+                <value name="IF0">
+                  <block type="variables_get" id=":P9=;RJHC482UB_{Ow4@">
+                    <field name="VAR">funciona</field>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="escornabot_distance" id="1J2%({PIVOHJ]}qDr8F.">
+                    <field name="distance">-5</field>
+                    <field name="escornabot_spin_velocity">10</field>
+                    <next>
+                      <block type="controls_if" id="57=#OAk^dS(4rCvgKFd3">
+                        <value name="IF0">
+                          <block type="logic_compare" id=";$bb=HhZ9C2r*WsIYyoO">
+                            <field name="OP">LTE</field>
+                            <value name="A">
+                              <block type="escornabot_getus" id="3;P)O6IrYuyWkCn1%%A9"></block>
+                            </value>
+                            <value name="B">
+                              <shadow type="math_number" id="wrUL,1o:S)r4w$CvWBJZ">
+                                <field name="NUM">15</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="escornabot_distance" id="ui:#WjwslHcFQ}vqTjW$">
+                            <field name="distance">5</field>
+                            <field name="escornabot_spin_velocity">10</field>
+                            <next>
+                              <block type="escornabot_turnangle" id="r}vYrTw[cyJphsT,pN0c">
+                                <field name="angle">-45</field>
+                                <field name="escornabot_spin_velocity">10</field>
+                              </block>
+                            </next>
+                          </block>
+                        </statement>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+                <next>
+                  <block type="controls_if" id="K0ph{YP.6y)]-GlF_mKl">
+                    <value name="IF0">
+                      <block type="escornabot_getbutton" id="==t3Tb6S7^bDg~oY!CFw">
+                        <field name="button">4</field>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="controls_if" id="?`b,XuW@dAM~{kvV|KTn">
+                        <mutation else="1"></mutation>
+                        <value name="IF0">
+                          <block type="logic_compare" id="e4J.8|hA4}54,Fj+JfLj">
+                            <field name="OP">EQ</field>
+                            <value name="A">
+                              <block type="variables_get" id="RYuY/aaaZgzOa7kkD2G4">
+                                <field name="VAR">funciona</field>
+                              </block>
+                            </value>
+                            <value name="B">
+                              <shadow type="math_number" id="/swaIXG2Vf[871}H?pr6">
+                                <field name="NUM">0</field>
+                              </shadow>
+                            </value>
+                          </block>
+                        </value>
+                        <statement name="DO0">
+                          <block type="variables_set" id="#a*D9gYz|7g$q]jlT.Qo">
+                            <field name="VAR">funciona</field>
+                            <value name="VALUE">
+                              <block type="math_number" id="aul+2+[~K1b_E-T+v{/a">
+                                <field name="NUM">1</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                        <statement name="ELSE">
+                          <block type="variables_set" id="H|`SLdk@=Ka?i?ag1KGS">
+                            <field name="VAR">funciona</field>
+                            <value name="VALUE">
+                              <block type="math_number" id="?uL6e=D@x^+,awt1Jz%^">
+                                <field name="NUM">0</field>
+                              </block>
+                            </value>
+                          </block>
+                        </statement>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
