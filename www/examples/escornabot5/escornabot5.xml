@@ -14,7 +14,7 @@
             </value>
             <statement name="DO0">
               <block type="escornabot_turnangle" id="~WoQQ%dsrCoUB#Y@8G:2">
-                <field name="angle">15</field>
+                <field name="angle">-15</field>
                 <field name="escornabot_spin_velocity">10</field>
               </block>
             </statement>
@@ -26,14 +26,14 @@
                 </value>
                 <statement name="DO0">
                   <block type="escornabot_turnangle" id="]!9GY]Xa*bm$YH.dz*|f">
-                    <field name="angle">-15</field>
+                    <field name="angle">15</field>
                     <field name="escornabot_spin_velocity">10</field>
                   </block>
                 </statement>
                 <statement name="ELSE">
                   <block type="escornabot_distance" id="`?`iQvIQS01y(6FvXzS3">
-                    <field name="distance">4</field>
-                    <field name="escornabot_spin_velocity">10</field>
+                    <field name="distance">-2</field>
+                    <field name="escornabot_spin_velocity">5</field>
                   </block>
                 </statement>
               </block>
