@@ -28,7 +28,7 @@ V 0.13 (07/03/2018): tercera versión del programa, incorpora control de motores
 
 /*Pinout*/
 	const int pinMotor[8]={2,3,4,5,6,7,8,9};//pines de motores
-
+	const int buzz = 10; //pin del zumbador	
 	const int led[4] = {14,15,16,17}; // 1 Azul, blue;2 Rojo, red;3 Amarillo, yellow;4 Verde, green
 	const int pushButtons = A7; //Es una variable analógica. En un circuito paralelo que en función de la tecla que pulsemos obtenemos un valor analógico distinto
 
