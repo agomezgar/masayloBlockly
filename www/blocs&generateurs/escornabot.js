@@ -251,8 +251,8 @@ var code = 'mirobot.distance()';
 return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 Blockly.Blocks['escornabot_ir_init'] = {init: function() {
-  this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/escorniir.png', 48, 48, "*")) .appendField(Blockly.Msg.ESCORNABOT_IRINIT_TEXT).appendField(Blockly.Msg.ESCORNABOT_TRIGGER_TEXT)
-  .appendField(new Blockly.FieldNumber("0"), "Izquierda") .appendField(Blockly.Msg.ESCORNABOT_IRINIT_TEXT) .appendField(new Blockly.FieldNumber("0"), "Derecha");
+  this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/escorniir.png', 48, 48, "*")) .appendField(Blockly.Msg.ESCORNABOT_IRINIT_TEXT).appendField(Blockly.Msg.ESCORNABOT_IRLEFT_TEXT)
+  .appendField(new Blockly.FieldNumber("0"), "Izquierda") .appendField(Blockly.Msg.ESCORNABOT_IRRIGHT_TEXT) .appendField(new Blockly.FieldNumber("0"), "Derecha");
   this.setInputsInline(false);
   this.setPreviousStatement(true);
   this.setNextStatement(true);
