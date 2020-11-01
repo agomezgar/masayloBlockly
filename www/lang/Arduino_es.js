@@ -538,3 +538,5 @@ Blockly.Msg.ESCORNABOT_GETWHITELEFT_TEXT="Detecto blanco a la izquierda";
 Blockly.Msg.ESCORNABOT_GETWHITELEFT_TOOLTIP="Devuelve TRUE si pisa blanco por la izquierda";
 Blockly.Msg.ESCORNABOT_GETWHITERIGHT_TEXT="Detecto blanco a la derecha";
 Blockly.Msg.ESCORNABOT_GETWHITERIGHT_TOOLTIP="Devuelve TRUE si pisa blanco por la derecha";
+Blockly.Msg.ESCORNABOT_IRLEFT_TEXT="Sensor izquierdo";
+Blockly.Msg.ESCORNABOT_IRRIGHT_TEXT="Sensor derecho";
