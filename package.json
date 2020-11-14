@@ -1,6 +1,6 @@
 {
  "name": "MasayloBlockly",
- "version": "1.0.4",
+ "version": "1.0.5",
  "description": "Entorno de desarrollo para programación en robótica",
  "author": "Antonio Gómez García y Lola Nogueras Atance, about a great job made by Fontaine Jean Philippe",
  "license": "CC0-1.0",
@@ -33,6 +33,7 @@
   "postinstall": "electron-builder install-app-deps",
   "start": "electron .",
   "compiler": "build --win --x64",
+  "compiler32": "build --win --ia32",
   "publier": "build --win --x64 -p always"
  },
  "build": {
