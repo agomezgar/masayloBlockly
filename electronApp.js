@@ -1,3 +1,12 @@
+//AVISO A NAVEGANTES: TENGO QUE MEJORAR EL CONTROL DEL MÓDULO SERIAL PORT
+/* 
+He probado todo esto (no sé qué ha funcionado y qué no):
+npm install --save-dev electron-rebuild
+npm install --save serialport
+npm rebuild
+	app.allowRendererProcessReuse=false (en la función app.on('ready'))
+
+*/
 var {electron, ipcMain, app, BrowserWindow, globalShortcut, dialog} = require('electron')
 var { autoUpdater } = require("electron-updater")
 var path = require('path')
@@ -5,8 +14,13 @@ var mainWindow, termWindow, factoryWindow, promptWindow, promptOptions, promptAn
 autoUpdater.autoDownload = false
 autoUpdater.logger = null
 function createWindow() {
-	mainWindow = new BrowserWindow({ width: 1000, height: 625, icon: './www/media/icon.png', frame: false, movable: true,        webPreferences: {
-		nodeIntegration: true
+	mainWindow = new BrowserWindow({ width: 1000, height: 625,
+		 icon: path.join(__dirname, '/www/media/logo.ico'), 
+		 frame: false, movable: true,        webPreferences: {
+		contextIsolation: false,
+        nodeIntegration: true,
+        nodeIntegrationInWorker: true,
+        enableRemoteModule: true
 	}})
 	if (process.platform == 'win32' && process.argv.length >= 2) {
 		console.log(path.join(__dirname, './www/index.html'));
@@ -31,7 +45,10 @@ function createWindow() {
 }
 function createTerm() {
 	termWindow = new BrowserWindow({ webPreferences: {
-		nodeIntegration: true
+		contextIsolation: false,
+		nodeIntegrationInWorker: true,
+		nodeIntegration: true,
+		enableRemoteModule: true
 	  },width: 640, height: 560, 'parent': mainWindow, resizable: false, movable: true, frame: false, modal: true}) 
 	termWindow.loadURL(path.join(__dirname, "./www/term.html"))
 	termWindow.setMenu(null)
@@ -96,7 +113,8 @@ function refresh(mainWindow = BrowserWindow.getFocusedWindow()) {
 	mainWindow.webContents.reloadIgnoringCache()
 }
 app.on('ready',  function() {
-	console.log('creating window');
+	app.allowRendererProcessReuse=false
+
 	createWindow()
 	globalShortcut.register('F8', open_console)
 	globalShortcut.register('F5', refresh)

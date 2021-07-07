@@ -39,6 +39,10 @@ Blockly.Arduino["serial_write"]=function(block){
     var content=Blockly.Arduino.valueToCode(block, "CONTENT", Blockly.Arduino.ORDER_ATOMIC);
     return "Serial.print(" + content + ");\n"
 };
+Blockly.Arduino["serial_write_line"]=function(block){
+    var content=Blockly.Arduino.valueToCode(block, "CONTENT", Blockly.Arduino.ORDER_ATOMIC);
+    return "Serial.println(" + content + ");\n"
+};
 Blockly.Arduino["serial_flush"]=function(block){
     return "Serial.flush();\n"
 };
@@ -58,6 +62,10 @@ Blockly.Arduino["soft_read"]=function(block){
 Blockly.Arduino["soft_write"]=function(block){
     var content=Blockly.Arduino.valueToCode(block, "CONTENT", Blockly.Arduino.ORDER_ATOMIC);
     return "mySerial.write(" + content + ");\n"
+};
+Blockly.Arduino["soft_write_line"]=function(block){
+    var content=Blockly.Arduino.valueToCode(block, "CONTENT", Blockly.Arduino.ORDER_ATOMIC);
+    return "mySerial.println(" + content + ");\n"
 };
 Blockly.Arduino["soft_available"]=function(block){
     var code="mySerial.available()";
@@ -338,9 +346,9 @@ Blockly.Arduino["inout_angle_maths"]=function(block){
 };
 Blockly.Arduino["toggle"]=function(block){
     var dropdown_pin=Blockly.Arduino.valueToCode(block, "PIN", Blockly.Arduino.ORDER_ATOMIC);
-	Blockly.Arduino.definitions_["toggle"+dropdown_pin]="boolean etat_" + dropdown_pin + "=LOW;";
+	Blockly.Arduino.definitions_["toggle"+dropdown_pin]="boolean state_" + dropdown_pin + "=LOW;";
     Blockly.Arduino.setups_["setup_output_" + dropdown_pin]="pinMode(" + dropdown_pin + ", OUTPUT);";
-    return "digitalWrite(" + dropdown_pin + ", etat_" + dropdown_pin + ");\netat_"+ dropdown_pin + "=!etat_"+ dropdown_pin + ";\n";
+    return "digitalWrite(" + dropdown_pin + ", state_" + dropdown_pin + ");\nstate_"+ dropdown_pin + "=!state_"+ dropdown_pin + ";\n";
 };
 /*  stockage  */
 Blockly.Arduino['eeprom_write'] = function(block) {

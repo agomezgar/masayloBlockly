@@ -1,0 +1,134 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_6</toolbox>
+  <block type="masaylo_arranca_personalizado" id="foUWX3_%34@Gz,AYHtzn" x="180" y="165">
+    <field name="MIP">6</field>
+    <field name="MIA">7</field>
+    <field name="MIB">8</field>
+    <field name="MDP">11</field>
+    <field name="MDA">12</field>
+    <field name="MDB">13</field>
+    <next>
+      <block type="masaylo_velocidad" id=":;*80sizf-99T6Wzi${*">
+        <field name="masaylo_move_choice">FORWARD</field>
+        <value name="masaylo_velocity">
+          <shadow type="math_number" id="b-H|uj7gv4$`[Iul*Et,">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+        <next>
+          <block type="base_delay" id="N,m23I)qL.Ue*}cKE(8V">
+            <field name="unite">s</field>
+            <value name="DELAY_TIME">
+              <shadow type="math_number" id="(~^ow$vBCV]VVI]1f+Ot">
+                <field name="NUM">3</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="masaylo_velocidad" id="6#A$%eG2U?.:=K@]@^L8">
+                <field name="masaylo_move_choice">LEFT</field>
+                <value name="masaylo_velocity">
+                  <shadow type="math_number" id="1(5CUKs:-=D5dKvtS|eq">
+                    <field name="NUM">60</field>
+                  </shadow>
+                </value>
+                <next>
+                  <block type="base_delay" id="aX!HDsM($P0C0$x6-R{=">
+                    <field name="unite">s</field>
+                    <value name="DELAY_TIME">
+                      <shadow type="math_number" id="Hi=[`eyW1^D]P-ITxRja">
+                        <field name="NUM">0.5</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="masaylo_velocidad" id="LG{OQ_|u2{mp0uPMk!hn">
+                        <field name="masaylo_move_choice">FORWARD</field>
+                        <value name="masaylo_velocity">
+                          <shadow type="math_number" id="}h%M+35u/-0!OFPqWe`4">
+                            <field name="NUM">100</field>
+                          </shadow>
+                        </value>
+                        <next>
+                          <block type="base_delay" id=",2rU}e|h+hXNBoh|C^.}">
+                            <field name="unite">s</field>
+                            <value name="DELAY_TIME">
+                              <shadow type="math_number" id="OM}]WvvUtoB(b@[*6+Co">
+                                <field name="NUM">3</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="masaylo_velocidad" id="HZYD;^g7k9IXr`P;^?_]">
+                                <field name="masaylo_move_choice">RIGHT</field>
+                                <value name="masaylo_velocity">
+                                  <shadow type="math_number" id="L!Xj}Tst=`B6y6#^iZN`">
+                                    <field name="NUM">60</field>
+                                  </shadow>
+                                </value>
+                                <next>
+                                  <block type="base_delay" id="B3`tko0fbB4-_QJJ_r:y">
+                                    <field name="unite">s</field>
+                                    <value name="DELAY_TIME">
+                                      <shadow type="math_number" id="`vG_3wcxWVuOq6xNf-6L">
+                                        <field name="NUM">0.5</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="masaylo_velocidad" id="2gF1Gg8)cgv,6dnHlDv@">
+                                        <field name="masaylo_move_choice">BACKWARD</field>
+                                        <value name="masaylo_velocity">
+                                          <shadow type="math_number" id="wWMqQ`)1VyERnx]+{hq%">
+                                            <field name="NUM">100</field>
+                                          </shadow>
+                                        </value>
+                                        <next>
+                                          <block type="base_delay" id="IxY[]s^A/xV^^vI1}Zt?">
+                                            <field name="unite">s</field>
+                                            <value name="DELAY_TIME">
+                                              <shadow type="math_number" id="wlpd2Ao^,Aa(l-r5U#,0">
+                                                <field name="NUM">3</field>
+                                              </shadow>
+                                            </value>
+                                            <next>
+                                              <block type="masaylo_velocidad" id="Pxx+-h_A{,wf#a!{4M`B">
+                                                <field name="masaylo_move_choice">LEFT</field>
+                                                <value name="masaylo_velocity">
+                                                  <shadow type="math_number" id="fTM#e,6Lb}E*Nf_XH`/R">
+                                                    <field name="NUM">60</field>
+                                                  </shadow>
+                                                </value>
+                                                <next>
+                                                  <block type="base_delay" id="$4lXJ}+ggQg%lVYk|sL1">
+                                                    <field name="unite">s</field>
+                                                    <value name="DELAY_TIME">
+                                                      <shadow type="math_number" id="$*cR})kmoV||`,;Y*)U7">
+                                                        <field name="NUM">1</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <next>
+                                                      <block type="base_end" id="q1EjTis1yM`*x+Db9A4U"></block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

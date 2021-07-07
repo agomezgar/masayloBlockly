@@ -1698,10 +1698,10 @@ Blockly.Arduino['otto9_smooth'] = function(block) {
   return code;
 };
 Blockly.Blocks['otto9_app'] = {init: function() {
-  this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/ottoApp.png', 48, 48, "*"))   .appendField('Grabar app ');
+  this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/ottoApp.png', 48, 48, "*"))   .appendField(Blockly.Msg.OTTO9_APP);
   this.setInputsInline(false);
   this.setColour("#32D900");
-  this.setTooltip(Blockly.Msg.OTTO9_DANCE_TOOLTIP);
+  this.setTooltip(Blockly.Msg.OTTO9_HUMANOID_TOOLTIP);
   this.setHelpUrl(Blockly.Msg.OTTO9_DIY_URL);
 }
 };
@@ -1825,6 +1825,110 @@ Blockly.Arduino.definitions_['otto9_legs'] = '#define N_SERVOS 4\n'
     +'Otto.home();\n'
     +'Otto.sing(S_happy_short);   // sing every 5 seconds so we know OTTO is still working\n'
     +'delay(5000);}\n'
+  
+
+
+
+  var code = 'SCmd.readSerial();     if (Otto.getRestState()==false){ move(moveId); }  \n'
+  
+  
+  return code;
+};
+Blockly.Blocks['otto9_appHumanoid'] = {init: function() {
+  this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/ottoApp.png', 48, 48, "*"))   .appendField(Blockly.Msg.OTTO9_APP);
+  this.setInputsInline(false);
+  this.setColour("#59646f");
+  this.setTooltip(Blockly.Msg.OTTO9_HUMANOID_TOOLTIP);
+  this.setHelpUrl(Blockly.Msg.OTTO9_DIY_URL);
+}
+};
+Blockly.Arduino['otto9_appHumanoid'] = function(block) {
+  Blockly.Arduino.includes_['otto9h_lib'] = '#include <Otto9Humanoid.h> \nOtto9Humanoid Otto;\n'
++ ' #include <SerialCommand.h>\nSoftwareSerial BTserial = SoftwareSerial(11,12);\n'
++'  SerialCommand SCmd(BTserial);\n';
+  Blockly.Arduino.variables_['otto9h_var'] =' int T=1000; \n  int moveId=0;\nint moveSize=15;\n'    
+  +"#define PIN_YL 2 \n#define PIN_YR 3 \n  #define PIN_RL 4\n #define PIN_RR 5 \n"
++"  #define PIN_Trigger 8\n  #define PIN_Echo 9 \n  #define PIN_Buzzer  13 \n"
++" #define PIN_LA 6 \n  #define PIN_RA 7\n   #define PIN_NoiseSensor A6 \n"
++"  #define DIN_PIN A3\n  #define CS_PIN A2\n  #define CLK_PIN A1\n  #define LED_DIRECTION 1\n"
++"void receiveStop(){\n  sendAck();\n  Otto.home();\n  sendFinalAck();\n}\n"
++"void receiveLED(){  \n  sendAck();\n  Otto.home();\n  unsigned long int matrix;\n"
++"char *arg;\n  char *endstr;\n  arg=SCmd.next();  if (arg != NULL) {\n"
++"    matrix=strtoul(arg,&endstr,2); \nOtto.putMouth(matrix,false);\n  }else{\n"
++"Otto.putMouth(xMouth);\n delay(2000);\nOtto.clearMouth();\n} \nsendFinalAck();\n}"
++"void receiveMovement(){\n  sendAck();\n  if (Otto.getRestState()==true){\n"
++"Otto.setRestState(false);\n }\n char *arg; \n  arg = SCmd.next();\nif (arg != NULL) {moveId=atoi(arg);}\n"
++"else{\n Otto.putMouth(xMouth);\n delay(2000);\nOtto.clearMouth();\nmoveId=0; //stop\n }\n"
++"arg = SCmd.next();\nif (arg != NULL) {T=atoi(arg);}\nelse{\n T=1000;\n }\n arg = SCmd.next();\n"
++"if (arg != NULL) {moveSize=atoi(arg);}\n else{\n moveSize =15;\n }\n}\n"
++"void move(int moveId){\n  bool manualMode = false;\n  switch (moveId) {\n    case 0:\n"
++"Otto.home();\n break;\n    case 1: //M 1 1000 \n      Otto.walk(1,T,1);\n"
++"      break;\n    case 2: //M 2 1000 \n      Otto.walk(1,T,-1);\n"
++"      break;\n    case 3: //M 3 1000 \n      Otto.turn(1,T,1);\n"
++"      break;\n    case 4: //M 4 1000 \n      Otto.turn(1,T,-1);\n      break;\n    case 5: //M 5 1000 30 \n"
++"      Otto.updown(1,T,moveSize);\n      break;\n    case 6: //M 6 1000 30\n"
++"      Otto.moonwalker(1,T,moveSize,1);\n      break;\n    case 7: //M 7 1000 30\n"
++"      Otto.moonwalker(1,T,moveSize,-1);\n      break;\n    case 8: //M 8 1000 30\n"
++"      Otto.swing(1,T,moveSize);\n      break;\n    case 9: //M 9 1000 30 \n"
++"      Otto.crusaito(1,T,moveSize,1);\n      break;\n    case 10: //M 10 1000 30 \n"
++"      Otto.crusaito(1,T,moveSize,-1);\n      break;\n    case 11: //M 11 1000 \n"
++"      Otto.jump(1,T);\n      break;\n    case 12: //M 12 1000 30 \n      Otto.flapping(1,T,moveSize,1);\n"
++"      break;\n    case 13: //M 13 1000 30\n      Otto.flapping(1,T,moveSize,-1);\n"
++"      break;\n    case 14: //M 14 1000 20\n      Otto.tiptoeSwing(1,T,moveSize);\n"
++"      break;\n    case 15: //M 15 500 \n      Otto.bend(1,T,1);\n      break;\n"
++"    case 16: //M 16 500 \n      Otto.bend(1,T,-1);\n      break;\n    case 17: //M 17 500 \n"
++"      Otto.shakeLeg(1,T,1);\n      break;\n    case 18: //M 18 500 \n      Otto.shakeLeg(1,T,-1);\n"
++"      break;\n    case 19: //M 19 500 20\n      Otto.jitter(1,T,moveSize);\n      break;\n"
++"    case 20: //M 20 500 15\n      Otto.ascendingTurn(1,T,moveSize);\n      break;\n"
++"     case 21: //M 21\n      Otto.armsup();\n      break;\n    case 22: //M 22 right arm\n"
++"      Otto.armwave(1);\n      break;\n    case 23: //M 23 left arm\n      Otto.armwave(-1);\n"
++"      break;\n    case 24: //M 24\n      Otto.armsdown();\n      break;\n"
++"    default:\n        manualMode = true;\n      break;\n  }\n  if(!manualMode){\n"
++"    sendFinalAck();\n  }  \n}"
++"void receiveGesture(){  sendAck();\n  Otto.home(); \n  int gesture = 0;\n"
++"  char *arg; \n  arg = SCmd.next(); \n  if (arg != NULL) {gesture=atoi(arg);}\n"
++"  else \n  {\n    delay(2000);\n  }\n  switch (gesture) {\n    case 1: //H 1\n" 
++"      Otto.playGesture(OttoHappy);\n      break;\n    case 2: //H 2 \n      Otto.playGesture(OttoSuperHappy);\n"
++"      break;\n    case 3: //H 3 \n      Otto.playGesture(OttoSad);\n      break;\n"
++"    case 4: //H 4 \n      Otto.playGesture(OttoSleeping);\n      break;\n    case 5: //H 5  \n"
++"      Otto.playGesture(OttoFart);\n      break;\n    case 6: //H 6 \n      Otto.playGesture(OttoConfused);\n"
++"      break;\n    case 7: //H 7 \n      Otto.playGesture(OttoLove);\n      break;\n    case 8: //H 8 \n"
++"      Otto.playGesture(OttoAngry);\n      break;\n    case 9: //H 9  \n      Otto.playGesture(OttoFretful);\n"
++"      break;\n    case 10: //H 10\n      Otto.playGesture(OttoMagic);\n      break;  \n"
++"    case 11: //H 11\n      Otto.playGesture(OttoWave);\n      break; \n    case 12: //H 12\n"
++"      Otto.playGesture(OttoVictory);\n      break; \n    case 13: //H 13\n      Otto.playGesture(OttoFail);\n"
++"      break;\n    default:\n      break;\n  }\n  sendFinalAck();\n}\n"
++"void receiveSing(){  sendAck();\n  Otto.home();\n  int sing = 0;\n  char *arg; \n  arg = SCmd.next();" 
++"  if (arg != NULL) {sing=atoi(arg);}\n  else \n  {\n    delay(2000);\n  }\n"
++"  switch (sing) {\n    case 1: //K 1 \n      Otto.sing(S_connection);\n      break;\n"
++"    case 2: //K 2 \n      Otto.sing(S_disconnection);\n      break;\n    case 3: //K 3 \n"
++"      Otto.sing(S_surprise);\n      break;\n    case 4: //K 4 \n      Otto.sing(S_OhOoh);\n"
++"      break;\n    case 5: //K 5  \n      Otto.sing(S_OhOoh2);\n      break;\n"
++"    case 6: //K 6 \n      Otto.sing(S_cuddly);\n      break;\n    case 7: //K 7 \n"
++"      Otto.sing(S_sleeping);\n      break;\n    case 8: //K 8 \n      Otto.sing(S_happy);\n"
++"      break;\n    case 9: //K 9  \n      Otto.sing(S_superHappy);\n      break;\n"
++"    case 10: //K 10\n      Otto.sing(S_happy_short);\n      break;  \n    case 11: //K 11\n"
++"      Otto.sing(S_sad);\n      break;\n    case 12: //K 12\n      Otto.sing(S_confused);\n"
++"      break;\n    case 13: //K 13\n      Otto.sing(S_fart1);\n      break;\n"
++"    case 14: //K 14\n      Otto.sing(S_fart2);\n      break;\n    case 15: //K 15\n"
++"      Otto.sing(S_fart3);\n      break;\n    case 16: //K 16\n      Otto.sing(S_mode1);"
++"      break;\n    case 17: //K 17\n      Otto.sing(S_mode2);\n      break; \n"
++"    case 18: //K 18\n      Otto.sing(S_mode3);\n      break;\n    case 19: //K 19\n"
++"      Otto.sing(S_buttonPushed);\n      break;\n    default:\n      break;\n"
++"  }\n  sendFinalAck();\n}\n"
++'void sendAck(){\n  delay(30);\n  Serial.print(F("&&"));\n  Serial.print(F("A"));\n'
++'Serial.println(F("%%"));\n  Serial.flush();\n}\n'
++'void sendFinalAck(){\delay(30);\n  Serial.print(F("&&"));\n  Serial.print(F("F"));'
++'  Serial.println(F("%%"));\n  Serial.flush();\n}\n';
+
+
+  Blockly.Arduino.setups_['otto9_humanoid_init']='Serial.begin(9600);\n'
+  +'BTserial.begin(9600);\n'
+ +" Otto.initMATRIX( DIN_PIN, CS_PIN, CLK_PIN, LED_DIRECTION);\n Otto.initHUMANOID(PIN_YL, PIN_YR, PIN_RL, PIN_RR, PIN_LA, PIN_RA, true, PIN_NoiseSensor, PIN_Buzzer, PIN_Trigger, PIN_Echo);\n" 
++'Otto.matrixIntensity(5);\n SCmd.addCommand("S", receiveStop);\n SCmd.addCommand("L", receiveLED);'
++' SCmd.addCommand("M", receiveMovement);\n SCmd.addCommand("H", receiveGesture); \n SCmd.addCommand("K", receiveSing); '
++" SCmd.addDefaultHandler(receiveStop);\n Otto.sing(S_connection);\n Otto.home();\n Otto.putMouth(smile);\n"
++"Otto.sing(S_happy);\n   delay(200);\n Otto.putMouth(happyOpen);\n";
   
 
 

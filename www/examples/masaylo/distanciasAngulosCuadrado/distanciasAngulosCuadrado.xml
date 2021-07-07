@@ -1,0 +1,81 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_6</toolbox>
+  <block type="masaylo_arranca_personalizado" id="86_tJ1C/L710lK*uT,a]" x="256" y="43">
+    <field name="MIP">6</field>
+    <field name="MIA">7</field>
+    <field name="MIB">8</field>
+    <field name="MDP">11</field>
+    <field name="MDA">12</field>
+    <field name="MDB">13</field>
+    <next>
+      <block type="masaylo_ENCODER_INIT" id="T7lq7-Iv+cEH~mvGZQdc">
+        <field name="encLeft">2</field>
+        <field name="encRight">3</field>
+        <field name="encdiameter">7.5</field>
+        <next>
+          <block type="controls_repeat_ext" id="Gy9gh_}[oy0Y3gqV68T-">
+            <value name="TIMES">
+              <shadow type="math_number" id="(*n#wldWs1#[KQQ-``R@">
+                <field name="NUM">4</field>
+              </shadow>
+            </value>
+            <statement name="DO">
+              <block type="masaylo_adelante" id="tw[%y`_^kVLFo+AMjI=%">
+                <next>
+                  <block type="masaylo_ENCODER_DISTANCIA" id="1xWP?#tHxn@%F@=]4raY">
+                    <value name="distancia">
+                      <shadow type="math_number" id="*Mh)/|y)g+zbVYgk3aC^">
+                        <field name="NUM">20</field>
+                      </shadow>
+                    </value>
+                    <next>
+                      <block type="masaylo_alto" id="1k@#;@$/2~O0K:Q9rlBO">
+                        <next>
+                          <block type="base_delay" id=";itfdL/!xcpCk2;zl4Y}">
+                            <field name="unite">s</field>
+                            <value name="DELAY_TIME">
+                              <shadow type="math_number" id="]((E@B`lw1g|5Rs+()UC">
+                                <field name="NUM">1</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="masaylo_derecha" id="12_,6]VjB$c#-j}Y.%~j">
+                                <next>
+                                  <block type="masaylo_ENCODER_ANGULO" id="#Kb}bF#tG$6,u`v34U7j">
+                                    <value name="angulo">
+                                      <shadow type="math_number" id="Us5HYKN+e:QCy3uQ.Y[P">
+                                        <field name="NUM">90</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="masaylo_alto" id="mDv?b;-b%!HN2,6H~GH~">
+                                        <next>
+                                          <block type="base_delay" id="1cw-:w(gkSA_*+ObhElH">
+                                            <field name="unite">s</field>
+                                            <value name="DELAY_TIME">
+                                              <shadow type="math_number" id="^wWrJV;IbE,BjHi^Z4_h">
+                                                <field name="NUM">1</field>
+                                              </shadow>
+                                            </value>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

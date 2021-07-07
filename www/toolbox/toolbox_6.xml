@@ -1,35 +1,75 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <toolbox>
-	<parametre id="defaultCategories">CAT_MASAYLO,CAT_OTTO,CAT_OTTOH,CAT_ESCORNABOT,CAT_ARDUINO_BASICS,CAT_LOGIC,CAT_MATH,CAT_ARDUINO,CAT_VARIABLES,CAT_servo</parametre>
-    <category name="CAT_ARDUINO" colour="#2d2d64">
+	<parametre id="defaultCategories">CAT_MASAYLO,CAT_OTTO,CAT_OTTOH,CAT_ESCORNABOT,CAT_ARDUINO_BASICS,CAT_LOGIC,CAT_MATH,CAT_ARDUINO,CAT_VARIABLES,CAT_ARDUINO_TIME</parametre>
+    <!--Eliminamos esta categoría en menú básico porque no aporta gran cosa 
+		<category name="CAT_ARDUINO" colour="#2d2d64">
 		<block type="base_begin"></block>
 		<block type="base_end"></block>
 		<block type="base_loop"></block>
-	</category>
+	</category> -->
 	<category name="CAT_MASAYLO" colour="#f5b041">
 			<block type="masaylo_arranca"></block>
 			<block type="masaylo_arranca_personalizado"></block>
-			<block type="masaylo_velocidad"></block>
+			<block type="masaylo_velocidad">
+				<value name="masaylo_velocity"><shadow type="math_number"><field name="NUM">100</field></shadow></value>
+			</block>
 			<block type="masaylo_adelante"></block>
 			<block type="masaylo_atras"></block>
 			<block type="masaylo_izquierda"></block>
 			<block type="masaylo_derecha"></block>
 			<block type="masaylo_alto"></block>
 			<block type="masaylo_BT_INIT"></block>
+			<block type="masaylo_US_INIT"></block>
 			<block type="masaylo_getdistance"></block>
+			<block type="masaylo_IR_INIT"></block>
 			<block type="masaylo_blackleft"></block>
 			<block type="masaylo_blackright"></block>
 			<block type="masaylo_blankleft"></block>
 			<block type="masaylo_blankright"></block>
+			<block type="masaylo_ENCODER_INIT"></block>
+			<block type="masaylo_ENCODER_VUELTAS">
+					<value name="vueltas"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+			</block>
+			<block type="masaylo_ENCODER_DISTANCIA">
+					<value name="distancia"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+</block>
+			<block type="masaylo_ENCODER_ANGULO">
+				<value name="angulo"><shadow type="math_number"><field name="NUM">90</field></shadow></value>
+			</block>
+			<block type="masaylo_SERVOS_INIT"></block>
+			<block type="masaylo_GIRA_CABEZA">
+				<value name="anguloCabeza"><shadow type="math_number"><field name="NUM">90</field></shadow></value>
+			</block>
+			<block type="masaylo_GIRA_BRAZO">
+				<value name="anguloBrazo"><shadow type="math_number"><field name="NUM">90</field></shadow></value>
+			</block>
+			<block type="masaylo_BUZZER_INIT"></block>
+			<block type="masaylo_BUZZER_PLAY">
+				<value name="frecuencia"><shadow type="math_number"><field name="NUM">1000</field></shadow></value>
+				<value name="duracion"><shadow type="math_number"><field name="NUM">1000</field></shadow></value>
+
+	
+			</block>
+
 	</category>
 	<category name="CAT_ESCORNABOT" colour="#C39BD3">
 			<block type="escornabot_init"></block>
-			<block type="escornabot_spin"></block>
-			<block type="escornabot_distance"></block>
-			<block type="escornabot_turnspin"></block>
-			<block type="escornabot_turnangle"></block>
+			<block type="escornabot_spin">
+				<value name="spinNumber"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+			</block>
+			<block type="escornabot_distance">
+				<value name="distance"><shadow type="math_number"><field name="NUM">10</field></shadow></value>
+			</block>
+			<block type="escornabot_turnspin">
+				<value name="spinNumber"><shadow type="math_number"><field name="NUM">1</field></shadow></value>			
+			</block>
+			<block type="escornabot_turnangle">
+				<value name="angle"><shadow type="math_number"><field name="NUM">45</field></shadow></value>			
+			</block>
 			<block type="escornabot_stop"></block>
-			<block type="escornabot_beep"></block>
+			<block type="escornabot_beep">
+				<value name="time"><shadow type="math_number"><field name="NUM">1000</field></shadow></value>			
+			</block>
 			<block type="escornabot_ledon"></block>
 			<block type="escornabot_ledoff"></block>
 			<block type="escornabot_getbutton"></block>
@@ -90,18 +130,35 @@
 			</block>
 			<block type="otto9_clear"></block>
 			<block type="otto9_matrix8x8"></block>
+			<block type="otto9_appHumanoid"></block>
+
 	</category>
 	<category name="CAT_ARDUINO_BASICS" colour="#00989D">
 	
-		<block type="digital_read"></block>
+		<block type="digital_read">
+			<value name="PIN"><shadow type="math_number"><field name="NUM">13</field></shadow></value>
+
+		</block>
 		<block type="inout_analog_read"></block>
-		<block type="inout_digital_write"></block>
-		<block type="inout_analog_write"></block>
-		<block type="toggle"></block>
+		<block type="inout_digital_write">
+			<value name="PIN"><shadow type="math_number"><field name="NUM">13</field></shadow></value>
+			<value name="STAT"><shadow type="inout_onoff"><field name="NUM">ON</field></shadow></value>
+
+		</block>
+		<block type="inout_analog_write">
+			<value name="NUM"><shadow type="math_number"><field name="NUM">255</field></shadow></value>
+
+		</block>
+		<block type="toggle">
+			<value name="PIN"><shadow type="math_number"><field name="NUM">12</field></shadow></value>
+
+		</block>
 		<block type="math_number"></block>
 		<block type="inout_onoff"></block>
 				<block type="base_delay">
-		<value name="DELAY_TIME"><shadow type="math_number">	<field name="NUM">1</field>	</shadow></value></block>
+		<value name="DELAY_TIME"><shadow type="math_number">	<field name="NUM">1</field>	</shadow></value>
+		</block>
+		<block type="base_end"></block>
 
 	
 	</category>

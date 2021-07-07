@@ -12,7 +12,7 @@ var messageDiv = document.getElementById('messageDIV')
 var detailDiv = document.getElementById('detailDIV')
 var btn_detail = document.getElementById('btn_detail')
 var btn_close_message = document.getElementById('btn_close_message')
-
+var instalado=true;
 window.addEventListener('load', function load(event){
 	var quitDiv = '<button type="button" class="close" data-dismiss="modal" aria-label="Close">&#215;</button>'
 	var window = remote.getCurrentWindow()
@@ -241,7 +241,7 @@ sp.list().then(ports => {
 			})
 		} else {
 			
-			fs.writeFile(chemin+'/compilation/arduino/ino/sketch.ino', data, function(err){
+			fs.writeFile(chemin+'/compilation/arduino/sketch/sketch.ino', data, function(err){
 				if (err) return console.log(err)
 			})
 			if ( cpu == "cortexM0" ) {
@@ -264,9 +264,46 @@ sp.list().then(ports => {
 					itsOK(0)
 				})
 			} else {
-				exec('verify.bat ' + carte, {cwd: chemin+'/compilation/arduino'}, function(err, stdout, stderr){
+				console.log("Chemin: "+chemin);
+				var dir=chemin+'/'+appVersion
+				if (!fs.existsSync(dir)){
+					fs.writeFile(dir, appVersion, (err) => {
+						alert("Ummm... Es la primera vez que instalas esta versión. Dame un par de minutos");
+						instalado=false;
+						if(err){
+							console.log("Problema creando el archivo de nueva versión"+ err.message);
+						}
+						messageDiv.innerHTML = Blockly.Msg.check + '<i class="fa fa-spinner fa-pulse fa-1_5x fa-fw"></i>'
+					
+						exec('instala.bat ' + carte, {cwd: chemin+'/compilation/arduino'}, function(err, stdout, stderr){
+							if (stderr) {
+								console.log(stderr);
+								alert ("error detectado: "+stderr);
+								return
+							}
+							console.log(stdout);
+							alert("Ya deberías poder empezar a trabajar. Empieza de nuevo a compilar");
+							instalado=true;
+							
+							messageDiv.innerHTML = "Todo ok" 
+							btn_close_message.style.display = "inline"
+						
+						})
+						
+				});
+			}
+				exec('verifica.bat ' + carte, {cwd: chemin+'/compilation/arduino'}, function(err, stdout, stderr){
+					console.log("Tarjeta: "+carte);
 					if (stderr) {
-						fs.realpath(chemin+'/compilation/arduino/ino/sketch.ino' , function(err, path){
+						if (carte=="esp8266"){
+					if (stderr.includes("Executable segment sizes:")){
+					console.log("Unattended error message... Ignoring it");
+					}
+						
+						} else{
+							if (instalado){
+						console.log(stderr);
+						fs.realpath(chemin+'/compilation/arduino/sketch/sketch.ino' , function(err, path){
 							if (err) return console.log(err)
 							var erreur = stderr.toString().replace("exit status 1","")
 							var error = erreur.replace(/error:/g,"").replace(/token/g,"")
@@ -280,8 +317,11 @@ sp.list().then(ports => {
 						})
 						return
 					}
+				}
+				}if (instalado){
 					localStorage.setItem('detail', stdout.toString())
 					itsOK(0)
+			}
 				})
 			}
 		}
@@ -304,13 +344,47 @@ sp.list().then(ports => {
 			btn_close_message.style.display = "inline"
 			return
 		}
+		var dir=chemin+'/'+appVersion
+		if (!fs.existsSync(dir)){
+			instalado=false;
+			fs.writeFile(dir, appVersion, (err) => {
+				if(err){
+					console.log("Problema creando el archivo de nueva versión"+ err.message);
+				}
+				alert ("Instalando tarjetas Arduino, ESP32 y ESP8266. Esto tardará un par de minutos. No hagas nada hasta que yo te avise");
+				messageDiv.innerHTML = Blockly.Msg.check + '<i class="fa fa-spinner fa-pulse fa-1_5x fa-fw"></i>'
+			
+				exec('instala.bat ' + carte, {cwd: chemin+'/compilation/arduino'}, function(err, stdout, stderr){
+					if (stderr) {
+						console.log(stderr);
+						alert ("error detectado: "+stderr);
+						return
+					}
+					console.log(stdout);
+					alert("Ya deberías poder empezar a trabajar. Empieza de nuevo a compilar");
+					instalado=true;
+					messageDiv.innerHTML = "Todo ok" 
+					btn_close_message.style.display = "inline"
+				
+				})
+				
+		});
+	}
+		if (instalado){
 		if ( localStorage.getItem('verif') == "false" ){	messageDiv.style.color = '#000000'
 		messageDiv.innerHTML = Blockly.Msg.check + '<i class="fa fa-spinner fa-pulse fa-1_5x fa-fw"></i>'
-		fs.writeFile(chemin+'/compilation/arduino/ino/sketch.ino', data, function(err){
+		fs.writeFile(chemin+'/compilation/arduino/sketch/sketch.ino', data, function(err){
 			if (err) return console.log(err)
 		})
-		exec('verify.bat ' + carte, {cwd: chemin+'/compilation/arduino'}, function(err, stdout, stderr){
+		
+		exec('verifica.bat ' + carte, {cwd: chemin+'/compilation/arduino'}, function(err, stdout, stderr){
+			//console.log(stdout);
 			if (stderr) {
+				if (carte=="esp8266"){
+					if (stderr.includes("Executable segment sizes:")){
+					console.log("Unattended error message... Ignoring it");
+					}}else{
+						if (instalado){
 				rech=RegExp('token')
 				if (rech.test(stderr)){
 					messageDiv.style.color = '#ff0000'
@@ -321,13 +395,15 @@ sp.list().then(ports => {
 				}
 				return
 			}
+			}
+		}
 			messageDiv.style.color = '#009000'
 			messageDiv.innerHTML = Blockly.Msg.check + ': OK' + quitDiv
 		
 		messageDiv.style.color = '#000000'
 		messageDiv.innerHTML = Blockly.Msg.upload + '<i class="fa fa-spinner fa-pulse fa-1_5x fa-fw"></i>'
+		exec('graba.bat ' + com + ' ' + carte + ' '+ com + ' ' + speed, {cwd: chemin+'/compilation/arduino'} , function(err, stdout, stderr){
 	
-		exec('flash.bat ' + cpu + ' ' + prog + ' '+ com + ' ' + speed, {cwd: chemin+'/compilation/arduino'} , function(err, stdout, stderr){
 			if (err) {
 				messageDiv.style.color = '#ff0000'
 				messageDiv.innerHTML = err.toString() + quitDiv
@@ -406,7 +482,7 @@ sp.list().then(ports => {
 					itsOK(1)
 				})
 			} else {
-				exec('flash.bat ' + cpu + ' ' + prog + ' '+ com + ' ' + speed, {cwd: chemin+'/compilation/arduino'} , function(err, stdout, stderr){
+				exec('graba.bat ' + com + ' ' + carte + ' '+ com + ' ' + speed, {cwd: chemin+'/compilation/arduino'} , function(err, stdout, stderr){
 					var erreur = stderr.toString().replace(/##################################################/g,"").replace(/|/g,"")
 					var errors = erreur.split("avrdude:")
 					localStorage.setItem('detail', errors)
@@ -421,6 +497,8 @@ sp.list().then(ports => {
 			}
 		}
 		localStorage.setItem("verif",false)
+	}
+	
 	})
 	$('#btn_detail').on('click', function(){
 		detailDiv.innerHTML = localStorage.getItem('detail')

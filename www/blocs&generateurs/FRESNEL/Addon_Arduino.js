@@ -375,6 +375,7 @@ Blockly.Arduino.storage_eeprom_write_long = function() {
 Blockly.Blocks.storage_eeprom_read_long = {
   init: function() {
     this.setColour("#154360");
+    this.appendDummyInput("Leer EEPROM");
     this.appendValueInput("ADDRESS")
 		.setCheck("Number")
         .appendField(Blockly.Msg.STORAGE_EEPROM_READ_LONG);

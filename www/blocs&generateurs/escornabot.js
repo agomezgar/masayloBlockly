@@ -9,7 +9,9 @@ goog.provide('Blockly.Arduino.otto');
 goog.require('Blockly.Arduino');
 goog.provide('Blockly.Arduino.masaylo');
 Blockly.Blocks['escornabot_init'] = {init: function() {
-    this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/escornabot.png', 48, 48, "*")) .appendField(Blockly.Msg.ESCORNABOT_MODE_TEXT).appendField(new Blockly.FieldDropdown(Blockly.Msg.ESCORNABOT_MODE_CHOICE), "escornabot_mode_choice") ;
+    this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/escornabot.png', 48, 48, "*")) .
+    appendField(Blockly.Msg.ESCORNABOT_MODE_TEXT).
+    appendField(new Blockly.FieldDropdown(Blockly.Msg.ESCORNABOT_MODE_CHOICE), "escornabot_mode_choice") ;
     this.setInputsInline(false);
     this.setPreviousStatement(false);
     this.setNextStatement(true);
@@ -27,13 +29,16 @@ return code;
 };
 
 Blockly.Blocks['escornabot_spin']={init:function(){
-  this.appendDummyInput() .appendField(new Blockly.FieldImage('media/escorniRecto.png', 48, 48, "*"))  .appendField(Blockly.Msg.ESCORNABOT_SPIN ).appendField(Blockly.Msg.ESCORNABOT_SPIN_NUMBER)
-  .appendField(new Blockly.FieldNumber("0"), "spinNumber")
+  this.appendDummyInput() .appendField(new Blockly.FieldImage('media/escorniRecto.png', 48, 48, "*")).
+  appendField(Blockly.Msg.ESCORNABOT_SPIN ).
+  appendField(Blockly.Msg.ESCORNABOT_SPIN_NUMBER);
+  this.appendValueInput("spinNumber");
+  this.appendDummyInput()
   .appendField(Blockly.Msg.ESCORNABOT_SPIN_VELOCITY_TEXT)
   .appendField(new Blockly.FieldDropdown(Blockly.Msg.ESCORNABOT_SPIN_VELOCITY), "escornabot_spin_velocity")
   ;
 
-  this.setInputsInline(false);
+  this.setInputsInline(true);
   this.setPreviousStatement(true);
   this.setNextStatement(true);
   this.setColour("#C39BD3");
@@ -42,7 +47,8 @@ Blockly.Blocks['escornabot_spin']={init:function(){
 };
 
 Blockly.Arduino['escornabot_spin']=function(block){
-  var spinNumber = block.getFieldValue('spinNumber');
+  var spinNumber = Blockly.Arduino.valueToCode(block,"spinNumber");
+  block.getFieldValue('spinNumber');
   var v = block.getFieldValue('escornabot_spin_velocity');
 
 
@@ -50,13 +56,18 @@ Blockly.Arduino['escornabot_spin']=function(block){
   return code;
 };
 Blockly.Blocks['escornabot_distance']={init:function(){
-  this.appendDummyInput() .appendField(new Blockly.FieldImage('media/escorniRecto.png', 48, 48, "*")) .appendField(Blockly.Msg.ESCORNABOT_DISTANCE).appendField(Blockly.Msg.ESCORNABOT_DISTANCE_TXT).appendField(Blockly.Msg.ESCORNABOT_DISTANCE_TEXT)
-  .appendField(new Blockly.FieldNumber("0"), "distance")
+  this.appendDummyInput() .appendField(new Blockly.FieldImage('media/escorniRecto.png', 48, 48, "*")).
+  appendField(Blockly.Msg.ESCORNABOT_DISTANCE);
+  this.appendValueInput("distance");
+
+ this.appendDummyInput().
+ appendField(Blockly.Msg.ESCORNABOT_DISTANCE_TEXT)
+
   .appendField(Blockly.Msg.ESCORNABOT_SPIN_VELOCITY_TEXT)
   .appendField(new Blockly.FieldDropdown(Blockly.Msg.ESCORNABOT_SPIN_VELOCITY), "escornabot_spin_velocity")
   ;
 
-  this.setInputsInline(false);
+  this.setInputsInline(true);
   this.setPreviousStatement(true);
   this.setNextStatement(true);
   this.setColour("#C39BD3");
@@ -65,21 +76,24 @@ Blockly.Blocks['escornabot_distance']={init:function(){
 };
 
 Blockly.Arduino['escornabot_distance']=function(block){
-  var spinNumber = block.getFieldValue('distance');
+  var distance = Blockly.Arduino.valueToCode(block,"distance");
   var v = block.getFieldValue('escornabot_spin_velocity');
 
 
-  var code = 'mirobot.driveD('+spinNumber+','+v+');\n';
+  var code = 'mirobot.driveD('+distance+','+v+');\n';
   return code;
 };
 Blockly.Blocks['escornabot_turnspin']={init:function(){
-  this.appendDummyInput() .appendField(new Blockly.FieldImage('media/escorniGira.png', 48, 48, "*")) .appendField(Blockly.Msg.ESCORNABOT_TURNSPIN_TEXT).appendField(Blockly.Msg.ESCORNABOT_SPIN_NUMBER)
-  .appendField(new Blockly.FieldNumber("0"), "spinNumber")
-  .appendField(Blockly.Msg.ESCORNABOT_SPIN_VELOCITY_TEXT)
+  this.appendDummyInput() .appendField(new Blockly.FieldImage('media/escorniGira.png', 48, 48, "*")).
+  appendField(Blockly.Msg.ESCORNABOT_TURNSPIN_TEXT).
+  appendField(Blockly.Msg.ESCORNABOT_SPIN_NUMBER);
+  this.appendValueInput("spinNumber");
+  
+  this.appendDummyInput().appendField(Blockly.Msg.ESCORNABOT_SPIN_VELOCITY_TEXT)
   .appendField(new Blockly.FieldDropdown(Blockly.Msg.ESCORNABOT_SPIN_VELOCITY), "escornabot_spin_velocity")
   ;
 
-  this.setInputsInline(false);
+  this.setInputsInline(true);
   this.setPreviousStatement(true);
   this.setNextStatement(true);
   this.setColour("#C39BD3");
@@ -88,7 +102,7 @@ Blockly.Blocks['escornabot_turnspin']={init:function(){
 };
 
 Blockly.Arduino['escornabot_turnspin']=function(block){
-  var spinNumber = block.getFieldValue('spinNumber');
+  var spinNumber = Blockly.Arduino.valueToCode(block,"spinNumber");
   var v = block.getFieldValue('escornabot_spin_velocity');
 
 
@@ -96,13 +110,16 @@ Blockly.Arduino['escornabot_turnspin']=function(block){
   return code;
 };
 Blockly.Blocks['escornabot_turnangle']={init:function(){
-  this.appendDummyInput() .appendField(new Blockly.FieldImage('media/escorniGira.png', 48, 48, "*")) .appendField(Blockly.Msg.ESCORNABOT_TURNANGLE_TEXT).appendField(Blockly.Msg.ESCORNABOT_ANGLE_NUMBER)
-  .appendField(new Blockly.FieldNumber("0"), "angle")
-  .appendField(Blockly.Msg.ESCORNABOT_SPIN_VELOCITY_TEXT)
+  this.appendDummyInput() .appendField(new Blockly.FieldImage('media/escorniGira.png', 48, 48, "*")).
+  appendField(Blockly.Msg.ESCORNABOT_TURNANGLE_TEXT).
+  appendField(Blockly.Msg.ESCORNABOT_ANGLE_NUMBER);
+  this.appendValueInput("angle");
+this.appendDummyInput().
+appendField(Blockly.Msg.ESCORNABOT_SPIN_VELOCITY_TEXT)
   .appendField(new Blockly.FieldDropdown(Blockly.Msg.ESCORNABOT_SPIN_VELOCITY), "escornabot_spin_velocity")
   ;
 
-  this.setInputsInline(false);
+  this.setInputsInline(true);
   this.setPreviousStatement(true);
   this.setNextStatement(true);
   this.setColour("#C39BD3");
@@ -111,7 +128,7 @@ Blockly.Blocks['escornabot_turnangle']={init:function(){
 };
 
 Blockly.Arduino['escornabot_turnangle']=function(block){
-  var angle = block.getFieldValue('angle');
+  var angle = Blockly.Arduino.valueToCode(block,"angle");
   var v = block.getFieldValue('escornabot_spin_velocity');
 
 
@@ -138,14 +155,14 @@ Blockly.Arduino['escornabot_stop']=function(block){
   return code;
 };
 Blockly.Blocks['escornabot_beep']={init:function(){
-  this.appendDummyInput() .appendField(new Blockly.FieldImage('media/escorniZumba.png', 48, 48, "*"))
-
-  .appendField(Blockly.Msg.ESCORNABOT_BEEP_TEXT)
-  .appendField(new Blockly.FieldNumber("0"), "time")
-  .appendField(Blockly.Msg.ESCORNABOT_TIME_TEXT)
+  this.appendDummyInput().
+  appendField(new Blockly.FieldImage('media/escorniZumba.png', 48, 48, "*"))
+  .appendField(Blockly.Msg.ESCORNABOT_BEEP_TEXT);
+  this.appendValueInput("time");
+  this.appendDummyInput().
+  appendField(Blockly.Msg.ESCORNABOT_TIME_TEXT)
   ;
-
-  this.setInputsInline(false);
+  this.setInputsInline(true);
   this.setPreviousStatement(true);
   this.setNextStatement(true);
   this.setColour("#C39BD3");
@@ -154,7 +171,7 @@ Blockly.Blocks['escornabot_beep']={init:function(){
 };
 
 Blockly.Arduino['escornabot_beep']=function(block){
-  var time = block.getFieldValue('time');
+  var time = Blockly.Arduino.valueToCode(block,"time");
   var code = 'mirobot.buzzON();\ndelay('+time+');\nmirobot.buzzOFF();\n';
   return code;
 };
@@ -219,8 +236,9 @@ Blockly.Arduino['escornabot_getbutton'] = function(block) {
 //Nueva librería escornabot
 
 Blockly.Blocks['escornabot_us_init'] = {init: function() {
-  this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/escornius.png', 48, 48, "*")) .appendField(Blockly.Msg.ESCORNABOT_USINIT_TEXT).appendField(Blockly.Msg.ESCORNABOT_TRIGGER_TEXT)
-  .appendField(new Blockly.FieldNumber("0"), "Trigger") .appendField(Blockly.Msg.ESCORNABOT_ECHO_TEXT) .appendField(new Blockly.FieldNumber("0"), "Echo");
+  this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/escornius.png', 48, 48, "*")) 
+  .appendField(Blockly.Msg.ESCORNABOT_USINIT_TEXT).appendField(Blockly.Msg.ESCORNABOT_TRIGGER_TEXT)
+  .appendField(new Blockly.FieldNumber("14"), "Trigger") .appendField(Blockly.Msg.ESCORNABOT_ECHO_TEXT) .appendField(new Blockly.FieldNumber("15"), "Echo");
   this.setInputsInline(false);
   this.setPreviousStatement(true);
   this.setNextStatement(true);
@@ -252,7 +270,7 @@ return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 Blockly.Blocks['escornabot_ir_init'] = {init: function() {
   this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/escorniir.png', 48, 48, "*")) .appendField(Blockly.Msg.ESCORNABOT_IRINIT_TEXT).appendField(Blockly.Msg.ESCORNABOT_IRLEFT_TEXT)
-  .appendField(new Blockly.FieldNumber("0"), "Izquierda") .appendField(Blockly.Msg.ESCORNABOT_IRRIGHT_TEXT) .appendField(new Blockly.FieldNumber("0"), "Derecha");
+  .appendField(new Blockly.FieldNumber("16"), "Izquierda") .appendField(Blockly.Msg.ESCORNABOT_IRRIGHT_TEXT) .appendField(new Blockly.FieldNumber("17"), "Derecha");
   this.setInputsInline(false);
   this.setPreviousStatement(true);
   this.setNextStatement(true);
@@ -323,7 +341,7 @@ return [code, Blockly.Arduino.ORDER_ATOMIC];
 //Aquí acaba la nueva librería escornabot
 // Intentando crear un botón para poner el código del escornabot
 Blockly.Blocks['escornabot_app'] = {init: function() {
-  this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/escorniPulsador.png', 48, 48, "*"))   .appendField('Escornabot autónomo');
+  this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/escorniPulsador.png', 48, 48, "*"))   .appendField(Blockly.Msg.ESCORNABOT_APP);
   this.setInputsInline(false);
   this.setColour("#C39BF2");
   this.setTooltip(Blockly.Msg.ESCORNABOT_APP_TOOLTIP);

@@ -1,22 +1,21 @@
 #include<Masaylo.h>
-Masaylo m;
+
+Masaylo m;//definimos objeto m de tipo Masaylo
 
 void setup() {
-  // Inicializamos el Masaylo:
-m.init(5,6,9,10);
-//Las funciones de movimiento son: adelante(), atras(), izquierda(), derecha() y alto()
-m.adelante();
-delay(2000);
-m.izquierda();
-delay(1000);
-m.atras();
-delay(2000);
-m.derecha();
-delay(1000);
-m.alto();
-
+  // Inicializamos los motores de Masaylo:
+  m.init(6,7,8,11,12,13); //Motor izdo:pines 7,8 para control de giro y 6 control pwm, Motor dcho:pines 12,13 para control de giro y 11 pwm
+  //Las funciones de movimiento son: adelante(), atras(), izquierda(), derecha() y alto()
+  m.adelante();
+  delay(500);
+  m.izquierda();
+  delay(500);
+  m.atras();
+  delay(500);
+  m.derecha();
+  delay(500);
+  m.alto();
 }
 
 void loop() {
-
 }

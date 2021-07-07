@@ -1,154 +1,155 @@
 {
- "name": "MasayloBlockly",
- "version": "1.0.5",
- "description": "Entorno de desarrollo para programación en robótica",
- "author": "Antonio Gómez García y Lola Nogueras Atance, about a great job made by Fontaine Jean Philippe",
- "license": "CC0-1.0",
- "main": "electronApp.js",
- "keywords": [
-  "masaylo",
-  "MASAYLO",
-  "blockly",
-  "BLOCKLY",
-  "arduino",
-  "ARDUINO",
-  "esp32",
-  "ESP32",
-  "esp8266",
-  "ESP8266",
-  "electron",
-  "ELECTRON",
-  "serialport",
-  "SERIALPORT",
-  "electron-builder",
-  "electron-updater",
-  "PYTHON",
-  "python",
-  "microbit",
-  "MICROBIT",
-  "ACE",
-  "ace"
- ],
- "scripts": {
-  "postinstall": "electron-builder install-app-deps",
-  "start": "electron .",
-  "compiler": "build --win --x64",
-  "compiler32": "build --win --ia32",
-  "publier": "build --win --x64 -p always"
- },
- "build": {
-  "appId": "com.electron.masayloBlockly",
-  "files": [
-   "./compilation/**/*",
-   "./www/**/*",
-   "./pilotes/**/*",
-   "*.js",
-   "package.json"
-  ],
-  "asar": false,
-  "directories": {
-   "buildResources": "./build",
-   "output": "./dist"
-  },
-  "nsis": {
-   "installerIcon": "build/installM.ico",
-   "uninstallerIcon": "build/appM.ico",
-   "oneClick": false,
-   "perMachine": true,
-   "deleteAppDataOnUninstall": true,
-   "allowToChangeInstallationDirectory": true,
-   "runAfterFinish": true,
-   "include": "build/masaylo.nsh"
-  },
-  "win": {
-   "target": [
-    "nsis",
-    "portable"
-   ],
-   "icon": "build/appM2.ico"
-  },
-  "fileAssociations": [
-   {
-    "ext": "bloc",
-    "name": "BLOC File",
-    "role": "Editor",
-    "icon": "build/appM2.ico"
-   },
-   {
-    "ext": "bf",
-    "name": "Factory File",
-    "role": "Editor",
-    "icon": "build/bf.ico"
-   },
-   {
-    "ext": "www",
-    "name": "Web File",
-    "role": "Editor",
-    "icon": "build/www.ico"
-   },
-   {
-    "ext": "ino",
-    "name": "Arduino File",
-    "role": "Editor",
-    "icon": "build/ino.ico"
-   },
-   {
-    "ext": "py",
-    "name": "Python File",
-    "role": "Editor",
-    "icon": "build/py.ico"
-   },
-   {
-    "ext": "html",
-    "name": "HTML File",
-    "role": "Editor",
-    "icon": "build/html.ico"
-   }
-  ],
-  "extraFiles": [
-   {
-    "from": "compilation",
-    "to": "resources/compilation",
-    "filter": [
-     "**/*"
-    ]
-   },
-   "README.md",
-   "LICENSE.md",
-   "config.json"
-  ],
-  "extraResources": [
-   "dev-app-update.yml",
-   "app-update.yml"
-  ],
-  "publish": [
-   {
-    "provider": "github",
-    "repo": "masayloBlockly",
-    "owner": "agomezgar",
-    "releaseType": "release"
-   }
-  ]
- },
- "repository": {
-  "type": "git",
-  "url": "https://github.com/agomezgar/masayloBlockly"
- },
- "bugs": {
-  "url": "https://github.com/agomezgar/masayloBlockly"
- },
- "devDependencies": {
-  "electron": "^7.2.4",
-  "electron-builder": "20.39.0"
- },
- "dependencies": {
-  "ajv": "^6.10.0",
-  "child_process": "1.0.2",
-  "core-util-is": "^1.0.2",
-  "electron-updater": "^4.0.6",
-  "ftp": "^0.3.10",
-  "node-gyp": "^7.1.0",
-  "serialport": "^9.0.1",
-  "tableify": "^1.1.0"
- }
+    "name": "MasayloBlockly",
+    "version": "1.1.0",
+    "description": "Entorno de desarrollo para programación en robótica",
+    "author": "Antonio Gómez García y Lola Nogueras Atance, about a great job made by Fontaine Jean Philippe",
+    "license": "CC0-1.0",
+    "main": "electronApp.js",
+    "keywords": [
+        "masaylo",
+        "MASAYLO",
+        "blockly",
+        "BLOCKLY",
+        "arduino",
+        "ARDUINO",
+        "esp32",
+        "ESP32",
+        "esp8266",
+        "ESP8266",
+        "electron",
+        "ELECTRON",
+        "serialport",
+        "SERIALPORT",
+        "electron-builder",
+        "electron-updater",
+        "PYTHON",
+        "python",
+        "microbit",
+        "MICROBIT",
+        "ACE",
+        "ace"
+    ],
+    "scripts": {
+        "postinstall": "electron-builder install-app-deps",
+        "start": "electron .",
+        "compiler": "build --win --x64",
+        "compiler32": "build --win --ia32",
+        "publier": "build --win --x64 -p always",
+        "rebuild": "electron-rebuild -f -w serialport"
+    },
+    "build": {
+        "appId": "com.electron.masayloBlockly",
+        "files": [
+            "./compilation/**/*",
+            "./www/**/*",
+            "./pilotes/**/*",
+            "*.js",
+            "package.json"
+        ],
+        "asar": false,
+        "directories": {
+            "buildResources": "./build",
+            "output": "./dist"
+        },
+        "nsis": {
+            "installerIcon": "build/installM.ico",
+            "uninstallerIcon": "build/appM.ico",
+            "oneClick": false,
+            "perMachine": true,
+            "deleteAppDataOnUninstall": true,
+            "allowToChangeInstallationDirectory": true,
+            "runAfterFinish": true,
+            "include": "build/masaylo.nsh"
+        },
+        "win": {
+            "target": [
+                "nsis",
+                "portable"
+            ],
+            "icon": "build/appM2.ico"
+        },
+        "fileAssociations": [
+            {
+                "ext": "bloc",
+                "name": "BLOC File",
+                "role": "Editor",
+                "icon": "build/appM2.ico"
+            },
+            {
+                "ext": "bf",
+                "name": "Factory File",
+                "role": "Editor",
+                "icon": "build/bf.ico"
+            },
+            {
+                "ext": "www",
+                "name": "Web File",
+                "role": "Editor",
+                "icon": "build/www.ico"
+            },
+            {
+                "ext": "ino",
+                "name": "Arduino File",
+                "role": "Editor",
+                "icon": "build/ino.ico"
+            },
+            {
+                "ext": "py",
+                "name": "Python File",
+                "role": "Editor",
+                "icon": "build/py.ico"
+            },
+            {
+                "ext": "html",
+                "name": "HTML File",
+                "role": "Editor",
+                "icon": "build/html.ico"
+            }
+        ],
+        "extraFiles": [
+            {
+                "from": "compilation",
+                "to": "resources/compilation",
+                "filter": [
+                    "**/*"
+                ]
+            },
+            "README.md",
+            "LICENSE.md",
+            "config.json"
+        ],
+        "extraResources": [
+            "dev-app-update.yml",
+            "app-update.yml"
+        ],
+        "publish": [
+            {
+                "provider": "github",
+                "repo": "masayloBlockly",
+                "owner": "agomezgar",
+                "releaseType": "release"
+            }
+        ]
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/agomezgar/masayloBlockly"
+    },
+    "bugs": {
+        "url": "https://github.com/agomezgar/masayloBlockly"
+    },
+    "devDependencies": {
+        "electron": "^13.1.6",
+        "electron-builder": "20.39.0"
+    },
+    "dependencies": {
+        "ajv": "^6.10.0",
+        "child_process": "1.0.2",
+        "core-util-is": "^1.0.2",
+        "electron-updater": "^4.0.6",
+        "ftp": "^0.3.10",
+        "node-gyp": "^7.1.0",
+        "serialport": "^9.0.1",
+        "tableify": "^0.0.3"
+    }
 }

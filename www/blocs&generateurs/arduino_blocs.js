@@ -25,10 +25,20 @@ Blockly.Blocks["soft_read"]={init:function(){
 Blockly.Blocks["soft_write"]={init:function(){
         this.setHelpUrl(Blockly.Msg.HELPURL);
         this.setColour("#006000");
-        this.appendValueInput("CONTENT").setCheck("String").appendField(Blockly.Msg.SSERIAL_Write);
+      //this.appendValueInput("CONTENT").setCheck("String").appendField(Blockly.Msg.SSERIAL_Write);
+        this.appendValueInput("CONTENT").appendField(Blockly.Msg.SSERIAL_Write);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.SSERIAL_Write_tooltip)}
+};
+Blockly.Blocks["soft_write_line"]={init:function(){
+    this.setHelpUrl(Blockly.Msg.HELPURL);
+    this.setColour("#006000");
+ // this.appendValueInput("CONTENT").setCheck("String").appendField(Blockly.Msg.Serial_Write2);
+    this.appendValueInput("CONTENT").appendField(Blockly.Msg.SSerial_Write2);
+     this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.SSerial_write2_tooltip)}
 };
 Blockly.Blocks["soft_available"]={init:function(){
         this.setHelpUrl(Blockly.Msg.HELPURL);
@@ -83,10 +93,22 @@ Blockly.Blocks["serial_available"]={init:function(){
 Blockly.Blocks["serial_write"]={init:function(){
         this.setColour("#006000");
         this.setHelpUrl(Blockly.Msg.HELPURL);
-        this.appendValueInput("CONTENT").setCheck("String").appendField(Blockly.Msg.Serial_Write);
+     // this.appendValueInput("CONTENT").setCheck("String").appendField(Blockly.Msg.Serial_Write);
+         this.appendValueInput("CONTENT").appendField(Blockly.Msg.Serial_Write);
+
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.Serial_write_tooltip)}
+};
+Blockly.Blocks["serial_write_line"]={init:function(){
+    this.setColour("#006000");
+    this.setHelpUrl(Blockly.Msg.HELPURL);
+  //this.appendValueInput("CONTENT").setCheck("String").appendField(Blockly.Msg.Serial_Write2);
+    this.appendValueInput("CONTENT").appendField(Blockly.Msg.Serial_Write2);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setTooltip(Blockly.Msg.Serial_write2_tooltip);
+}
 };
 Blockly.Blocks["serial_input"]={init:function(){
         this.setColour("#006000");
@@ -112,7 +134,7 @@ Blockly.Blocks["inout_digital_write"]={init:function(){
 			.setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.ARDUINO_INOUT_DIGITAL_WRITE_INPUT1);
         this.setInputsInline(true);
         this.appendValueInput("STAT").setCheck("Boolean").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg._AT);
-        this.setInputsInline(false);
+        this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.ARDUINO_INOUT_DIGITAL_WRITE_TOOLTIP)}
@@ -121,6 +143,7 @@ Blockly.Blocks["inout_digital_read"]={init:function(){
         this.setColour("#787746");
         this.setHelpUrl(Blockly.Msg.HELPURL);
         this.appendValueInput("PIN").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.ARDUINO_INOUT_DIGITAL_READ_INPUT);
+        this.setInputsInline(true);
         this.setOutput(true, "Boolean");
         this.setTooltip(Blockly.Msg.ARDUINO_INOUT_DIGITAL_READ_TOOLTIP)}
 };
@@ -139,7 +162,7 @@ Blockly.Blocks["inout_analog_write"]={init:function(){
         this.setHelpUrl(Blockly.Msg.HELPURL);
         this.appendDummyInput().appendField(Blockly.Msg.ARDUINO_INOUT_ANALOG_WRITE_INPUT1).appendField(new Blockly.FieldDropdown(profile[card].dropdownPWM), "broche");
         this.appendValueInput("NUM").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg._AT).setCheck("Number");
-        this.setInputsInline(false);
+        this.setInputsInline(true);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.ARDUINO_INOUT_ANALOG_WRITE_TOOLTIP)}
@@ -721,8 +744,9 @@ Blockly.Blocks['eeprom_write']={init:function(){
   }
 };
 Blockly.Blocks["eeprom_read"]={init:function(){
+   this.appendDummyInput().appendField(Blockly.Msg.STOCK3);
         this.appendValueInput("adr").setCheck("Number")
-			.appendField(Blockly.Msg.STOCK3);
+			.appendField(Blockly.Msg.STOCK2);
         this.setColour("#154360");
         this.setHelpUrl(Blockly.Msg.HELPURL);
         this.setOutput(true, "Number");

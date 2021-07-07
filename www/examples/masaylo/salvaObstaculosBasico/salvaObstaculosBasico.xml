@@ -1,0 +1,120 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_6</toolbox>
+  <block type="variables_set_init" id="NgaguxS=G#lA|@(Jtv^K" x="34" y="60">
+    <field name="VAR">izquierda</field>
+    <field name="VARIABLE_SETTYPE_TYPE">BOOLEAN</field>
+    <value name="VALUE">
+      <block type="math_number" id="D3C%gy8][Lu=X_S0-bIr">
+        <field name="NUM">0</field>
+      </block>
+    </value>
+  </block>
+  <block type="masaylo_arranca_personalizado" id="foUWX3_%34@Gz,AYHtzn" x="180" y="165">
+    <field name="MIP">6</field>
+    <field name="MIA">7</field>
+    <field name="MIB">8</field>
+    <field name="MDP">11</field>
+    <field name="MDA">12</field>
+    <field name="MDB">13</field>
+    <next>
+      <block type="masaylo_US_INIT" id="K5?qd.0-;[N@/r*.Yol#">
+        <field name="trigger">16</field>
+        <field name="echo">17</field>
+        <next>
+          <block type="controls_if" id="lc+lk8dp6M~{mik#I4%d">
+            <mutation else="1"></mutation>
+            <value name="IF0">
+              <block type="logic_compare" id="_G^L*0N66R6%vFyRg[@,">
+                <field name="OP">GT</field>
+                <value name="A">
+                  <block type="masaylo_getdistance" id=";tBBGN!jt!!mrYct0)~/"></block>
+                </value>
+                <value name="B">
+                  <shadow type="math_number" id="j!5.=C?5Vwqnw%W4x_sI">
+                    <field name="NUM">20</field>
+                  </shadow>
+                </value>
+              </block>
+            </value>
+            <statement name="DO0">
+              <block type="masaylo_adelante" id="hMgzhhQ_SpR|)U+Rg4WR"></block>
+            </statement>
+            <statement name="ELSE">
+              <block type="variables_set" id="J3Wu+Md`N/Jer*wU59Eb">
+                <field name="VAR">izquierda</field>
+                <value name="VALUE">
+                  <block type="math_random_int" id="|M+jI:1srGoY?W::v!9@">
+                    <value name="FROM">
+                      <block type="math_number" id="fP7eS%.3jJg#6-JJd^{@">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                    <value name="TO">
+                      <block type="math_number" id="@x)Bjei^?s$bp7I_xq6.">
+                        <field name="NUM">1</field>
+                      </block>
+                    </value>
+                  </block>
+                </value>
+                <next>
+                  <block type="controls_if" id="UpDK$.BUAT+-_{noPglm">
+                    <mutation else="1"></mutation>
+                    <value name="IF0">
+                      <block type="logic_compare" id="~b@%VZP^q9(RT|gWz|;;">
+                        <field name="OP">EQ</field>
+                        <value name="A">
+                          <block type="variables_get" id="o`uDIAeB_1p-(tjlq!mH">
+                            <field name="VAR">izquierda</field>
+                          </block>
+                        </value>
+                        <value name="B">
+                          <shadow type="math_number" id="(O`.$5BM-5=C8Yb*f)uC">
+                            <field name="NUM">0</field>
+                          </shadow>
+                        </value>
+                      </block>
+                    </value>
+                    <statement name="DO0">
+                      <block type="masaylo_derecha" id="+Q.clZE!/pvk:-5({RZh">
+                        <next>
+                          <block type="base_delay" id="bis?=A}62,XJ5@,ZDSB[">
+                            <field name="unite">s</field>
+                            <value name="DELAY_TIME">
+                              <shadow type="math_number" id="lB=X:9Xd/~8.+WKv9$pr">
+                                <field name="NUM">0.5</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="masaylo_alto" id="bm3,gbsy5(%P@4MPcJxM"></block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                    <statement name="ELSE">
+                      <block type="masaylo_izquierda" id="VnXnNI{A#`}[cs0.m/!h">
+                        <next>
+                          <block type="base_delay" id="Ezho-jQtu%m*(tn],s[0">
+                            <field name="unite">s</field>
+                            <value name="DELAY_TIME">
+                              <shadow type="math_number" id="nbydWzb55m.V^NeKGbtt">
+                                <field name="NUM">0.5</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="masaylo_alto" id="[kwr.}y5kJxF8D8,V[G7"></block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </statement>
+                  </block>
+                </next>
+              </block>
+            </statement>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

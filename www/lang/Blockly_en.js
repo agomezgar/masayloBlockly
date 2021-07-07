@@ -299,6 +299,8 @@ Blockly.Msg.TEXT_LENGTH_TOOLTIP = "returns the number of letters (including spac
 Blockly.Msg.TEXT_PRINT_TITLE = "show %1";
 Blockly.Msg.TEXT_PRINT_TOOLTIP = "Show text, number or other specified value";
 Blockly.Msg.TEXT_TEXT_TOOLTIP = "A letter, a word or a phrase";
+Blockly.Msg.TEXT_TEXT2_TOOLTIP = "A char only";
+
 Blockly.Msg.TODAY = "Today";
 Blockly.Msg.UNDO = "Cancel";
 Blockly.Msg.VARIABLES_AS = "type";

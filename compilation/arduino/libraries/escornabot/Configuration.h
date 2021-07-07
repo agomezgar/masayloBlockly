@@ -106,7 +106,7 @@ See LICENSE.txt for details
 #define STEPPERS_MOTOR_LEFT_IN3 7
 #define STEPPERS_MOTOR_LEFT_IN4 6
 
-// step calibration 
+// step calibration (los comentados son los originales)
 #define STEPPERS_STEPS_PER_SECOND 1000
 #define STEPPERS_LINE_STEPS 1738
 #define STEPPERS_TURN_STEPS 1024

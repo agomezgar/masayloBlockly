@@ -109,5 +109,62 @@
         "link_url": "#modal_potar",
         "link_text": "",
         "visible": false
+    },
+    {
+        "source_url": "masaylo/movimientosBasicos/movimientosBasicos.xml",
+        "source_text": "Aprende a controlar los movimientos básicos del robot Masaylo",
+        "image": "./masaylo/movimientosBasicos/movimientosBasicos.png",
+        "link_url": "#masaylo1",
+        "link_text": "",
+        "visible": true
+    },
+    {
+        "source_url": "masaylo/movimientosVelocidad/movimientosVelocidad.xml",
+        "source_text": "Utiliza PWM para controlar la velocidad de movimientos del Masaylo",
+        "image": "./masaylo/movimientosVelocidad/movimientosVelocidad.png",
+        "link_url": "#masaylo2",
+        "link_text": "",
+        "visible": true
+    },
+    {
+        "source_url": "masaylo/salvaObstaculosBasico2/salvaObstaculosBasico2.xml",
+        "source_text": "Aprende a usar el sensor de US para detectar obstáculos y esquivarlos girando a la izquierda",
+        "image": "./masaylo/salvaObstaculosBasico2/salvaObstaculosBasico2.png",
+        "link_url": "#masaylo5",
+        "link_text": "",
+        "visible": true
+    },
+    {
+        "source_url": "masaylo/salvaObstaculosBasico/salvaObstaculosBasico.xml",
+        "source_text": "Aprende a detectar obstáculos con el sensor US y a esquivarlos mediante movimientos aleatorios",
+        "image": "./masaylo/salvaObstaculosBasico/salvaObstaculosBasico.png",
+        "link_url": "#masaylo3",
+        "link_text": "",
+        "visible": true
+    },
+    {
+        "source_url": "masaylo/distanciasAngulosCuadrado/distanciasAngulosCuadrado.xml",
+        "source_text": "Aprende a usar los encoder de ranura para dibujar un cuadrado perfecto",
+        "image": "./masaylo/distanciasAngulosCuadrado/distanciasAngulosCuadrado.png",
+        "link_url": "#masaylo4",
+        "link_text": "",
+        "visible": true
+    },
+    {
+        "source_url": "masaylo/servoCabeza/servoCabeza.xml",
+        "source_text": "Gira el cabezal del sensor de ultrasonidos",
+        "image": "./masaylo/servoCabeza/servoCabeza.png",
+        "link_url": "#masaylo6",
+        "link_text": "",
+        "visible": true
+    },
+    {
+        "source_url": "masaylo/laberinto/laberinto.xml",
+        "source_text": "Salva obstáculos decidiendo la dirección adecuada midiendo distancias a izquierda y derecha",
+        "image": "./masaylo/laberinto/laberinto.png",
+        "link_url": "#masaylo7",
+        "link_text": "",
+        "visible": true
     }
+    
 ]

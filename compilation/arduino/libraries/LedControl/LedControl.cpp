@@ -55,6 +55,8 @@ LedControl::LedControl(int dataPin, int clkPin, int csPin, int numDevices) {
     pinMode(SPI_CS,OUTPUT);
     digitalWrite(SPI_CS,HIGH);
     SPI_MOSI=dataPin;
+      for (int i=0; i<80; i++)
+    CHARbuffer[i] = 0;
     for(int i=0;i<64;i++) 
 	status[i]=0x00;
     for(int i=0;i<maxDevices;i++) {
@@ -211,3 +213,85 @@ void LedControl::spiTransfer(int addr, volatile byte opcode, volatile byte data)
 }    
 
 
+//Added imitating OTTODIY Humanoid
+void LedControl::writeText(const char * s, byte scrollspeed){
+ int a ;
+ int b ;
+  for(a = 0; s[a] != '\0'; a++){
+    b = a +1 ;
+    if (b > 9 ) b = 9; // only maximum of nine characters allowed
+  }
+  for(int charNUMBER = 0; charNUMBER <b; charNUMBER++){
+      if ((* s < 48) || (* s > 91)) {
+        if (* s == 32){
+          this->sendChar (44, charNUMBER, b, scrollspeed);
+        }
+        else
+        {
+          this->sendChar (43, charNUMBER, b, scrollspeed);
+        }
+     }
+      else
+      {
+      this->sendChar ((* s - 48), charNUMBER, b, scrollspeed);
+     }
+  * s++;
+  }
+
+}
+void LedControl::sendChar (const byte data, byte pos, byte number, byte scrollspeed){
+  if (scrollspeed < 50 ) scrollspeed = 50;
+   if (scrollspeed > 150 ) scrollspeed = 150;
+  int charPos;
+charPos = pos * 8;
+//Serial.print ("sendchar  ");
+//Serial.print (pos);
+//Serial.print (" -  ");
+//Serial.print (number);
+//Serial.print (" -  ");
+//Serial.print (charPos);
+//Serial.print (" -  ");
+//Serial.println (data);
+//we need to add 8 for each character
+  CHARbuffer[0 + charPos] = 0;
+  CHARbuffer[1 + charPos] = pgm_read_byte(&Character_font_6x8[data].data[0]);
+  CHARbuffer[2 + charPos] = pgm_read_byte(&Character_font_6x8[data].data[1]);
+  CHARbuffer[3 + charPos] = pgm_read_byte(&Character_font_6x8[data].data[2]);
+  CHARbuffer[4 + charPos] = pgm_read_byte(&Character_font_6x8[data].data[3]);
+  CHARbuffer[5 + charPos] = pgm_read_byte(&Character_font_6x8[data].data[4]);
+  CHARbuffer[6 + charPos] = pgm_read_byte(&Character_font_6x8[data].data[5]);
+  CHARbuffer[7 + charPos] = 0;
+
+ if (number == (pos + 1)){ // last character so display the total text
+// we need to display first character and scroll left until each charater is shown.
+    for (int c=0; c<8;c++){ // show first character
+         byte value = CHARbuffer[c];
+            for (int r=0; r<8; r++){
+        
+                setLed(0,7-r,c,(0b00000001 & (value >> r)));//       
+		//setLed(0,7-c,r,(0b00000001 & (value >> r)));//  
+		//  setLed(0,c,r,(0b00000001 & (value >> r)));//  
+		    //           setLed(0,7-c,7-r,(0b00000001 & (value >> r)));//  
+
+           }
+      }
+      delay(500); // show first digit for longer
+      for (int i=0; i<((number*8)-1); i++){   // shift buffer the correct number of characters (8 lines per character)
+        CHARbuffer[i] = CHARbuffer[i+1];
+         for (int c=0; c<8;c++){ // 
+             byte value = CHARbuffer[(1+c)+i];
+                for (int r=0; r<8; r++){
+            
+                  setLed(0,7-r,c,(0b00000001 & (value >> r)));//       
+                    //setLed(0,7-c,r,(0b00000001 & (value >> r)));//  
+                 //  setLed(0,c,r,(0b00000001 & (value >> r)));//  
+                 //setLed(0,7-c,7-r,(0b00000001 & (value >> r)));//  
+
+              }
+        }
+     delay(scrollspeed);// this sets the scroll speed
+  
+      }
+      clearDisplay(0);
+ }   
+}

@@ -1,6 +1,9 @@
 "use strict";
 goog.provide("Blockly.Blocks.arduino");
 goog.require("Blockly.Blocks");
+goog.require('Blockly.Types');
+goog.require('Blockly.FieldInstance');
+goog.require('Blockly.Arduino');
   /////////////
  /*  audio  */
 /////////////
@@ -119,7 +122,7 @@ Blockly.Arduino["lp2i_mp3_init"]=function(block){
 		volume_hex="0x"+volume.toString(16);
 	}
     Blockly.Arduino.includes_["extension"]="#include <extension.h>";
-	Blockly.Arduino.definitions_["extension"]="Extension module;";
+	Blockly.Arduino.definitions_["extension"]="extension module;";
     //Blockly.Arduino.codeFunctions_["fonction_mp3"]="void exe_cmd(byte CMD, byte Par1, byte Par2) {\n  word check=-(0xFF + 0x06 + CMD + 0x00 + Par1 + Par2);\n  byte Command[10]={0x7E,0xFF,0x06,CMD,0x00,Par1,Par2,highByte(check),lowByte(check),0xEF};\n  for (int i=0; i<10; i++) {\n    Serial.write( Command[i]);\n  };\n}";
     if (autoplay){
 		Blockly.Arduino.setups_["mp3"]="module.mp3_lecture_auto("+ volume_hex +");";
@@ -269,16 +272,28 @@ Blockly.Python["lp2i_mp3_play"]=function(block){
 Blockly.Blocks["lcd_i2c"]={init:function(){
         this.appendDummyInput().appendField(new Blockly.FieldImage("data:image/png;base64,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", 55, 35))
 			.appendField(Blockly.Msg.LCD+" I2C");
-        this.appendDummyInput().setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.lcd_fond).appendField(new Blockly.FieldDropdown(Blockly.Msg.couleur), "fond");
+        //this.appendDummyInput().setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.lcd_fond).appendField(new Blockly.FieldDropdown(Blockly.Msg.couleur), "fond");
+        this.appendValueInput("address").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.LCD_ADDRESS);
+        this.appendValueInput("columns").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.LCD_COLUMNS);
+        this.appendValueInput("rows").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.LCD_ROWS);
+        this.setInputsInline(false);
         this.setColour("#00929F");
         this.setTooltip(Blockly.Msg.LCDi2c_tooltip);
         this.setHelpUrl("http://wiki.seeed.cc/Grove-LCD_RGB_Backlight/");
     }
 };
 Blockly.Arduino["lcd_i2c"]=function(block){
-    var fond_couleur=block.getFieldValue("fond");
-    Blockly.Arduino.includes_["rgb_lcd"]='#include <Wire.h>\n#include <rgb_lcd.h>';
-    Blockly.Arduino.definitions_["rgb_lcd"]="rgb_lcd lcd;";
+   // var fond_couleur=block.getFieldValue("fond");
+   var v_address=Blockly.Arduino.valueToCode(block,"address");
+   var v_columns=Blockly.Arduino.valueToCode(block,"columns");
+   var v_rows=Blockly.Arduino.valueToCode(block,"rows");
+
+
+    Blockly.Arduino.includes_["lcd_i2c"]='#include <Wire.h>\n#include <LiquidCrystal_I2C.h>\n';
+    Blockly.Arduino.definitions_["lcd_i2c"]="LiquidCrystal_I2C lcd(0x"+v_address+", "+v_columns+", "+v_rows+");"
+    +" // Inicia el LCD en la dirección especificada, con "+v_columns+" caracteres y "+v_rows+" líneas\n"
+    +"int nRows="+v_rows+";\nint nColumns="+v_columns+";\n";
+    /* 
     switch (fond_couleur) {
         case "bleu":
             var code="  lcd.setRGB(0,0,255);";
@@ -292,8 +307,8 @@ Blockly.Arduino["lcd_i2c"]=function(block){
         case "vert":
             var code="  lcd.setRGB(0,255,0);";
             break
-    };
-	Blockly.Arduino.setups_["rgb_lcd"]="lcd.begin(16,2);\n  lcd.clear();\n"+code;
+    }; */
+	Blockly.Arduino.setups_["lcd_i2c"]="lcd.begin();\n  lcd.clear();\n lcd.backlight();\n";
     return "";
 };
 Blockly.Python["lcd_i2c"]=function(block){
@@ -344,7 +359,8 @@ Blockly.Arduino["lcd_symbole"]=function(block){
     var l8=block.getFieldValue("L8");
     Blockly.Arduino.variables_["char_"+vname]="byte char_" + vname + "[]={\n B" + l1 + ",\n B" + l2 + ",\n B" + l3 + ",\n B" + l4 + ",\n B" + l5 + ",\n B" + l6 + ",\n B" + l7 + ",\n B" + l8 + "\n" + "};";
     Blockly.Arduino.setups_["char_"+vname]="lcd.createChar("+vname+",char_"+vname+");";
-	return ""
+	Blockly.Arduino.definitions_["printByte"]="#if defined(ARDUINO) && ARDUINO >= 100\n    #define printByte(args)  write(args);\n    #else\n    #define printByte(args)  print(args,BYTE);\n   #endif\n";
+    return ""
 };
 Blockly.Python["lcd_symbole"]=function(block){
     var vname=block.getFieldValue("c_char");
@@ -375,7 +391,7 @@ Blockly.Arduino["lcd_aff_symbole"]=function(block){
     var value_num_ligne=block.getFieldValue("ligne");
     var value_num_colonne=block.getFieldValue("colonne");
     var variable=block.getFieldValue("c_char");
-    return "lcd.setCursor(" + value_num_colonne + "," + value_num_ligne + ");\nlcd.write(" + variable + ");\n"
+    return "lcd.setCursor(" + value_num_colonne + "," + value_num_ligne + ");\nlcd.printByte(" + variable +");\n"
 };
 //////////////
 Blockly.Blocks["lcd"]={init:function(){
@@ -423,6 +439,8 @@ Blockly.Blocks["LCD_Keypad_Shield_DFR_09"]={init:function(){
         this.appendDummyInput().appendField(Blockly.Msg.LCD_SHIELD_PRINT_TEXT);
         this.appendValueInput("TEXT1").setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.LCD_SHIELD_PRINT_INPUT1);
         this.appendValueInput("TEXT2").setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.LCD_SHIELD_PRINT_INPUT2);
+        this.appendValueInput("TEXT3").setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.LCD_SHIELD_PRINT_INPUT3);
+        this.appendValueInput("TEXT4").setCheck("String").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.LCD_SHIELD_PRINT_INPUT4);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setTooltip(Blockly.Msg.LCD_SHIELD_PRINT_TOOLTIP)}
@@ -430,7 +448,9 @@ Blockly.Blocks["LCD_Keypad_Shield_DFR_09"]={init:function(){
 Blockly.Arduino["LCD_Keypad_Shield_DFR_09"]=function(block){
     var text1=Blockly.Arduino.valueToCode(block, "TEXT1", Blockly.Arduino.ORDER_UNARY_POSTFIX);
     var text2=Blockly.Arduino.valueToCode(block, "TEXT2", Blockly.Arduino.ORDER_UNARY_POSTFIX);
-    return "lcd.setCursor(0,0);\nlcd.print(" + text1 + ");\nlcd.setCursor(0,1);\nlcd.print(" + text2 + ");\n"
+    var text3=Blockly.Arduino.valueToCode(block, "TEXT3", Blockly.Arduino.ORDER_UNARY_POSTFIX);
+    var text4=Blockly.Arduino.valueToCode(block, "TEXT4", Blockly.Arduino.ORDER_UNARY_POSTFIX);
+    return "lcd.setCursor(0,0);\nlcd.print(" + text1 + ");\nlcd.setCursor(0,1);\nlcd.print(" + text2 + ");\nlcd.setCursor(0,2);\nlcd.print(" + text3 + ");\nlcd.setCursor(0,3);\nlcd.print(" + text4 + ");\n"
 };
 Blockly.Python["LCD_Keypad_Shield_DFR_09"]=function(block){
     var text1=Blockly.Python.valueToCode(block, "TEXT1", Blockly.Python.ORDER_UNARY_POSTFIX);
@@ -541,13 +561,13 @@ Blockly.Blocks['rvb_init']={init:function() {
         .appendField(Blockly.Msg.rvb_init);
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("R").appendField(new Blockly.FieldDropdown(profile[card].dropdownPWM), "rouge");
+        .appendField(Blockly.Msg.rvb_red).appendField(new Blockly.FieldDropdown(profile[card].dropdownPWM), "rouge");
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("V").appendField(new Blockly.FieldDropdown(profile[card].dropdownPWM), "vert");
+        .appendField(Blockly.Msg.rvb_green).appendField(new Blockly.FieldDropdown(profile[card].dropdownPWM), "vert");
     this.appendDummyInput()
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("B").appendField(new Blockly.FieldDropdown(profile[card].dropdownPWM), "bleu");
+        .appendField(Blockly.Msg.rvb_blue).appendField(new Blockly.FieldDropdown(profile[card].dropdownPWM), "bleu");
     this.setInputsInline(false);
     this.setColour("#00929f");
     this.setTooltip(Blockly.Msg.rvb_init_tooltip);
@@ -557,9 +577,10 @@ Blockly.Arduino['rvb_init'] = function(block) {
 	var value_rouge = block.getFieldValue('rouge');
 	var value_vert = block.getFieldValue('vert');
 	var value_bleu = block.getFieldValue('bleu');
-	Blockly.Arduino.includes_["extension"]="#include <extension.h>";
-	Blockly.Arduino.definitions_["extension"]="Extension module;";
-	Blockly.Arduino.setups_["rvb"]="module.rvb("+value_rouge+","+value_vert+","+value_bleu+");"
+//	Blockly.Arduino.includes_["extension"]="#include <extension.h>";
+//	Blockly.Arduino.definitions_["extension"]="Extension module;";
+    Blockly.Arduino.includes_["rgb"]="int red="+value_rouge+";\nint green="+value_vert+";\nint blue="+value_bleu+";\n";
+//	Blockly.Arduino.setups_["rvb"]="module.rvb("+value_rouge+","+value_vert+","+value_bleu+");"
 	//Blockly.Arduino.variables_['rvb_'+value_rouge] = '#define redPin '+value_rouge+'\n#define greenPin '+value_vert+'\n#define bluePin '+value_bleu;
 	//Blockly.Arduino.userFunctions_['rvb_'+value_rouge] = 'void setColor(int redValue, int greenValue, int blueValue) {\n  analogWrite(redPin, redValue);\n  analogWrite(greenPin, greenValue);\n  analogWrite(bluePin, blueValue);\n}';
 	//Blockly.Arduino.setups_['rvb_'+value_rouge]='pinMode(greenPin, OUTPUT);\n  pinMode(redPin, OUTPUT);\n  pinMode(bluePin, OUTPUT);';
@@ -581,13 +602,13 @@ Blockly.Blocks['rvb_set']={init:function() {
         .appendField(Blockly.Msg.rvb_set);
     this.appendValueInput("r").setCheck("Number")
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("R");
+        .appendField(Blockly.Msg.rvb_red);
     this.appendValueInput("v").setCheck("Number")
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("V");
+        .appendField(Blockly.Msg.rvb_green);
     this.appendValueInput("b").setCheck("Number")
         .setAlign(Blockly.ALIGN_RIGHT)
-        .appendField("B");
+        .appendField(Blockly.Msg.rvb_blue);
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -599,7 +620,7 @@ Blockly.Arduino['rvb_set'] = function(block) {
   var value_r = Blockly.Arduino.valueToCode(block, 'r', Blockly.Arduino.ORDER_ATOMIC);
   var value_v = Blockly.Arduino.valueToCode(block, 'v', Blockly.Arduino.ORDER_ATOMIC);
   var value_b = Blockly.Arduino.valueToCode(block, 'b', Blockly.Arduino.ORDER_ATOMIC);
-  var code = 'module.rvb_afficher_couleur('+value_r+','+value_v+','+value_b+');\n';
+  var code = 'analogWrite(red,'+value_r+');\nanalogWrite(green,'+value_v+');\nanalogWrite(blue,'+value_b+');\n';
   //var code = 'setColor('+value_r+','+value_v+','+value_b+');\n';
   return code;
 };
@@ -728,8 +749,10 @@ Blockly.Blocks["pixel_setcolor"]={init:function(){
 Blockly.Arduino["pixel_setcolor"]=function(block){
     var pin=Blockly.Arduino.valueToCode(block, "broche", Blockly.Arduino.ORDER_ASSIGNMENT);
 	var color=block.getFieldValue("color");
-	var colorR=color[1] + color[2], colorG=color[3] + color[4], colorB=color[5] + color[6];
-	var red=parseInt(colorR,16), green=parseInt(colorG,16), blue=parseInt(colorB,16);
+//	var colorR=color[1] + color[2], colorG=color[3] + color[4], colorB=color[5] + color[6];
+var colorR=color[3] + color[4], colorG=color[1] + color[2], colorB=color[5] + color[6];
+
+    var red=parseInt(colorR,16), green=parseInt(colorG,16), blue=parseInt(colorB,16);
     return "pixel.setPixelColor(" + pin + ", " + red + ", " + green + ", " + blue + ");\n"
 };
 Blockly.Python["pixel_setcolor"]=function(block){
@@ -741,7 +764,7 @@ Blockly.Python["pixel_setcolor"]=function(block){
 };
 //////////////
 Blockly.Blocks["pixel_show"]={init:function(){
-	this.appendDummyInput().appendField(Blockly.Msg.pixel2);
+	this.appendDummyInput().appendField("Mostrar");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour("#00929F");
@@ -762,7 +785,7 @@ Blockly.Python["pixel_show"]=function(block){
     
 };
 //////////////
-Blockly.Blocks["pixel_clear"]={init:function(){
+Blockly.Blocks["pixel_show"]={init:function(){
 	this.appendDummyInput().appendField(Blockly.Msg.pixel7);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -770,8 +793,29 @@ Blockly.Blocks["pixel_clear"]={init:function(){
     this.setTooltip(Blockly.Msg.pixel4_tooltip);
     this.setHelpUrl("http://")}
 };
-Blockly.Arduino["pixel_clear"]=function(block){
+Blockly.Arduino["pixel_show"]=function(block){
     return "pixel.show();\n"
+};
+Blockly.Python["pixel_show"]=function(block){
+	var carte = localStorage.getItem('card')
+	var cpu = profile[carte].cpu
+	if ( cpu == "cortexM0" ) {
+		return "np.clear()\n"
+	} else {
+		return "np.clear()\n"
+	}
+    
+};
+Blockly.Blocks["pixel_clear"]={init:function(){
+	this.appendDummyInput().appendField(Blockly.Msg.pixel8);
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour("#00929F");
+    this.setTooltip(Blockly.Msg.pixel8_tooltip);
+    this.setHelpUrl("http://")}
+};
+Blockly.Arduino["pixel_clear"]=function(block){
+    return "pixel.clear();\n"
 };
 Blockly.Python["pixel_clear"]=function(block){
 	var carte = localStorage.getItem('card')
@@ -957,7 +1001,8 @@ Blockly.Blocks["dagu_rs027"]={init:function(){
         this.setNextStatement(true, null);
         this.setColour("#00929F");
         this.setTooltip(Blockly.Msg.moteurdagu_tooltiprs027);
-        this.setHelpUrl("http://www.dagurobot.com/goods.php?id=142")}
+       // this.setHelpUrl("http://www.dagurobot.com/goods.php?id=142")}
+}
 };
 Blockly.Arduino["dagu_rs027"]=function(block){
     var dropdown_moteur=block.getFieldValue("MOTEUR");
@@ -991,7 +1036,8 @@ Blockly.Python["moteur3v"]=function(){return ""};
 //////////////
 Blockly.Blocks["m_pap"]={init:function(){
     this.appendDummyInput().appendField(new Blockly.FieldImage("data:image/png;base64,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",62,45))
-		.appendField(Blockly.Msg.m_pap);
+		.appendField(Blockly.Msg.m_pap).appendField(new Blockly.FieldDropdown([["1","1"],["2","2"]]), "motor");
+
     this.appendValueInput("pas").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.m_pap_step);
     this.appendValueInput("vit").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.vitesse);
     this.appendValueInput("ph1").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField("phase 1");
@@ -999,10 +1045,13 @@ Blockly.Blocks["m_pap"]={init:function(){
     this.appendValueInput("ph3").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField("phase 3");
     this.appendValueInput("ph4").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField("phase 4");
     this.setColour("#00929F");
+    this.setInputsInline(false);
     this.setTooltip(Blockly.Msg.m_pap_tooltip);
     this.setHelpUrl(Blockly.Msg.HELPURL);}
 };
 Blockly.Arduino["m_pap"]=function(block){
+    var vstepper_choice = block.getFieldValue('motor');
+    console.log("Eleccion "+vstepper_choice);
     var vitesse=Blockly.Arduino.valueToCode(block, "vit", Blockly.Arduino.ORDER_ASSIGNMENT);
     var nb_pas=Blockly.Arduino.valueToCode(block, "pas", Blockly.Arduino.ORDER_ASSIGNMENT);
     var phase1=Blockly.Arduino.valueToCode(block, "ph1", Blockly.Arduino.ORDER_ASSIGNMENT);
@@ -1010,8 +1059,8 @@ Blockly.Arduino["m_pap"]=function(block){
     var phase3=Blockly.Arduino.valueToCode(block, "ph3", Blockly.Arduino.ORDER_ASSIGNMENT);
     var phase4=Blockly.Arduino.valueToCode(block, "ph4", Blockly.Arduino.ORDER_ASSIGNMENT);
     Blockly.Arduino.includes_["stepper"]="#include <Stepper.h>";
-    Blockly.Arduino.definitions_["stepper"]="Stepper moteurPAP(" + nb_pas + "," + phase1 + "," + phase2 + "," + phase3 + "," + phase4 + ");";
-    Blockly.Arduino.setups_["stepper"]="moteurPAP.setSpeed("+vitesse+");";
+    Blockly.Arduino.definitions_["stepper"+vstepper_choice]="Stepper s"+ vstepper_choice+" (" + nb_pas + "," + phase1 + "," + phase2 + "," + phase3 + "," + phase4 + ");";
+    Blockly.Arduino.setups_["stepper"+vstepper_choice]="s"+vstepper_choice+".setSpeed("+vitesse+");";
     return ''
 };
 Blockly.Python["m_pap"]=function(block){
@@ -1022,14 +1071,16 @@ Blockly.Python["m_pap"]=function(block){
     var phase3=Blockly.Python.valueToCode(block, "ph3", Blockly.Python.ORDER_ASSIGNMENT);
     var phase4=Blockly.Python.valueToCode(block, "ph4", Blockly.Python.ORDER_ASSIGNMENT);
     Blockly.Python.imports_["stepper"]="import ";
-    Blockly.Python.definitions_["stepper"]="Stepper moteurPAP(" + nb_pas + "," + phase1 + "," + phase2 + "," + phase3 + "," + phase4 + ");";
-    Blockly.Python.setups_["stepper"]="moteurPAP.setSpeed("+vitesse+");";
+    Blockly.Python.definitions_["stepper"]="Stepper motorPAP(" + nb_pas + "," + phase1 + "," + phase2 + "," + phase3 + "," + phase4 + ");";
+    Blockly.Python.setups_["stepper"]="motorPAP.setSpeed("+vitesse+");";
     return ''
 };
 //////////////
 Blockly.Blocks["m_pap_step"]={init:function(){
+    this.appendDummyInput().appendField(new Blockly.FieldDropdown([["1","1"],["2","2"]]), "motor")
+
         this.appendValueInput("step").setCheck("Number").appendField(Blockly.Msg.m_pap_step1);
-		this.appendDummyInput().appendField(Blockly.Msg.m_pap_step);
+        this.appendDummyInput().appendField(Blockly.Msg.m_pap_step);
         this.setPreviousStatement(true, null);
         this.setNextStatement(true, null);
         this.setColour("#00929F");
@@ -1037,8 +1088,10 @@ Blockly.Blocks["m_pap_step"]={init:function(){
         this.setHelpUrl(Blockly.Msg.HELPURL)}
 };
 Blockly.Arduino['m_pap_step'] = function(block) {
+    var vstepper_choice = block.getFieldValue('motor');
+
 	var m_step = Blockly.Arduino.valueToCode(block, 'step', Blockly.Arduino.ORDER_ASSIGNMENT);
-	return 'moteurPAP.step('+m_step+');\n';
+	return 's'+vstepper_choice+'.step('+m_step+');\n';
 };
 Blockly.Python['m_pap_step'] = function(block) {
 	var m_step = Blockly.Python.valueToCode(block, 'step', Blockly.Python.ORDER_ASSIGNMENT);
@@ -1194,7 +1247,9 @@ Blockly.Arduino["matrice8x8_init"]=function(block){
     var cs=Blockly.Arduino.valueToCode(block, "CS", Blockly.Arduino.ORDER_ASSIGNMENT);
     Blockly.Arduino.includes_["matrice8x8init"]='#include <LedControl.h>';
     Blockly.Arduino.definitions_["matrice8x8init"]="LedControl lc=LedControl(" + din + "," + clk + "," + cs + ",1);";
-    Blockly.Arduino.codeFunctions_["matrice8x8init"]="void afficher(byte s[]) {\n  for (int i=0; i<8; i++) {\n    lc.setRow(0,i,s[i]);\n  };\n}";
+    Blockly.Arduino.codeFunctions_["matrice8x8init"]="void draw(byte s[]) {\n  for (int i=0; i<8; i++) {\n    lc.setRow(0,i,s[i]);\n  }\n}";
+    Blockly.Arduino.codeFunctions_["matrice8x8init2"]="void deleteMatrix() {\n  for (int i=0; i<8; i++) {\n    lc.setRow(0,i,0);\n  }\n}";
+   
     Blockly.Arduino.setups_["matrice8x8"]="lc.shutdown(0,false);\n  lc.setIntensity(0,1);\n  lc.clearDisplay(0);";
     return ""
 };
@@ -1210,7 +1265,8 @@ Blockly.Python["matrice8x8_init"]=function(block){
 };
 /////////////
 Blockly.Blocks["matrice8x8_efface"]={init:function(){
-    this.appendValueInput("mat").setCheck("Number").appendField(Blockly.Msg.matrice8x8_efface);
+    this.appendDummyInput().appendField(Blockly.Msg.matrice8x8_efface);
+    //this.appendValueInput("mat").setCheck("Number").appendField(Blockly.Msg.matrice8x8_efface);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour("#00929F");
@@ -1219,7 +1275,7 @@ Blockly.Blocks["matrice8x8_efface"]={init:function(){
 };
 Blockly.Arduino["matrice8x8_efface"]=function(block){
 	var num_mat=Blockly.Arduino.valueToCode(block, "mat", Blockly.Arduino.ORDER_ASSIGNMENT)||0;
-    return "matrice.effacer("+num_mat+");\n"
+    return "deleteMatrix();\n"
 };
 Blockly.Python["matrice8x8_efface"]=function(block){
     return "effacer();\n"
@@ -1245,10 +1301,10 @@ Blockly.Python["matrice8x8_aff_mat"]=function(block){
 };
 ////////////
 Blockly.Blocks["matrice8x8_aff"]={init:function(){
-    this.appendValueInput("mat").setCheck("Number")
-		.appendField(Blockly.Msg.matrice8x8_aff)
-		.appendField(new Blockly.FieldVariable(Blockly.Msg.VARIABLES_GET_ITEM), "VAR")
-		.appendField("sur la matrice");
+    this.appendDummyInput()
+    .appendField(Blockly.Msg.matrice8x8_aff)
+	.appendField(new Blockly.FieldVariable(Blockly.Msg.VARIABLES_GET_ITEM), "VAR");
+		// .appendField("sur la matrice");
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
     this.setColour("#00929F");
@@ -1261,8 +1317,8 @@ Blockly.Blocks["matrice8x8_aff"]={init:function(){
 };
 Blockly.Arduino["matrice8x8_aff"]=function(block){
 	var varname=Blockly.Arduino.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
-	var num_mat=Blockly.Arduino.valueToCode(block, "mat", Blockly.Arduino.ORDER_ASSIGNMENT)||0;
-    return "matrice.afficher(" + varname + ", " + num_mat +");\n"
+	//var num_mat=Blockly.Arduino.valueToCode(block, "mat", Blockly.Arduino.ORDER_ASSIGNMENT)||0;
+    return "draw(" + varname +");\n";
 };
 Blockly.Python["matrice8x8_aff"]=function(block){
 	var varname=Blockly.Python.variableDB_.getName(block.getFieldValue('VAR'), Blockly.Variables.NAME_TYPE);
@@ -1270,8 +1326,9 @@ Blockly.Python["matrice8x8_aff"]=function(block){
 };
 //////////
 Blockly.Blocks["matrice8x8_del"]={init:function(){
-    this.appendValueInput("mat").setCheck("Number").appendField(Blockly.Msg.matriceLC);
-	this.appendValueInput("col").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.LCD_col);
+  //  this.appendValueInput("mat").setCheck("Number").appendField(Blockly.Msg.matriceLC);
+    this.appendDummyInput().appendField("LED: ")
+  this.appendValueInput("col").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.LCD_col);
     this.appendValueInput("line").setCheck("Number").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.LCD_line);
     this.appendValueInput("STATE").setCheck("Boolean").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg._AT);
 	this.setPreviousStatement(true, null);
@@ -1284,8 +1341,8 @@ Blockly.Arduino["matrice8x8_del"]=function(block){
 	var etat=Blockly.Arduino.valueToCode(block, "STATE", Blockly.Arduino.ORDER_ASSIGNMENT) == "HIGH" ? "true" : "false";
 	var ligne=Blockly.Arduino.valueToCode(block, "line", Blockly.Arduino.ORDER_ASSIGNMENT);
 	var colonne=Blockly.Arduino.valueToCode(block, "col", Blockly.Arduino.ORDER_ASSIGNMENT);
-	var mat=Blockly.Arduino.valueToCode(block, "mat", Blockly.Arduino.ORDER_ASSIGNMENT)||0;
-    return "matrice.mettre_del(" + mat + ", "+ligne+", "+colonne+", "+etat+");\n"
+//	var mat=Blockly.Arduino.valueToCode(block, "mat", Blockly.Arduino.ORDER_ASSIGNMENT)||0;
+    return "lc.setLed(0, "+ligne+", "+colonne+", "+etat+");\n"
 };
 Blockly.Python["matrice8x8_del"]=function(block){
 	var etat=Blockly.Python.valueToCode(block, "STATE", Blockly.Python.ORDER_ASSIGNMENT);
@@ -1472,21 +1529,131 @@ Blockly.Python["matrice_init"]=function(block){
 		Blockly.Python.definitions_["spi"]="spi = SPI(-1, baudrate=10000000, miso=Pin(" + cs + "), mosi=Pin(" + din + "), sck=Pin(" + clk + "))\ndisplay = max7219.Matrix8x8(spi, 1)";
 	}
 	return ""
-};////////////
-///////////
+};
+////////////
+//Matrix scroll
 Blockly.Blocks["matrice_scroll"]={init:function(){
     this.appendValueInput("text").setCheck("String").appendField(Blockly.Msg.matrice8x8_scroll);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
+    this.setInputsInline(true);
     this.setColour("#00929F");
     this.setTooltip(Blockly.Msg.matrice8x8_scroll_tooltip);
 	this.setHelpUrl(Blockly.Msg.matrice8x8_helpurl)}
 };
 Blockly.Arduino["matrice_scroll"]=function(block){
-	var texte=Blockly.Arduino.valueToCode(block, "text", Blockly.Arduino.ORDER_ASSIGNMENT);
-	return "matrice.faire_defiler({" + texte + "});\n"
+	var texto=Blockly.Arduino.valueToCode(block, "text", Blockly.Arduino.ORDER_ASSIGNMENT);
+
+    var code = 'lc.writeText ( '+ texto +',100); \n';
+    return code;
 };
 Blockly.Python["matrice_scroll"]=function(block){
 	var texte=Blockly.Arduino.valueToCode(block, "text", Blockly.Arduino.ORDER_ASSIGNMENT);
 	return "faire_defiler({" + texte + "})\n"
 };
+////////////
+//Custom matrix
+Blockly.Blocks["matrix_matrix8x8"] = {  init: function() {
+    this.appendDummyInput().appendField('  ').appendField(' 0').appendField(' 1').appendField(' 2').appendField('  3').appendField('  4').appendField(' 5').appendField(' 6').appendField(' 7');
+    Blockly.FieldCheckbox.CHECK_CHAR= '▉'
+    this.appendDummyInput().appendField('0 ')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel0')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel1')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel2')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel3')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel4')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel5')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel6')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel7');
+   this.appendDummyInput().appendField('1 ')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel8')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel9')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel10')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel11')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel12')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel13')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel14')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel15');
+   this.appendDummyInput().appendField('2 ')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel16')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel17')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel18')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel19')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel20')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel21')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel22')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel23');
+   this.appendDummyInput().appendField('3 ')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel24')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel25')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel26')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel27')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel28')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel29')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel30')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel31');
+   this.appendDummyInput().appendField('4 ')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel32')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel33')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel34')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel35')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel36')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel37')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel38')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel39');
+   this.appendDummyInput().appendField('5 ')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel40')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel41')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel42')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel43')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel44')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel45')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel46')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel47');
+   this.appendDummyInput().appendField('6 ')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel48')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel49')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel50')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel51')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel52')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel53')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel54')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel55');
+   this.appendDummyInput().appendField('7 ')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel56')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel57')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel58')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel59')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel60')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel61')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel62')
+      .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel63');
+   this.setInputsInline(false);
+   this.setPreviousStatement(true, null);
+   this.setNextStatement(true, null);
+   this.setColour("#00929F");
+   this.setTooltip('');
+   this.setHelpUrl("https://learn.adafruit.com/adafruit-neopixel-uberguide/arduino-library-use");
+  },
+  };
+  Blockly.Arduino.matrix_matrix8x8 = function() {
+
+  var code = '';
+  for (var i=0; i<64; i++) {
+  
+   if (this.getFieldValue('Pixel' + i) != 'rgb(255, 255, 255)') {
+       var on = this.getFieldValue('Pixel' + i)== "TRUE"? "true" : "false";
+       var row= i +1
+       {if  (i >= 0 && i <= 7)row=0}{if  (i >= 8 && i < 16)row=1}{if  (i >= 16 && i < 24)row=2}{if  (i >= 24 && i < 32)row=3}
+       {if  (i >= 32 && i < 40)row=4}{if  (i >= 40 && i < 48)row=5}{if  (i >= 48 && i < 56)row=6}{if  (i >= 56 && i < 64)row=7}
+       var col= i
+       {if  (i > 1 && i <= 7)col=i}{if  (i >= 8 && i < 16)col=i-8}{if  (i >= 16 && i < 24)col=i-16}{if  (i >= 24 && i < 32)col=i-24}
+       {if  (i >= 32 && i < 40)col=i-32}{if  (i >= 40 && i < 48)col=i-40}{if  (i >= 48 && i < 56)col=i-48}{if  (i >= 56 && i < 64)col=i-56}
+       code += ' lc.setLed(0,'+row+','+col+',' + on + ');\n'
+   }
+  };
+  for (var i=0; i<8; i++) {if (this.getFieldValue('eyes_pixel' + i) == 'TRUE')row = 0;};
+  return code;
+  };
+
+  ///////////

@@ -41,7 +41,7 @@ var profile = {
 		build: "",
 		cpu: "esp32",
 		speed: "115200",
-		prog: "python",
+		prog: "arduino",
 		usb: "micro USB",
 		voltage: "3,3V",
 		inout: "34"
@@ -62,7 +62,7 @@ var profile = {
 		build: "",
 		cpu: "esp8266",
 		speed: "115200",
-		prog: "python",
+		prog: "arduino",
 		usb: "micro USB",
 		voltage: "3,3V",
 		inout: "11"

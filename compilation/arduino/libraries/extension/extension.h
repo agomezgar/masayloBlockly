@@ -13,6 +13,14 @@ public:
 	void rvb(byte pinR, byte pinV, byte pinB);
 	void rvb_afficher_couleur(byte red, byte green, byte blue);
 	void mp3();
+	void sendData(unsigned int data) ;
+	void setData(unsigned char _state[]);
+	void matrice16_afficher(byte s[]);
+	void matrice16_effacer();
+	void IIC_start(byte scl,byte sda);
+	void IIC_end(byte scl,byte sda);
+	void IIC_send(unsigned char send_data);
+
 private:
 	byte Rouge_pin;
 	byte Vert_pin;

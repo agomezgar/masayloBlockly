@@ -299,6 +299,7 @@ Blockly.Msg.TEXT_LENGTH_TOOLTIP = "retourne le nombre de lettres (espaces compri
 Blockly.Msg.TEXT_PRINT_TITLE = "afficher %1";
 Blockly.Msg.TEXT_PRINT_TOOLTIP = "Afficher le texte, le nombre ou une autre valeur spécifié";
 Blockly.Msg.TEXT_TEXT_TOOLTIP = "Une lettre, un mot ou une phrase";
+Blockly.Msg.TEXT_TEXT2_TOOLTIP="Une seule lettre"
 Blockly.Msg.TODAY = "Aujourd'hui";
 Blockly.Msg.UNDO = "Annuler";
 Blockly.Msg.VARIABLES_AS="de type";

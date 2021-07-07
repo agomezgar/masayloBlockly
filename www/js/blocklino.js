@@ -150,7 +150,7 @@ BlocklyDuino.loadConfig = function() {
 	var card = window.localStorage.card;
 	var content = window.localStorage.content;
 	var prog = window.localStorage.prog;
-	var theme = window.localStorage.theme;
+	var theme = 'masaylo';
 	var size = window.localStorage.size;
 	if (card===undefined) {
 		window.localStorage.card = BlocklyDuino.selectedCard;
@@ -208,6 +208,7 @@ BlocklyDuino.change_card = function() {
 	$("#boards").blur();
 	var new_card = $("#boards").val();
 	var new_prog = window.profile[new_card].prog;
+
 	if (window.profile[new_card].cpu != window.profile[card].cpu) {
 		if (window.confirm(Blockly.Msg['arduino_card'] + window.profile[new_card].description + ' ?')){
 			$('#arduino_card_mini_picture').attr("src", profile[new_card]['picture']);
