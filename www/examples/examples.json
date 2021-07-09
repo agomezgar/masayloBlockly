@@ -165,6 +165,22 @@
         "link_url": "#masaylo7",
         "link_text": "",
         "visible": true
+    },
+    {
+        "source_url": "masaylo/distanciaPuertoSerie/distanciaPuertoSerie.xml",
+        "source_text": "Envía la distancia al obstáculo detectado al puerto serie de tu ordenador",
+        "image": "./masaylo/distanciaPuertoSerie/distanciaPuertoSerie.png",
+        "link_url": "#masaylo8",
+        "link_text": "",
+        "visible": true
+    },
+    {
+        "source_url": "masaylo/compruebaSensoresIR/compruebaSensoresIR.xml",
+        "source_text": "Envía al puerto serie de tu ordenador la medición (blanco/negro) de tus sensores IR",
+        "image": "./masaylo/compruebaSensoresIR/compruebaSensoresIR.png",
+        "link_url": "#masaylo9",
+        "link_text": "",
+        "visible": true
     }
     
 ]

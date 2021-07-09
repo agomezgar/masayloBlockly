@@ -1,0 +1,259 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_6</toolbox>
+  <block type="masaylo_arranca_personalizado" id="5ieU1Dg!nIoHwK,#5b3g" x="8" y="-356">
+    <field name="MIP">6</field>
+    <field name="MIA">7</field>
+    <field name="MIB">8</field>
+    <field name="MDP">11</field>
+    <field name="MDA">12</field>
+    <field name="MDB">13</field>
+    <next>
+      <block type="masaylo_US_INIT" id="Z,C])f;8`H@/BCjsSKk,">
+        <field name="trigger">16</field>
+        <field name="echo">17</field>
+        <next>
+          <block type="masaylo_SERVOS_INIT" id="Lh1aH%yd]TOtw@C_.^/x">
+            <field name="cabeza">5</field>
+            <field name="brazo">4</field>
+            <next>
+              <block type="variables_set_init" id="whtaaF1w$2EUi]4n$J1B">
+                <field name="VAR">distancia_dcha</field>
+                <field name="VARIABLE_SETTYPE_TYPE">LARGE_NUMBER</field>
+                <value name="VALUE">
+                  <block type="math_number" id="$iN#lQtAU^{kV:x:.ECy">
+                    <field name="NUM">0</field>
+                  </block>
+                </value>
+                <next>
+                  <block type="variables_set_init" id="}7(;]TDLl@zz2,cYP/;W">
+                    <field name="VAR">distancia_izda</field>
+                    <field name="VARIABLE_SETTYPE_TYPE">LARGE_NUMBER</field>
+                    <value name="VALUE">
+                      <block type="math_number" id="bGP/kE*K|tV=33JZdt%$">
+                        <field name="NUM">0</field>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="variables_set_init" id="gZPD:|u}|rJ{/kO]K-[3">
+                        <field name="VAR">distancia_frente</field>
+                        <field name="VARIABLE_SETTYPE_TYPE">LARGE_NUMBER</field>
+                        <value name="VALUE">
+                          <block type="math_number" id=")jkzwqq3KLg?JU1jKNkp">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <next>
+                          <block type="masaylo_GIRA_CABEZA" id="Y1Cdo-I]qW,sDdEeVM4P">
+                            <value name="anguloCabeza">
+                              <shadow type="math_number" id="W=m|af0,zdcTDR%icdNQ">
+                                <field name="NUM">90</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="variables_set" id="Vv%eqCYm;q#gG^xNZoEI">
+                                <field name="VAR">distancia_frente</field>
+                                <value name="VALUE">
+                                  <block type="masaylo_getdistance" id="i0tS;$cg.{TTk*:T1v-Y"></block>
+                                </value>
+                                <next>
+                                  <block type="controls_if" id="N]`{7;FJlMvz~_sb7[dG">
+                                    <mutation else="1"></mutation>
+                                    <value name="IF0">
+                                      <block type="logic_compare" id="sjv6!0WxZ;iSq{m:5*{H">
+                                        <field name="OP">GTE</field>
+                                        <value name="A">
+                                          <block type="variables_get" id="c[c`2I#XY/$~tIPS8jLO">
+                                            <field name="VAR">distancia_frente</field>
+                                          </block>
+                                        </value>
+                                        <value name="B">
+                                          <shadow type="math_number" id="GZvjxpCp(PgmW1nydDu[">
+                                            <field name="NUM">30</field>
+                                          </shadow>
+                                        </value>
+                                      </block>
+                                    </value>
+                                    <statement name="DO0">
+                                      <block type="masaylo_velocidad" id="_jn5#{Hb)JSx+P-xNC(#">
+                                        <field name="masaylo_move_choice">FORWARD</field>
+                                        <value name="masaylo_velocity">
+                                          <shadow type="math_number" id="X?S=fM.G:nzbVDN12iu5">
+                                            <field name="NUM">100</field>
+                                          </shadow>
+                                        </value>
+                                      </block>
+                                    </statement>
+                                    <statement name="ELSE">
+                                      <block type="masaylo_alto" id="|0OUP%j]6gc*D.-qu=[v">
+                                        <next>
+                                          <block type="base_delay" id="hs:`w8oJ/*t|A=sO;PQz">
+                                            <field name="unite">s</field>
+                                            <value name="DELAY_TIME">
+                                              <shadow type="math_number" id="HFGxNl}YzRdqK!t]4$Rf">
+                                                <field name="NUM">1</field>
+                                              </shadow>
+                                            </value>
+                                            <next>
+                                              <block type="masaylo_GIRA_CABEZA" id="q(^hd94qRf7}$GCsl?qe">
+                                                <value name="anguloCabeza">
+                                                  <shadow type="math_number" id="V-/`fAY]U+C|.@([Vq|l">
+                                                    <field name="NUM">10</field>
+                                                  </shadow>
+                                                </value>
+                                                <next>
+                                                  <block type="base_delay" id="?R/7cfnDQH0a7UR8Wc=}">
+                                                    <field name="unite">s</field>
+                                                    <value name="DELAY_TIME">
+                                                      <shadow type="math_number" id="]=}3}#`,A=m3P9Uoh4f|">
+                                                        <field name="NUM">1</field>
+                                                      </shadow>
+                                                    </value>
+                                                    <next>
+                                                      <block type="variables_set" id="K[mcWnr|$*RJl]q.#2o)">
+                                                        <field name="VAR">distancia_dcha</field>
+                                                        <value name="VALUE">
+                                                          <block type="masaylo_getdistance" id="R`_U@CYB=$jt5MwSMHs1"></block>
+                                                        </value>
+                                                        <next>
+                                                          <block type="masaylo_GIRA_CABEZA" id="#|wp7R//3L@SQ1@=~M9_">
+                                                            <value name="anguloCabeza">
+                                                              <shadow type="math_number" id="a}.$gGL~IQ^dy~Iu!n*:">
+                                                                <field name="NUM">170</field>
+                                                              </shadow>
+                                                            </value>
+                                                            <next>
+                                                              <block type="base_delay" id="{+PlIRw.0rGxrLn7voA)">
+                                                                <field name="unite">s</field>
+                                                                <value name="DELAY_TIME">
+                                                                  <shadow type="math_number" id="%9eYmp?^:+0O^OQ=-;;-">
+                                                                    <field name="NUM">1</field>
+                                                                  </shadow>
+                                                                </value>
+                                                                <next>
+                                                                  <block type="variables_set" id="UUL1gNEgIiqIzaR70Vo}">
+                                                                    <field name="VAR">distancia_izda</field>
+                                                                    <value name="VALUE">
+                                                                      <block type="masaylo_getdistance" id="7Jrflq_^b-)]c5B}~ihn"></block>
+                                                                    </value>
+                                                                    <next>
+                                                                      <block type="controls_if" id="QI(xnUF{^hQjG_MJO6=e">
+                                                                        <mutation else="1"></mutation>
+                                                                        <value name="IF0">
+                                                                          <block type="logic_compare" id="^M}p[hA;/qcpV9q5WcRN">
+                                                                            <field name="OP">GT</field>
+                                                                            <value name="A">
+                                                                              <block type="variables_get" id="!2njw|7sbL1Vv2,$jIw#">
+                                                                                <field name="VAR">distancia_dcha</field>
+                                                                              </block>
+                                                                            </value>
+                                                                            <value name="B">
+                                                                              <shadow type="math_number" id="E04z(T=k/cyWW{?fuz^s">
+                                                                                <field name="NUM">10</field>
+                                                                              </shadow>
+                                                                              <block type="variables_get" id="GS5@vjiT3K55!B{]H*jG">
+                                                                                <field name="VAR">distancia_izda</field>
+                                                                              </block>
+                                                                            </value>
+                                                                          </block>
+                                                                        </value>
+                                                                        <statement name="DO0">
+                                                                          <block type="masaylo_velocidad" id="d1l1+uW~}H0UJ,oaex9(">
+                                                                            <field name="masaylo_move_choice">RIGHT</field>
+                                                                            <value name="masaylo_velocity">
+                                                                              <shadow type="math_number" id="BSDY1/e*oCE+?4b~RP}[">
+                                                                                <field name="NUM">100</field>
+                                                                              </shadow>
+                                                                            </value>
+                                                                            <next>
+                                                                              <block type="base_delay" id="@Z7H}I|PR3J:|y@P=9.A">
+                                                                                <field name="unite">s</field>
+                                                                                <value name="DELAY_TIME">
+                                                                                  <shadow type="math_number" id="yxn/?;s70MzO|@w/d|.b">
+                                                                                    <field name="NUM">0.5</field>
+                                                                                  </shadow>
+                                                                                </value>
+                                                                                <next>
+                                                                                  <block type="masaylo_alto" id="JkqZpN!=8UrSiESc][-_"></block>
+                                                                                </next>
+                                                                              </block>
+                                                                            </next>
+                                                                          </block>
+                                                                        </statement>
+                                                                        <statement name="ELSE">
+                                                                          <block type="masaylo_velocidad" id="{boJ|e4P6Q}|41VVALCc">
+                                                                            <field name="masaylo_move_choice">LEFT</field>
+                                                                            <value name="masaylo_velocity">
+                                                                              <shadow type="math_number" id="=o2-iJD70,33x%u-+%Q)">
+                                                                                <field name="NUM">100</field>
+                                                                              </shadow>
+                                                                            </value>
+                                                                            <next>
+                                                                              <block type="base_delay" id=",?ygh/NITWSoGI=y4Hf7">
+                                                                                <field name="unite">s</field>
+                                                                                <value name="DELAY_TIME">
+                                                                                  <shadow type="math_number" id="b9mT!e|4hVpnp$3w#V}K">
+                                                                                    <field name="NUM">0.5</field>
+                                                                                  </shadow>
+                                                                                </value>
+                                                                                <next>
+                                                                                  <block type="masaylo_alto" id="{5,@3jv$9D9,V7#Y~e$J"></block>
+                                                                                </next>
+                                                                              </block>
+                                                                            </next>
+                                                                          </block>
+                                                                        </statement>
+                                                                        <next>
+                                                                          <block type="masaylo_GIRA_CABEZA" id="_%{e!N6-=G2v7++D{}Y#">
+                                                                            <value name="anguloCabeza">
+                                                                              <shadow type="math_number" id="Ea_$AdI-kh(B]3QJ(cZw">
+                                                                                <field name="NUM">90</field>
+                                                                              </shadow>
+                                                                            </value>
+                                                                            <next>
+                                                                              <block type="base_delay" id="`{.olZB(BP0O^xMCnD)0">
+                                                                                <field name="unite">s</field>
+                                                                                <value name="DELAY_TIME">
+                                                                                  <shadow type="math_number" id="Nl%dn2G^6Llk1fPORGLS">
+                                                                                    <field name="NUM">1</field>
+                                                                                  </shadow>
+                                                                                </value>
+                                                                              </block>
+                                                                            </next>
+                                                                          </block>
+                                                                        </next>
+                                                                      </block>
+                                                                    </next>
+                                                                  </block>
+                                                                </next>
+                                                              </block>
+                                                            </next>
+                                                          </block>
+                                                        </next>
+                                                      </block>
+                                                    </next>
+                                                  </block>
+                                                </next>
+                                              </block>
+                                            </next>
+                                          </block>
+                                        </next>
+                                      </block>
+                                    </statement>
+                                  </block>
+                                </next>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </next>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>

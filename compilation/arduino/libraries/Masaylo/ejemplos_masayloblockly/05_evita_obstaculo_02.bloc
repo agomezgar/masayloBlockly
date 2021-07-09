@@ -1,0 +1,137 @@
+<xml xmlns="http://www.w3.org/1999/xhtml">
+  <toolbox>toolbox_6</toolbox>
+  <block type="masaylo_arranca_personalizado" id="5ieU1Dg!nIoHwK,#5b3g" x="300" y="-32">
+    <field name="MIP">6</field>
+    <field name="MIA">7</field>
+    <field name="MIB">8</field>
+    <field name="MDP">11</field>
+    <field name="MDA">12</field>
+    <field name="MDB">13</field>
+    <next>
+      <block type="masaylo_US_INIT" id="Z,C])f;8`H@/BCjsSKk,">
+        <field name="trigger">16</field>
+        <field name="echo">17</field>
+        <next>
+          <block type="masaylo_velocidad" id="1z{G2mDWHceu~IG,cVOo">
+            <field name="masaylo_move_choice">FORWARD</field>
+            <value name="masaylo_velocity">
+              <shadow type="math_number" id=":hfO*aU?;RXgS@lPPZ5u">
+                <field name="NUM">75</field>
+              </shadow>
+            </value>
+            <next>
+              <block type="controls_if" id="G+,^~~*q9sR^2PKD|:]v">
+                <value name="IF0">
+                  <block type="logic_compare" id="G0Vfo=Bi-/WHItfU#[KD">
+                    <field name="OP">LTE</field>
+                    <value name="A">
+                      <block type="masaylo_getdistance" id="P02qryk#/|ntWDcY{dr5"></block>
+                    </value>
+                    <value name="B">
+                      <shadow type="math_number" id="99U]`a$wdUf%9?kkJ1c~">
+                        <field name="NUM">40</field>
+                      </shadow>
+                    </value>
+                  </block>
+                </value>
+                <statement name="DO0">
+                  <block type="variables_set" id="3c*ral+$uAz?/mkjdCR9">
+                    <field name="VAR">giro</field>
+                    <value name="VALUE">
+                      <block type="math_random_int" id="WA)ZwW%clOrlX?YsoHkP">
+                        <value name="FROM">
+                          <block type="math_number" id="zz~w~PMjLV;RisWIhwUW">
+                            <field name="NUM">0</field>
+                          </block>
+                        </value>
+                        <value name="TO">
+                          <block type="math_number" id="Li(XDTiNB:6jHrW%2jWe">
+                            <field name="NUM">1</field>
+                          </block>
+                        </value>
+                      </block>
+                    </value>
+                    <next>
+                      <block type="masaylo_alto" id="xLY#|QQUO`}rv{:7z5e6">
+                        <next>
+                          <block type="base_delay" id="Uil*3ZL4ssZY^EdPSr,Z">
+                            <field name="unite">s</field>
+                            <value name="DELAY_TIME">
+                              <shadow type="math_number" id="]@tWHAW0UG|:gk^gL_9H">
+                                <field name="NUM">1</field>
+                              </shadow>
+                            </value>
+                            <next>
+                              <block type="controls_if" id=")_v_$x/~Jp^[GR+c{xPd">
+                                <mutation else="1"></mutation>
+                                <value name="IF0">
+                                  <block type="logic_compare" id=".]^3PpNLLfIma)QUJ@6@">
+                                    <field name="OP">EQ</field>
+                                    <value name="A">
+                                      <block type="variables_get" id="Fi]yC2-|IdH;fz*}XKRl">
+                                        <field name="VAR">giro</field>
+                                      </block>
+                                    </value>
+                                    <value name="B">
+                                      <shadow type="math_number" id="Vg)PvNIbMd4td5wYqGDi">
+                                        <field name="NUM">0</field>
+                                      </shadow>
+                                    </value>
+                                  </block>
+                                </value>
+                                <statement name="DO0">
+                                  <block type="masaylo_velocidad" id="l@G@{7|~HT_nua4X?*D=">
+                                    <field name="masaylo_move_choice">LEFT</field>
+                                    <value name="masaylo_velocity">
+                                      <shadow type="math_number" id="ZAaYc^Ncgq9,dK0iA]e4">
+                                        <field name="NUM">75</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="base_delay" id="5tYYJ7w,?ymB8)2`jY_p">
+                                        <field name="unite">s</field>
+                                        <value name="DELAY_TIME">
+                                          <shadow type="math_number" id="a-XRG*4$8hN7I?QBC?uZ">
+                                            <field name="NUM">0.5</field>
+                                          </shadow>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                                <statement name="ELSE">
+                                  <block type="masaylo_velocidad" id="PD~2/yU`2]~qC*_sq64y">
+                                    <field name="masaylo_move_choice">RIGHT</field>
+                                    <value name="masaylo_velocity">
+                                      <shadow type="math_number" id="h|`().:*#EhM}$W=D-P.">
+                                        <field name="NUM">75</field>
+                                      </shadow>
+                                    </value>
+                                    <next>
+                                      <block type="base_delay" id="fpL#JO$Ec#L[6L[_p).z">
+                                        <field name="unite">s</field>
+                                        <value name="DELAY_TIME">
+                                          <shadow type="math_number" id="k7Sm6E^(8xvE:Et]nDoh">
+                                            <field name="NUM">0.5</field>
+                                          </shadow>
+                                        </value>
+                                      </block>
+                                    </next>
+                                  </block>
+                                </statement>
+                              </block>
+                            </next>
+                          </block>
+                        </next>
+                      </block>
+                    </next>
+                  </block>
+                </statement>
+              </block>
+            </next>
+          </block>
+        </next>
+      </block>
+    </next>
+  </block>
+</xml>
