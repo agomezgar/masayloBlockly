@@ -1,2 +1,2 @@
 @echo off
-arduino-cli config init --overwrite --additional-urls https://arduino.esp8266.com/stable/package_esp8266com_index.json,https://dl.espressif.com/dl/package_esp32_index.json &&arduino-cli core update-index &&arduino-cli core install arduino:avr
+arduino-cli config init --overwrite &&arduino-cli core update-index &&arduino-cli core install arduino:avr
