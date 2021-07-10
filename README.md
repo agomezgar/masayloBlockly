@@ -32,3 +32,4 @@ Tools without which nothing would not have been possible :
 - [ACE](https://ace.c9.io/)
 - [CodeDragon](https://codedragon.org/)
 - [node-ftp](https://github.com/mscdex/node-ftp)
+- [Arduino-cli](https://github.com/arduino/arduino-cli)
