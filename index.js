@@ -285,7 +285,7 @@ sp.list().then(ports => {
 							let iot=confirm("Ya hemos instalado las tarjetas Arduino. ¿Piensas trabajar también con tarjetas ESP8266 o ESP32?");
 							if (iot){
 								alert("Esto puede alargarse un poco. Ten paciencia...");
-										exec('instalaESP.bat', {cwd: __dirname+'/compilation/arduino/'}, function(err, stdout, stderr){
+										exec('instalaESP.bat', {cwd: chemin+'/compilation/arduino/'}, function(err, stdout, stderr){
 										if (err) {
 											console.log('error instalando esp8266/esp32: ' +err);
 											alert('Ummm... Ha habido algún problema. Prueba con el script manual');
@@ -386,7 +386,7 @@ sp.list().then(ports => {
 					let iot=confirm("Ya hemos instalado las tarjetas Arduino. ¿Piensas trabajar también con tarjetas ESP8266 o ESP32?");
 					if (iot){
 						alert("Esto puede alargarse un poco. Ten paciencia...");
-								exec('instalaESP.bat', {cwd: __dirname+'/compilation/arduino/'}, function(err, stdout, stderr){
+								exec('instalaESP.bat', {cwd: chemin+'/compilation/arduino/'}, function(err, stdout, stderr){
 								if (err) {
 									console.log('error instalando esp8266/esp32: ' +err);
 									alert('Ummm... Ha habido algún problema. Prueba con el script manual');
