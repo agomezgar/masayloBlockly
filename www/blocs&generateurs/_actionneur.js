@@ -1110,10 +1110,16 @@ Blockly.Blocks["servo_move"]={init:function(){
         this.setHelpUrl(Blockly.Msg.HELPURL);
         this.setTooltip(Blockly.Msg.ARDUINO_SERVO_MOVE_TOOLTIP)}
 };
+//Modified to change library in case of ESP32 use
 Blockly.Arduino["servo_move"]=function(block){
+
     var value_pin=Blockly.Arduino.valueToCode(block, "PIN", Blockly.Arduino.ORDER_ATOMIC);
     var value_degree=Blockly.Arduino.valueToCode(block, "DEGREE", Blockly.Arduino.ORDER_ATOMIC);
+    if (localStorage.card=="esp32"){
+        Blockly.Arduino.includes_["define_servo"]="#include <ESP32Servo.h> ";
+    }else{
     Blockly.Arduino.includes_["define_servo"]="#include <Servo.h>";
+    }
     Blockly.Arduino.definitions_["var_servo" + value_pin]="Servo servo_" + value_pin + ";";
     Blockly.Arduino.setups_["setup_servo_" + value_pin]="servo_" + value_pin + ".attach(" + value_pin + ");";
     return "servo_" + value_pin + ".write(" + value_degree + ");\n"

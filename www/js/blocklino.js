@@ -208,6 +208,7 @@ BlocklyDuino.change_card = function() {
 	$("#boards").blur();
 	var new_card = $("#boards").val();
 	var new_prog = window.profile[new_card].prog;
+	var new_build=window.profile[new_card].build;
 
 	if (window.profile[new_card].cpu != window.profile[card].cpu) {
 		if (window.confirm(Blockly.Msg['arduino_card'] + window.profile[new_card].description + ' ?')){

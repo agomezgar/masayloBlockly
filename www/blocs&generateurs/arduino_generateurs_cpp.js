@@ -76,42 +76,106 @@ Blockly.Arduino['esp8266_init']=function(block){
 	var mode=block.getFieldValue("clientserveur");
 	var adressage=block.getFieldValue("staticdynamic");
 	var reseau=block.getFieldValue("SSID");
-	var cle=block.getFieldValue("KEY");
-	Blockly.Arduino.includes_["esp8266"] = "#include <ESP8266WiFi.h>";
+	var cle=block.getFieldValue("PASSWORD");
+    var carte = localStorage.getItem('card');
+//	Blockly.Arduino.includes_["esp8266"] = "#include <ESP8266WiFi.h>";
 	if (adressage=="static"){
 		var ipabc=block.getFieldValue("IPa")+","+block.getFieldValue("IPb")+","+block.getFieldValue("IPc");
 		var ipd=block.getFieldValue("IPd");
 		var passerelle=block.getFieldValue("GATEWAY");
 		var masque=block.getFieldValue("MASKa")+","+block.getFieldValue("MASKb")+","+block.getFieldValue("MASKc")+","+block.getFieldValue("MASKd");
 		Blockly.Arduino.definitions_["esp8266"] = 'IPAddress ip('+ipabc+','+ipd+');\nIPAddress gateway('+ipabc+','+passerelle+');\nIPAddress subnet('+masque+');\n';
-		Blockly.Arduino.setups_["esp8266"] = 'WiFi.disconnect();\n  delay(2500);\n  WiFi.config(ip, gateway, subnet);\n  WiFi.begin("'+reseau+'","'+cle+'");\n  while (WiFi.status() != WL_CONNECTED) { delay(250); };\n';
+		Blockly.Arduino.setups_["esp8266"] = 'Serial.begin(115200);\nWiFi.disconnect();\n  delay(2500);\n  WiFi.config(ip, gateway, subnet);\n  WiFi.begin("'+reseau+'","'+cle+'");\n  while (WiFi.status() != WL_CONNECTED) {\nSerial.println(\".\");\n delay(250); };\n'+
+        "  Serial.println();\nSerial.print(\"Conectado a:\\t\");\nSerial.println(WiFi.SSID());\nSerial.print(\"IP address:\\t\");\nSerial.println(WiFi.localIP());\n";
 	} else {
 		Blockly.Arduino.definitions_["esp8266"] = "";
-		Blockly.Arduino.setups_["esp8266"] = 'WiFi.disconnect();\n  delay(2500);\n  WiFi.begin("'+reseau+'","'+cle+'");\n  while (WiFi.status() != WL_CONNECTED) { delay(250); };\n';
+		Blockly.Arduino.setups_["esp8266"] = 'Serial.begin(115200);\nWiFi.disconnect();\n  delay(2500);\n  WiFi.begin("'+reseau+'","'+cle+'");\n  while (WiFi.status() != WL_CONNECTED)\n { Serial.println(\".\");\ndelay(250); }\n'+
+        "Serial.println();\nSerial.print(\"Conectado a:\\t\");\nSerial.println(WiFi.SSID());\nSerial.print(\"IP address:\\t\");\nSerial.println(WiFi.localIP());\n";
+
 	}
-	if (mode=="serveur"){
+	if (mode=="server"){
+       
+      //  console.log(carte);
 		var port=Blockly.Arduino.valueToCode(block, "V0", Blockly.Arduino.ORDER_ATOMIC);
-		Blockly.Arduino.definitions_["esp8266"] += 'WiFiServer server(' + port + ');\n';
-		Blockly.Arduino.setups_["esp8266"] += '  server.begin();\n';
+        if (carte=='esp8266'){
+        Blockly.Arduino.includes_["esp8266"] = "#include <ESP8266WiFi.h>\n#include<ESP8266WebServer.h>\n";
+		Blockly.Arduino.definitions_["esp8266"] = 'ESP8266WebServer server(' + port + ');\n';
+		Blockly.Arduino.setups_["esp8266"] ='Serial.begin(115200);\nWiFi.disconnect();\n  delay(2500);\n  WiFi.begin("'+reseau+'","'+cle+'");\n  while (WiFi.status() != WL_CONNECTED)\n { Serial.println(\".\");\ndelay(250); }\n'+
+        "Serial.println();\nSerial.print(\"Conectado a:\\t\");\nSerial.println(WiFi.SSID());\nSerial.print(\"IP address:\\t\");\nSerial.println(WiFi.localIP());\n"+
+        "server.begin("+port+");\n";
+        }
+        if (carte=='esp32'){
+        Blockly.Arduino.includes_["esp32"] = "#include <WiFi.h>\n#include<WebServer.h>\n";
+            Blockly.Arduino.definitions_["esp32"] = 'WebServer server(' + port + ');\n';
+            Blockly.Arduino.setups_["esp32"] = '  server.begin();\n';    
+        }
+        var code="server.handleClient();";
+        return code;
 	} else {
-		Blockly.Arduino.definitions_["esp8266"] += 'WiFiClient client;\n';
+        if (carte=='esp8266'){
+            Blockly.Arduino.includes_["esp8266"] = "#include <ESP8266WiFi.h>\n#include <ESP8266HTTPClient.h>\n#include<WiFiClient.h>\n";
+            Blockly.Arduino.definitions_["esp8266"] += 'WiFiClient client;\nString payload;\nHTTPClient http;\n';
+          //  Blockly.Arduino.setups_["esp8266"] = '  WiFiClient client;\n HTTPClient http;\n';   
+        }
+        if (carte=='esp32'){
+            Blockly.Arduino.includes_["esp32"] = "#include <WiFi.h>\n#include <HTTPClient.h>\n#include<WiFiClient.h>\n\String payload;\nHTTPClient http;\n";
+        }
 	}
 	return "" ;
 };
-Blockly.Arduino['esp8266_send']=function(block){
-	var data=Blockly.Arduino.valueToCode(block, 'message', Blockly.Arduino.ORDER_ATOMIC);
-	var code = 'client.println("HTTP/1.1 200 OK");\nclient.println("Content-Type: text/html");\nclient.println("");\nclient.println("<!DOCTYPE HTML>");\n';
-	code += 'client.println("<html>");\nclient.println(' + data + ');\nclient.println("</html>");\n';
-	return code
+Blockly.Arduino['esp8266_AP']=function(block){
+    var carte = localStorage.getItem('card');
+	var vSsid=block.getFieldValue("SSID");
+	var vPassword=block.getFieldValue("PASSWORD");
+    var vPort=block.getFieldValue("PORT");
+if (carte=='esp8266'){
+	Blockly.Arduino.includes_["esp8266"] = "#include <ESP8266WiFi.h>\n#include<ESP8266WebServer.h>\n";
+}
+if (carte=='esp32'){
+    Blockly.Arduino.includes_["esp32"] = "#include <WiFi.h>\n#include<WebServer.h>\n";
+
+}
+    Blockly.Arduino.definitions_["esp8266"]='const char ssid[]=\"'+vSsid+'\";\n const char password[]=\"'+vPassword+'\";\n'+
+    'ESP8266WebServer server(80);\n';
+	Blockly.Arduino.setups_["esp8266"]='delay(1000);\nSerial.begin(115200);\n Serial.println();\nserver.begin();\n'+
+    'Serial.print("Configuring access point...");\nWiFi.mode(WIFI_AP);\nWiFi.softAP(ssid, password);\nIPAddress myIP = WiFi.softAPIP();\n'+
+    'Serial.print("AP IP address: ");\nSerial.println(myIP);\n';
+   var code='';
+	
+	return code ;
 };
-Blockly.Arduino['esp8266_send_html']=function(block){
-	var htmlhead=Blockly.Arduino.statementToCode(block, 'HEAD');
+Blockly.Arduino['esp8266_send']=function(block){
+	//var data=Blockly.Arduino.valueToCode(block, 'message', Blockly.Arduino.ORDER_ATOMIC);
+	var pagina=block.getFieldValue('text');
+    var direccion=block.getFieldValue('address');
+    var ordenes=Blockly.Arduino.statementToCode(block, "ORDERS");
+/*     Blockly.Arduino.definitions_["esp8266_server"]='String damePagina="";\nvoid handleRoot(){\n'
+  +"server.send(200,\"text/html\",damePagina);\n}\n";
+  Blockly.Arduino.setups_["esp8266_server"]='server.on(\"/\",handleRoot);\n'; */
+  Blockly.Arduino.definitions_["esp8266_server"+pagina]='void serve'+pagina+'() {\n'
+  +"server.send(200,\"text/html\",p"+pagina+"());\n"+ordenes+"\n}\n";
+ // Blockly.Arduino.setups_["esp8266_server"]='server.on(\"/\",handleRoot);\n';
+  Blockly.Arduino.setups_["esp8266_query"+pagina]='server.on(\"/'+direccion+'\",serve'+pagina+');\n';
+
+ // var code='damePagina=p'+pagina+'();\nserver.handleClient();\n';
+  //var code="server.send(200,\"text/html\","+pagina+"());\n";
+  var code='';
+    return code;
+};
+Blockly.Arduino['esp8266_html']=function(block){
+	var htmlhead=block.getFieldValue("HEAD");
 	var htmlbody=Blockly.Arduino.statementToCode(block, "BODY");
-    var code = 'client.println("HTTP/1.1 200 OK");\nclient.println("Content-Type: text/html; charset=UTF-8");\nclient.println("");\nclient.println("<!DOCTYPE HTML>");\n';
-	code += 'client.println("<html>");\nclient.println("<head>");\n' + htmlhead + 'client.println("</head>");\n';
-	code += 'client.println("<body>");\n' + htmlbody + 'client.println("</body>");\nclient.println("</html>");\n';
-	code += 'delay(1);\nclient.stop();\n' ;
-	return code
+    Blockly.Arduino.definitions_["esp8266_pag"+htmlhead] ='String p'+htmlhead+'(){\nString cadena=(String) R\"=====(\n'
+    +'<!DOCTYPE HTML>\n'
+    +' <html>\n<head><title>'+htmlhead+'</title></head>\n<body>\n'
+    +htmlbody
+    +'\n</body>\n</html>\n'
+    +')=====\";\n return cadena;\n}\n ';
+   
+	return ''
+};
+Blockly.Arduino['esp8266_start']=function(block){
+    var code=''
 };
 Blockly.Arduino['esp8266_wait_server']=function(block){
 	return 'WiFiClient client = server.available();\nif (!client) return;\nwhile (!client.available()) { delay(1); }\nchar request = client.read();\nclient.flush();\n'
@@ -119,19 +183,71 @@ Blockly.Arduino['esp8266_wait_server']=function(block){
 Blockly.Arduino['esp8266_wait_client']=function(block){
 	var host=Blockly.Arduino.valueToCode(block, "host", Blockly.Arduino.ORDER_ATOMIC);
 	var port=Blockly.Arduino.valueToCode(block, "port", Blockly.Arduino.ORDER_ATOMIC);
-	return 'if (!client.connect(' + host + ',' + port + ')) { delay(1000) ; return }.\nwhile (client.available()){ String reponse = client.read(); };\n'
+    var carte = localStorage.getItem('card');
+    var code='';
+    if (carte=='esp8266'){
+        code='if (http.begin(client,'+host+','+port+')){\n'+
+        'int httpCode=http.GET();\nif(httpCode>0){\nif (httpCode == HTTP_CODE_OK || httpCode == HTTP_CODE_MOVED_PERMANENTLY) {\n'+
+        ' payload = http.getString();}\n}\nhttp.end();\n}\n';
+    }
+    if (carte=='esp32'){
+        code='http.begin('+host+','+port+');\nint httpCode = http.GET();\n  if(httpCode > 0) {\nif(httpCode == HTTP_CODE_OK) {\npayload = http.getString();\n}\n}\nhttp.end();\n';
+    }
+	return code;
 };
-Blockly.Arduino["esp8266_request_indexof"]=function(block){
+Blockly.Arduino['esp8266_useresponse']=function(block){
+    //var arg=Blockly.Arduino.valueToCode(block,"arg",Blockly.Arduino.ORDER_ATOMIC);
+	
+    var code='payload';
+return [code,Blockly.Arduino.ORDER_ATOMIC];
+};
+Blockly.Arduino["esp8266_request_find"]=function(block){
     var n=0;
-    var argument=Blockly.Arduino.valueToCode(block, "CASE" + n, Blockly.Arduino.ORDER_NONE);
+    var argument=block.getFieldValue("CASE0");
+  //  var argument=Blockly.Arduino.valueToCode(block, "CASE" + n, Blockly.Arduino.ORDER_NONE);
     var branch=Blockly.Arduino.statementToCode(block, "DO" + n);
-	var code='if (request.indexOf(' + argument + ') != -1) {\n' + branch + '}\n';
+    Blockly.Arduino.setups_["esp8266_query"+argument]='server.on(\"/'+argument+'\",HTTP_GET,GET'+argument+');\n';
+
+
+  //  Blockly.Arduino.includes_["esp8266query"]='void GET'+argument+'(){\n'+branch+'\n}\n'; 
+    var codigo='void GET'+argument+'(){\n'+branch+'\n'; 
+	//var code='if (request.indexOf(' + argument + ') != -1) {\n' + branch + '}\n';
 	for (n=1; n <= block.casebreakCount_; n++) {
         argument=Blockly.Arduino.valueToCode(block, "CASE" + n, Blockly.Arduino.ORDER_NONE);
         branch=Blockly.Arduino.statementToCode(block, "DO" + n);
-        code += 'if (request.indexOf(' + argument + ') != -1) {\n' + branch + '}\n'
+        codigo += 'if (request.indexOf(' + argument + ') != -1) {\n' + branch + '}\n'
     }
-	return code
+    codigo+='}\n';
+    Blockly.Arduino.includes_["esp8266query"+argument]=codigo;
+ 
+	return ''
+};
+Blockly.Arduino['esp8266_getArg']=function(block){
+	var arg=block.getFieldValue("arg");
+    var code="String "+arg+"=server.arg(\""+arg+"\");\n"
+return code;
+};
+Blockly.Arduino['esp8266_useArg']=function(block){
+    //var arg=Blockly.Arduino.valueToCode(block,"arg",Blockly.Arduino.ORDER_ATOMIC);
+	var arg=block.getFieldValue("arg");
+    var code=arg;
+return [code,Blockly.Arduino.ORDER_ATOMIC];
+};
+/* Values casting */
+Blockly.Arduino["cast_int"]= function(block) {
+    var valor=Blockly.Arduino.valueToCode(block,"valor");
+    var target=block.getFieldValue("tipo");
+    var code='';
+    if (target=="int"){
+        code=valor+'.toInt()'
+    }
+    if (target=="float"){
+        code=valor+'.toFloat()'
+    }
+
+	
+	
+return [code, Blockly.Arduino.ORDER_ATOMIC];
 };
 /*  bluetooth  */
 Blockly.Arduino["bluetooth_init"]=function(block){

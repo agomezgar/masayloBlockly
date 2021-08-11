@@ -1,9 +1,13 @@
 #include "Arduino.h"
 #include "Encoder.h"
 #include "Masaylo.h"
-#include "Servo.h"
+#if defined(ARDUINO_ARCH_ESP32)
+ #include "ESP32Servo.h"
+ #else
+ #include "Servo.h"
+ #endif
 
-void Masaylo::init(int MIP=6,int MIA=7,int MIB=8,int MDP=11,int MDA=12,int MDB=13)//cambios añadiendo los pines de control de velocidad
+void Masaylo::init(int MIP, int MIA, int MIB, int MDP, int MDA, int MDB)
 {
 pinMode(MIA,OUTPUT);
 pinMode(MIB,OUTPUT);
@@ -24,7 +28,7 @@ digitalWrite(_MIA,HIGH);
 digitalWrite(_MDB,HIGH);
 digitalWrite(_MDA,HIGH);
 }
-void Masaylo::adelante(int v=255){
+void Masaylo::adelante(int v){
 analogWrite (_MIP,v);
 digitalWrite(_MIA,HIGH);
 digitalWrite(_MIB,LOW);
@@ -32,7 +36,7 @@ analogWrite (_MDP,v);
 digitalWrite(_MDA,HIGH);
 digitalWrite(_MDB,LOW);
 }
-void Masaylo::atras(int v=255){
+void Masaylo::atras(int v){
 analogWrite (_MIP,v);
 digitalWrite(_MIB,HIGH);
 digitalWrite(_MIA,LOW);
@@ -40,7 +44,7 @@ analogWrite (_MDP,v);
 digitalWrite(_MDB,HIGH);
 digitalWrite(_MDA,LOW);
 }
-void Masaylo::izquierda(int v=255){//pivotar izda con dos motores
+void Masaylo::izquierda(int v){//pivotar izda con dos motores
 analogWrite (_MIP,v);
 digitalWrite(_MIA,LOW);
 digitalWrite(_MIB,HIGH);
@@ -48,7 +52,7 @@ analogWrite (_MDP,v);
 digitalWrite(_MDA,HIGH);
 digitalWrite(_MDB,LOW);
 }
-void Masaylo::derecha(int v=255){//pivotar dcha con dos motores
+void Masaylo::derecha(int v){//pivotar dcha con dos motores
 analogWrite (_MIP,v);
 digitalWrite(_MIA,HIGH);
 digitalWrite(_MIB,LOW);
@@ -57,28 +61,28 @@ digitalWrite(_MDA,LOW);
 digitalWrite(_MDB,HIGH);
 }
 
-void Masaylo::ultrasonidos(int t=16, int e=17){
+void Masaylo::ultrasonidos(int t, int e){
 _trig=t;
 _echo=e;
 pinMode(_trig,OUTPUT);
 pinMode(_echo,INPUT);
 }
-void Masaylo::irIzq(int i=14){
+void Masaylo::irIzq(int i){
 _IRI=i;
 pinMode(_IRI,INPUT);
 }
-void Masaylo::irDer(int d=15){
+void Masaylo::irDer(int d){
 _IRD=d;
 pinMode(_IRD,INPUT);
 }
-void Masaylo::infrarrojos(int i=14, int d=15){
+void Masaylo::infrarrojos(int i, int d){
 _IRI=i;
 _IRD=d;
 pinMode(_IRI,INPUT);
 pinMode(_IRD,INPUT);
 }
 //Lectura de infrarrojos tipo 1 (negro=1, blanco=0), tipo 0 (negro=0, blanco=1), por defecto está el tipo 1
-bool Masaylo::nIzquierda(int t=1){
+bool Masaylo::nIzquierda(int t){
 bool negro=false;
 if (digitalRead(_IRI)==HIGH){
 	if (t==1) {negro=true;}
@@ -90,7 +94,7 @@ else {//estoy en caso de LOW
 return negro;
 }
 
-bool Masaylo::nDerecha(int t=1){
+bool Masaylo::nDerecha(int t){
 bool negro=false;
 if (digitalRead(_IRD)==HIGH){
 	if (t==1) {negro=true;}
@@ -103,12 +107,12 @@ return negro;
 }
 
 
-bool Masaylo::bIzquierda(int t=1){
+bool Masaylo::bIzquierda(int t){
 bool blanco= not nIzquierda(t);
 return blanco;
 }
 
-bool Masaylo::bDerecha(int t=1){
+bool Masaylo::bDerecha(int t){
 bool blanco= not nDerecha(t);
 return blanco;
 }
@@ -128,7 +132,7 @@ return espacio;
 
 }
 
-void Masaylo::encoders(int i=2, int d=3, float diametro=7.8){//función que define los pines de los encoders (pines de interrupciones) y el diámetro de la rueda en cm
+void Masaylo::encoders(int i, int d, float diametro){//función que define los pines de los encoders (pines de interrupciones) y el diámetro de la rueda en cm
 _ENI=i;
 _END=d;
 _DIA=diametro;
@@ -149,7 +153,7 @@ Encoder miEncoder (_ENI, _END, _DIA);
 miEncoder.loopAngle (angulo);
 }
 
-void Masaylo::servos(int c=5,int b=4) {
+void Masaylo::servos(int c,int b) {
 servocabeza.attach(c);
 servobrazo.attach(b);
 }
@@ -166,7 +170,7 @@ delay (100);
 /*
 buzzer procedimiento para indicar el pin al que se conecta un zumbador
 */
-void Masaylo::buzzer(int pin=18){
+void Masaylo::buzzer(int pin){
 	_buzz=pin;
 	pinMode(_buzz,OUTPUT);
 }

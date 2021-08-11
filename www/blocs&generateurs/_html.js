@@ -39,7 +39,7 @@ Blockly.Blocks['emptytext'] = {
                 {
                     "type": "field_input",
                     "name": "content",
-                    "text": "un texte."
+                    "text": "texto"
                 }
             ],
             "previousStatement": "textcontainer",

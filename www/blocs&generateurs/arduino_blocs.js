@@ -537,7 +537,9 @@ Blockly.Blocks["esp8266_init"]={init:function(){
     this.setColour("#154360");
     this.setHelpUrl(Blockly.Msg.esp8266_url);
     this.appendDummyInput().appendField(new Blockly.FieldImage("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAIAAAC1JZyVAAAACXBIWXMAAAsTAAALEwEAmpwYAAABeklEQVR42u2Uf22FQAyAkYAGHOAACVhAAg6mAQc4QAIacIADHLx92WVdae8dd2xZsuz1D0J6bb9ef1z1+BWpXpg/jDmOY13XaZrezoIGPaffwuz7TqC2basrwQZL7Msw5Nj3/WV0L13X4XuNIaMooK5rQgzDIBXjHw16b0wEf7MvzDzPxq1pmnEct21LVINTbLA0aREtgiE7AzB2l4K9gRHzhNEMEqGfJl+qRIl0FP7RoDd3xVeXREgnDDMjbkwqPibBqGCDpUw2EWQ+T5hA4kxMl2XJARgYXpIi0WzRjJg+hUoyP5Ro/RT+0fhJ06FTe2P2kQakZ4FTbLQLEa4xchU/C6Hu4TZGrzsfvVC8aBTazIJ/dcIbozuPV27RjNDV6KrrtunOP4uTwvhZCOvih/DZJcowpMxo6ZeKfzTpfhQUzeyTEb8fNzFa6EF4mPlKPzIlF2OWI6zUz2P8OOTU6k7RNKmIUYYRUimjGPP4eMRKXe5g7skL8+8x78jBnNub/YbsAAAAAElFTkSuQmCC", 34, 34))
-        .appendField(Blockly.Msg.esp8266_1);
+    .appendField(Blockly.Msg.esp8266_1)
+    .appendField(new Blockly.FieldTextInput("ssid"), "SSID") 
+    .appendField(new Blockly.FieldTextInput("password"), "PASSWORD") ;
 	this.appendDummyInput().setAlign(Blockly.ALIGN_RIGHT)
 		.appendField(Blockly.Msg.esp8266_10)
 		.appendField(new Blockly.FieldDropdown(Blockly.Msg.esp8266_9,function(option){this.sourceBlock_.updateShape1_(option)}), "staticdynamic");
@@ -546,11 +548,13 @@ Blockly.Blocks["esp8266_init"]={init:function(){
     this.setNextStatement(false);
     this.setTooltip(Blockly.Msg.esp8266_init_tooltip)},
     updateShape2_:function(option){
+       
 		var inputExists = this.getInput("V0");
+        console.log(option);
 		if (inputExists) {
 			this.removeInput("V0")
 		}
-		if (option=="serveur"){
+		if (option=="server"){
 		    this.appendValueInput("V0").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.esp8266_8)
 		}
     },
@@ -591,12 +595,30 @@ Blockly.Blocks["esp8266_init"]={init:function(){
 		}
     }
 };
+Blockly.Blocks["esp8266_AP"]={init:function(){
+    this.setColour("#154360");
+    this.setHelpUrl(Blockly.Msg.esp8266_url);
+    this.appendDummyInput().appendField(new Blockly.FieldImage("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACIAAAAiCAIAAAC1JZyVAAAACXBIWXMAAAsTAAALEwEAmpwYAAABeklEQVR42u2Uf22FQAyAkYAGHOAACVhAAg6mAQc4QAIacIADHLx92WVdae8dd2xZsuz1D0J6bb9ef1z1+BWpXpg/jDmOY13XaZrezoIGPaffwuz7TqC2basrwQZL7Msw5Nj3/WV0L13X4XuNIaMooK5rQgzDIBXjHw16b0wEf7MvzDzPxq1pmnEct21LVINTbLA0aREtgiE7AzB2l4K9gRHzhNEMEqGfJl+qRIl0FP7RoDd3xVeXREgnDDMjbkwqPibBqGCDpUw2EWQ+T5hA4kxMl2XJARgYXpIi0WzRjJg+hUoyP5Ro/RT+0fhJ06FTe2P2kQakZ4FTbLQLEa4xchU/C6Hu4TZGrzsfvVC8aBTazIJ/dcIbozuPV27RjNDV6KrrtunOP4uTwvhZCOvih/DZJcowpMxo6ZeKfzTpfhQUzeyTEb8fNzFa6EF4mPlKPzIlF2OWI6zUz2P8OOTU6k7RNKmIUYYRUimjGPP4eMRKXe5g7skL8+8x78jBnNub/YbsAAAAAElFTkSuQmCC", 34, 34))
+    .appendField(Blockly.Msg.esp8266_11)
+    .appendField(new Blockly.FieldTextInput("ssid"), "SSID") 
+    .appendField(new Blockly.FieldTextInput("password"), "PASSWORD") 
+    .appendField("min 8 char");
+    this.appendDummyInput().appendField("puerto").appendField(new Blockly.FieldTextInput("80"),"PORT")
+    this.setPreviousStatement(false);
+    this.setNextStatement(false);
+    this.setTooltip(Blockly.Msg.esp8266_init_tooltip)}
+   
+};
 Blockly.Blocks["esp8266_send"]={init:function(){
     this.setColour("#154360");
     this.setHelpUrl(Blockly.Msg.esp8266_url);
     this.appendDummyInput().appendField(Blockly.Msg.esp8266_send_html);
-    this.setPreviousStatement(true);
-    this.setNextStatement(true);
+    this.appendDummyInput().appendField(Blockly.Msg.esp8266_send_html_title).appendField(new Blockly.FieldTextInput(Blockly.Msg.esp8266_send_html_title), "text") ;
+    this.appendDummyInput().appendField(Blockly.Msg.esp8266_send_html_address).appendField(new Blockly.FieldTextInput(""),"address");
+    this.appendDummyInput().appendField(Blockly.Msg.esp8266_send_html_execute);
+    this.appendStatementInput("ORDERS");
+/*     this.setPreviousStatement(true);
+    this.setNextStatement(true); */
     this.setTooltip(Blockly.Msg.esp8266_send_html_tooltip)}
 };
 Blockly.Blocks["esp8266_start"]={init:function(){
@@ -610,7 +632,7 @@ Blockly.Blocks["esp8266_start"]={init:function(){
 Blockly.Blocks["esp8266_html"]={init:function(){
     this.setColour("#154360");
     this.setHelpUrl(Blockly.Msg.esp8266_url);
-    this.appendDummyInput().appendField("HTML :").appendField(new Blockly.FieldTextInput("ma page"),"HEAD");
+    this.appendDummyInput().appendField("HTML :").appendField(new Blockly.FieldTextInput("HEAD"), "HEAD") ;
 	this.appendStatementInput("BODY");
     this.setTooltip(Blockly.Msg.esp8266_html_tooltip)}
 };
@@ -625,18 +647,28 @@ Blockly.Blocks["esp8266_wait_server"]={init:function(){
 Blockly.Blocks["esp8266_wait_client"]={init:function(){
     this.setColour("#154360");
     this.setHelpUrl(Blockly.Msg.esp8266_url);
-    this.appendValueInput("host").appendField("attendre une réponse du serveur");
-    this.appendValueInput("port").setAlign(Blockly.ALIGN_RIGHT).appendField("port");
+    this.appendValueInput("host").appendField(Blockly.Msg.esp8266_wait_for_response);
+    this.appendValueInput("port").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.esp8266_port);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
     this.setTooltip(Blockly.Msg.esp8266_init_tooltip)}
 };
+Blockly.Blocks["esp8266_useresponse"]={init:function(){
+    this.setColour("#154360");
+    this.setHelpUrl(Blockly.Msg.esp8266_url);
+    this.appendDummyInput().appendField("Escribir respuesta :");
+    this.setTooltip(Blockly.Msg.esp8266_html_tooltip);
+    this.setOutput(true);
+  }
+};
 Blockly.Blocks["esp8266_request_find"]={
 	init:function(){
-        this.appendValueInput("CASE0").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.esp8266_request);
+	
+        this.appendDummyInput().appendField(Blockly.Msg.esp8266_request).appendField(new Blockly.FieldTextInput("CASE0"),"CASE0") .setAlign(Blockly.ALIGN_RIGHT);
         this.appendStatementInput("DO0").setAlign(Blockly.ALIGN_RIGHT).appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN);
         this.setHelpUrl("");
         this.setColour("#154360");
+	this.setInputsInline(true);
         this.setPreviousStatement(true);
         this.setNextStatement(true);
         this.setMutator(new Blockly.Mutator(["esp8266_create_item"]));
@@ -653,7 +685,7 @@ Blockly.Blocks["esp8266_request_find"]={
     domToMutation: function(xmlElement) {
         this.casebreakCount_ = parseInt(xmlElement.getAttribute("casebreak"), 10);
         for (var i = 1; i <= this.casebreakCount_; i++) {
-            this.appendValueInput("CASE" + i).setAlign(Blockly.ALIGN_RIGHT).appendField("on trouve");
+            this.appendValueInput("CASE" + i).setAlign(Blockly.ALIGN_RIGHT).appendField("si se encuentra");
             this.appendStatementInput("DO" + i).appendField(Blockly.Msg.CONTROLS_IF_MSG_THEN)
         }
     },
@@ -711,6 +743,23 @@ Blockly.Blocks["esp8266_request_find"]={
         }
     }
 };
+Blockly.Blocks["esp8266_getArg"]={init:function(){
+    this.setColour("#154360");
+    this.setHelpUrl(Blockly.Msg.esp8266_url);
+    this.appendDummyInput().appendField("Leer parámetro :").appendField(new Blockly.FieldTextInput("arg"), "arg") ;
+    this.setTooltip(Blockly.Msg.esp8266_html_tooltip);
+    
+        this.setPreviousStatement(true);
+    this.setNextStatement(true);}
+};
+Blockly.Blocks["esp8266_useArg"]={init:function(){
+    this.setColour("#154360");
+    this.setHelpUrl(Blockly.Msg.esp8266_url);
+    this.appendDummyInput().appendField("Usar parámetro :").appendField(new Blockly.FieldTextInput("arg"), "arg") ;
+    this.setTooltip(Blockly.Msg.esp8266_html_tooltip);
+    this.setOutput(true);
+  }
+};
 Blockly.Blocks["esp8266_create_item"]={init:function(){
     this.setColour("#154360");
     this.appendDummyInput().appendField(Blockly.Msg.esp8266_request_container);
@@ -727,6 +776,16 @@ Blockly.Blocks["esp8266_create_container"]={init:function(){
         this.contextMenu = false
     }
 };
+/* Values casting */
+Blockly.Blocks["cast_int"]={init:function(){
+    this.appendValueInput("valor").appendField("Convertir el valor");
+
+    this.appendDummyInput().appendField("a: ").appendField(new Blockly.FieldDropdown([["int","int"],["float","float"]]), "tipo");
+    this.setOutput(true);
+  
+    this.setColour("#FD6C9E");
+
+}}
 /*  stockage  */
 Blockly.Blocks['eeprom_write']={init:function(){
     this.appendValueInput("val").setCheck("Number")

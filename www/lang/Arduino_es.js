@@ -66,10 +66,13 @@ Blockly.Msg.CAT_MASAYLO="🚗 Masaylo";
 Blockly.Msg.CAT_ESCORNABOT="🚜 Escornabot";
 Blockly.Msg.CAT_OLED_U8G = "▀ OLED";
 Blockly.Msg.CAT_NEOPIXEL = "☄ NeoPixel";
+//
+Blockly.Msg.CAT_CASTING=" 🔄 Casting";
+//
 
 //Wireless
 Blockly.Msg.esp8266_init_tooltip = "Inicialización del módulo wifi y conexión con los parámetros indicados";
-Blockly.Msg.esp8266_1 = "Esp 8266";
+Blockly.Msg.esp8266_1 = "Conectar a WiFi";
 Blockly.Msg.esp8266_2 = "SSID";
 Blockly.Msg.esp8266_3 = "clave";
 Blockly.Msg.esp8266_4 = "IP";
@@ -79,16 +82,22 @@ Blockly.Msg.esp8266_7 = [["cliente", "client"], ["servidor", "server"]];
 Blockly.Msg.esp8266_8 = "port";
 Blockly.Msg.esp8266_9 = [["dinámica", "dynamic"], ["estática", "static"]];
 Blockly.Msg.esp8266_10 = "dirección";
+Blockly.Msg.esp8266_11 = "Conectar AP";
 Blockly.Msg.esp8266_recept_tooltip = "recepción";
 Blockly.Msg.esp8266_url = "https://github.com/OttoDIY/OttoDIYESP";// do not translate
 Blockly.Msg.esp8266_html_tooltip = "";
-Blockly.Msg.esp8266_send_html_tooltip = "";
-Blockly.Msg.esp8266_send_html = "enviar página HTML ";
+Blockly.Msg.esp8266_send_html_tooltip = "Asocia la página previamente creada a la dirección expresada. Dejar en blanco para la página principal";
+Blockly.Msg.esp8266_send_html = "asociar página HTML ";
+Blockly.Msg.esp8266_send_html_title="nombre: ";
+Blockly.Msg.esp8266_send_html_address="dirección (vacío para principal):  ";
+Blockly.Msg.esp8266_send_html_execute="y ejecutar: ";
 Blockly.Msg.esp8266_start_tooltip = "";
 Blockly.Msg.esp8266_start = "Arrancar servidor";
 Blockly.Msg.esp8266_request_tooltip = "";
-Blockly.Msg.esp8266_request = "Si en la consulta encontramos";
+Blockly.Msg.esp8266_request = "Al ejecutar el formulario";
 Blockly.Msg.esp8266_request_container = "encontramos";
+Blockly.Msg.esp8266_wait_for_response="hacer una petición a host: ";
+Blockly.Msg.esp8266_port="puerto: ";
 //INTERRUPTION
 Blockly.Msg.LKL_ATTACHINTERRUPT_PIN = 'Interrupción: cuando ';
 Blockly.Msg.LKL_DETACHINTERRUPT_PIN = "desactivar interrupción en pin ";

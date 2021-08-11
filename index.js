@@ -268,7 +268,7 @@ sp.list().then(ports => {
 				var dir=chemin+'/'+appVersion
 				if (!fs.existsSync(dir)){
 					fs.writeFile(dir, appVersion, (err) => {
-						alert("Ummm... Es la primera vez que instalas esta versión. Dame un par de minutos");
+						alert("Ummm... Es la primera vez que instalas esta versión. Deja que instale las tarjetas Arduino");
 						instalado=false;
 						if(err){
 							console.log("Problema creando el archivo de nueva versión"+ err.message);
@@ -282,13 +282,35 @@ sp.list().then(ports => {
 								return
 							}
 							console.log(stdout);
+							let iot=confirm("Ya hemos instalado las tarjetas Arduino. ¿Piensas trabajar también con tarjetas ESP8266 o ESP32?");
+							if (iot){
+								alert("Esto puede alargarse un poco. Ten paciencia...");
+										exec('instalaESP.bat', {cwd: __dirname+'/compilation/arduino/'}, function(err, stdout, stderr){
+										if (err) {
+											console.log('error instalando esp8266/esp32: ' +err);
+											alert('Ummm... Ha habido algún problema. Prueba con el script manual');
+										}										
+									console.log(stdout);
+									
+									alert("Instalación finalizada");
+									instalado=true;
+									//extraeLibrerias();
+									alert("Ya deberías poder empezar a trabajar. Empieza de nuevo a compilar");
+									instalado=true;
+									
+									messageDiv.innerHTML = "Todo ok" 
+									btn_close_message.style.display = "inline"
+								});
+							}else{
 							alert("Ya deberías poder empezar a trabajar. Empieza de nuevo a compilar");
 							instalado=true;
 							
 							messageDiv.innerHTML = "Todo ok" 
 							btn_close_message.style.display = "inline"
+							}
 						
-						})
+						});
+				
 						
 				});
 			}
@@ -351,7 +373,7 @@ sp.list().then(ports => {
 				if(err){
 					console.log("Problema creando el archivo de nueva versión"+ err.message);
 				}
-				alert ("Instalando tarjetas Arduino, ESP32 y ESP8266. Esto tardará un par de minutos. No hagas nada hasta que yo te avise");
+				alert("Ummm... Es la primera vez que instalas esta versión. Deja que instale las tarjetas Arduino");
 				messageDiv.innerHTML = Blockly.Msg.check + '<i class="fa fa-spinner fa-pulse fa-1_5x fa-fw"></i>'
 			
 				exec('instala.bat ' + carte, {cwd: chemin+'/compilation/arduino'}, function(err, stdout, stderr){
@@ -361,10 +383,32 @@ sp.list().then(ports => {
 						return
 					}
 					console.log(stdout);
+					let iot=confirm("Ya hemos instalado las tarjetas Arduino. ¿Piensas trabajar también con tarjetas ESP8266 o ESP32?");
+					if (iot){
+						alert("Esto puede alargarse un poco. Ten paciencia...");
+								exec('instalaESP.bat', {cwd: __dirname+'/compilation/arduino/'}, function(err, stdout, stderr){
+								if (err) {
+									console.log('error instalando esp8266/esp32: ' +err);
+									alert('Ummm... Ha habido algún problema. Prueba con el script manual');
+								}										
+							console.log(stdout);
+							
+							alert("Instalación finalizada");
+							instalado=true;
+							//extraeLibrerias();
+							alert("Ya deberías poder empezar a trabajar. Empieza de nuevo a compilar");
+							instalado=true;
+							
+							messageDiv.innerHTML = "Todo ok" 
+							btn_close_message.style.display = "inline"
+						});
+					}else{
 					alert("Ya deberías poder empezar a trabajar. Empieza de nuevo a compilar");
 					instalado=true;
+					
 					messageDiv.innerHTML = "Todo ok" 
 					btn_close_message.style.display = "inline"
+					}
 				
 				})
 				
@@ -391,7 +435,12 @@ sp.list().then(ports => {
 					messageDiv.innerHTML = Blockly.Msg.error + quitDiv
 				} else {
 					messageDiv.style.color = '#ff0000'
+					if (err!= null){
 					messageDiv.innerHTML = err.toString() + quitDiv
+					}else{
+						messageDiv.innerHTML = stderr.toString() + quitDiv
+
+					}
 				}
 				return
 			}

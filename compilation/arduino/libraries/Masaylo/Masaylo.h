@@ -8,10 +8,14 @@ Modificaciones Maribel Ruiz y Pedro Ruiz 25/05/2021
 */
 #ifndef Masaylo_h
 #define Masaylo_h
- 
+ #if defined(ARDUINO_ARCH_ESP32)
+ #include "ESP32Servo.h"
+ #else
+ #include "Servo.h"
+ #endif
 #include "Arduino.h"
 //#include "Encoder.h"
-#include "Servo.h"
+
  
 class Masaylo
 {

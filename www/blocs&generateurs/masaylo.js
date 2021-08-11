@@ -19,8 +19,9 @@ Blockly.Blocks['masaylo_arranca'] = {init: function() {
 };
 
 Blockly.Arduino['masaylo_arranca'] = function(block) {
-  Blockly.Arduino.includes_['masaylo_lib'] = '#include <Masaylo.h>\n'
-	+ 'Masaylo m;';
+
+  Blockly.Arduino.includes_['masaylo_lib'] = '#include <Masaylo.h>\nMasaylo m;\n'
+
   Blockly.Arduino.definitions_['masaylo_pins'] = '//no hay definiciones \n';
 
   Blockly.Arduino.setups_['masaylo_init']='m.init();';
@@ -33,14 +34,14 @@ Blockly.Blocks['masaylo_arranca_personalizado']={init:function(){
   this.appendDummyInput().
   appendField(Blockly.Msg.MIP) .
 
-  appendField(new Blockly.FieldNumber("6"), "MIP") .
-  appendField(Blockly.Msg.MIA) .appendField(new Blockly.FieldNumber("7"), "MIA").
-  appendField(Blockly.Msg.MIB) .appendField(new Blockly.FieldNumber("8"), "MIB");
+  appendField(new Blockly.FieldTextInput("6"), "MIP") .
+  appendField(Blockly.Msg.MIA) .appendField(new Blockly.FieldTextInput("7"), "MIA").
+  appendField(Blockly.Msg.MIB) .appendField(new Blockly.FieldTextInput("8"), "MIB");
   this.appendDummyInput() .setAlign(Blockly.ALIGN_RIGHT) 
-  .appendField(Blockly.Msg.MDP).appendField(new Blockly.FieldNumber("11"), "MDP")
+  .appendField(Blockly.Msg.MDP).appendField(new Blockly.FieldTextInput("11"), "MDP")
  
-    .appendField(Blockly.Msg.MDA).appendField(new Blockly.FieldNumber("12"), "MDA").
-    appendField(Blockly.Msg.MDB).appendField(new Blockly.FieldNumber("13"), "MDB") ;
+    .appendField(Blockly.Msg.MDA).appendField(new Blockly.FieldTextInput("12"), "MDA").
+    appendField(Blockly.Msg.MDB).appendField(new Blockly.FieldTextInput("13"), "MDB") ;
   this.setInputsInline(false);
   this.setPreviousStatement(false);
   this.setNextStatement(true);
@@ -259,7 +260,7 @@ Blockly.Blocks['masaylo_BT_INIT'] = {init: function() {
     this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/Bluetooth.png', 48, 48, "*")) .appendField(Blockly.Msg.MASAYLO_BTINIT_TEXT);
     this.appendDummyInput()
     .appendField(Blockly.Msg.MASAYLO_Tx_TEXT)
-    .appendField(new Blockly.FieldNumber("9"), "Tx") .appendField(Blockly.Msg.MASAYLO_Rx_TEXT) .appendField(new Blockly.FieldNumber("10"), "Rx");
+    .appendField(new Blockly.FieldTextInput("9"), "Tx") .appendField(Blockly.Msg.MASAYLO_Rx_TEXT) .appendField(new Blockly.FieldTextInput("10"), "Rx");
     this.setInputsInline(false);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -284,8 +285,8 @@ Blockly.Blocks['masaylo_US_INIT'] = {init: function() {
   appendField(Blockly.Msg.MASAYLO_USINIT_TEXT);
   this.appendDummyInput().
   appendField("Trigger: ").
-  appendField(new Blockly.FieldNumber("16"), "trigger") .
-  appendField("Echo") .appendField(new Blockly.FieldNumber("17"), "echo");
+  appendField(new Blockly.FieldTextInput("A2"), "trigger") .
+  appendField("Echo") .appendField(new Blockly.FieldTextInput("A3"), "echo");
   this.setInputsInline(false);
   this.setPreviousStatement(true);
   this.setNextStatement(true);
@@ -324,9 +325,9 @@ Blockly.Blocks['masaylo_IR_INIT'] = {init: function() {
   appendField(Blockly.Msg.MASAYLO_IRINIT_TEXT);
   this.appendDummyInput().
   appendField(Blockly.Msg.MASAYLO_IRLEFT_TEXT).
-  appendField(new Blockly.FieldNumber("14"),"IRLeft" ) .
+  appendField(new Blockly.FieldTextInput("A0"),"IRLeft" ) .
   appendField(Blockly.Msg.MASAYLO_IRRIGHT_TEXT) .
-  appendField(new Blockly.FieldNumber("15"),"IRRight" );
+  appendField(new Blockly.FieldTextInput("A1"),"IRRight" );
   this.setInputsInline(false);
   this.setPreviousStatement(true);
   this.setNextStatement(true);
@@ -436,9 +437,9 @@ Blockly.Blocks['masaylo_SERVOS_INIT'] = {init: function() {
   appendField(Blockly.Msg.MASAYLO_SERVOS_TEXT);
   this.appendDummyInput().
   appendField(Blockly.Msg.MASAYLO_CABEZA_TEXT).
-  appendField(new Blockly.FieldNumber("5"),"cabeza" ) .
+  appendField(new Blockly.FieldTextInput("5"),"cabeza" ) .
   appendField(Blockly.Msg.MASAYLO_BRAZO_TEXT) .
-  appendField(new Blockly.FieldNumber("4"),"brazo" );
+  appendField(new Blockly.FieldTextInput("4"),"brazo" );
   this.setInputsInline(false);
   this.setPreviousStatement(true);
   this.setNextStatement(true);
@@ -572,7 +573,7 @@ Blockly.Arduino['masaylo_blankleft'] = function(block) {
 Blockly.Blocks['masaylo_BUZZER_INIT'] = {init: function() {
   this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/masaylo_activate_buzzer.png', 48, 48, "*")) .
   appendField(Blockly.Msg.MASAYLO_BUZZER_TEXT).
-  appendField(new Blockly.FieldNumber("18"),"buzzer" );
+  appendField(new Blockly.FieldTextInput("A4"),"buzzer" );
   this.setInputsInline(false);
   this.setPreviousStatement(true);
   this.setNextStatement(true);

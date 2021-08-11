@@ -69,7 +69,7 @@ Blockly.Msg.CAT_NEOPIXEL = "☄ NeoPixel";
 
 //Wireless
 Blockly.Msg.esp8266_init_tooltip = "initialization of the wifi module and connection with the indicated parameters";
-Blockly.Msg.esp8266_1 = "Esp 8266";
+Blockly.Msg.esp8266_1 = "Connect to WiFi: ";
 Blockly.Msg.esp8266_2 = "SSID";
 Blockly.Msg.esp8266_3 = "key";
 Blockly.Msg.esp8266_4 = "IP";
@@ -79,16 +79,22 @@ Blockly.Msg.esp8266_7 = [["client", "client"], ["server", "server"]];
 Blockly.Msg.esp8266_8 = "port";
 Blockly.Msg.esp8266_9 = [["dynamic", "dynamic"], ["static", "static"]];
 Blockly.Msg.esp8266_10 = "address";
+Blockly.Msg.esp8266_10 = "Set AP";
 Blockly.Msg.esp8266_recept_tooltip = "reception";
 Blockly.Msg.esp8266_url = "https://github.com/OttoDIY/OttoDIYESP";// do not translate
 Blockly.Msg.esp8266_html_tooltip = "";
 Blockly.Msg.esp8266_send_html_tooltip = "";
-Blockly.Msg.esp8266_send_html = "send HTML page";
+Blockly.Msg.esp8266_send_html = "associate HTML page";
+Blockly.Msg.esp8266_send_html_title="name: ";
+Blockly.Msg.esp8266_send_html_address="address (void for main page): ";
+Blockly.Msg.esp8266_send_html_execute="and execute: ";
 Blockly.Msg.esp8266_start_tooltip = "";
 Blockly.Msg.esp8266_start = "start server";
 Blockly.Msg.esp8266_request_tooltip = "";
-Blockly.Msg.esp8266_request = "if in the query we find";
+Blockly.Msg.esp8266_request = "in the query";
 Blockly.Msg.esp8266_request_container = "we find";
+Blockly.Msg.esp8266_wait_for_response="make a request to host: ";
+Blockly.Msg.esp8266_port="port: ";
 //INTERRUPTION
 Blockly.Msg.LKL_ATTACHINTERRUPT_PIN = 'Interrupt: when a';
 Blockly.Msg.LKL_DETACHINTERRUPT_PIN = "disable interrupt on pin";
