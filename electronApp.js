@@ -98,7 +98,10 @@ function createGames() {
 function promptModal(options, callback) {
 	promptOptions = options
 	promptWindow = new BrowserWindow({webPreferences: {
-		nodeIntegration: true
+		contextIsolation: false,
+		nodeIntegrationInWorker: true,
+		nodeIntegration: true,
+		enableRemoteModule: true
 	  },width:360, height: 135, 'parent': mainWindow, resizable: false, movable: true, frame: false, modal: true})
 	promptWindow.loadURL(path.join(__dirname, "./www/modalVar.html"))
 	promptWindow.on('closed', function () { 

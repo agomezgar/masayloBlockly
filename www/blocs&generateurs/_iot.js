@@ -226,7 +226,7 @@ Blockly.Arduino['link'] = function(block){
     var text = Blockly.Arduino.statementToCode(block, 'content');
     var link = URLInput(block.getFieldValue('target'));
     var block_modifier = Blockly.Arduino.statementToCode(block, 'modifier', Blockly.Arduino.ORDER_ATOMIC);
-    return '<a href=\\"' + link + '\\" target=\\"_blank\\"' + block_modifier + '>' + text + '</a>'
+    return '<a href=\"' + link + '\" target=\"_blank\"' + block_modifier + '>' + text + '</a>'
 };
 Blockly.Python['link'] = function(block){
     var text = Blockly.Python.statementToCode(block, 'content');
