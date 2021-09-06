@@ -241,4 +241,3 @@ void Masaylo::tono(int frequency, int time){
 	noTone(_buzz);
 }
 
-

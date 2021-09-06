@@ -12,6 +12,7 @@ Blockly.Blocks['masaylo_arranca'] = {init: function() {
     this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/7acabado.png', 48, 48, "*")) .appendField(Blockly.Msg.MASAYLO_START_TEXT);
     this.setInputsInline(false);
     this.setPreviousStatement(false);
+    this.setPreviousStatement(true);
     this.setNextStatement(true);
   this.setColour("#f5b041");
     this.setTooltip(Blockly.Msg.MASAYLO_START_TOOLTIP);
@@ -43,7 +44,7 @@ Blockly.Blocks['masaylo_arranca_personalizado']={init:function(){
     .appendField(Blockly.Msg.MDA).appendField(new Blockly.FieldTextInput("12"), "MDA").
     appendField(Blockly.Msg.MDB).appendField(new Blockly.FieldTextInput("13"), "MDB") ;
   this.setInputsInline(false);
-  this.setPreviousStatement(false);
+  this.setPreviousStatement(true);
   this.setNextStatement(true);
   this.setColour("#f5b041");
   this.setTooltip(Blockly.Msg.MASAYLO_STARTPERS_TOOLTIP);
@@ -573,7 +574,7 @@ Blockly.Arduino['masaylo_blankleft'] = function(block) {
 Blockly.Blocks['masaylo_BUZZER_INIT'] = {init: function() {
   this.appendDummyInput("") .appendField(new Blockly.FieldImage('media/masaylo_activate_buzzer.png', 48, 48, "*")) .
   appendField(Blockly.Msg.MASAYLO_BUZZER_TEXT).
-  appendField(new Blockly.FieldTextInput("A4"),"buzzer" );
+  appendField(new Blockly.FieldTextInput("1"),"buzzer" );
   this.setInputsInline(false);
   this.setPreviousStatement(true);
   this.setNextStatement(true);

@@ -140,9 +140,8 @@ if (carte=='esp32'){
 	Blockly.Arduino.setups_["esp8266"]='delay(1000);\nSerial.begin(115200);\n Serial.println();\nserver.begin();\n'+
     'Serial.print("Configuring access point...");\nWiFi.mode(WIFI_AP);\nWiFi.softAP(ssid, password);\nIPAddress myIP = WiFi.softAPIP();\n'+
     'Serial.print("AP IP address: ");\nSerial.println(myIP);\n';
-   var code='';
-	
-	return code ;
+    var code="server.handleClient();";
+    return code;
 };
 Blockly.Arduino['esp8266_send']=function(block){
 	//var data=Blockly.Arduino.valueToCode(block, 'message', Blockly.Arduino.ORDER_ATOMIC);

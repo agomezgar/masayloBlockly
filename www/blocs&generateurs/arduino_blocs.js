@@ -544,8 +544,8 @@ Blockly.Blocks["esp8266_init"]={init:function(){
 		.appendField(Blockly.Msg.esp8266_10)
 		.appendField(new Blockly.FieldDropdown(Blockly.Msg.esp8266_9,function(option){this.sourceBlock_.updateShape1_(option)}), "staticdynamic");
 	this.appendDummyInput().setAlign(Blockly.ALIGN_RIGHT).appendField(new Blockly.FieldDropdown(Blockly.Msg.esp8266_7,function(option){this.sourceBlock_.updateShape2_(option)}), "clientserveur");
-    this.setPreviousStatement(false);
-    this.setNextStatement(false);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
     this.setTooltip(Blockly.Msg.esp8266_init_tooltip)},
     updateShape2_:function(option){
        
@@ -604,8 +604,8 @@ Blockly.Blocks["esp8266_AP"]={init:function(){
     .appendField(new Blockly.FieldTextInput("password"), "PASSWORD") 
     .appendField("min 8 char");
     this.appendDummyInput().appendField("puerto").appendField(new Blockly.FieldTextInput("80"),"PORT")
-    this.setPreviousStatement(false);
-    this.setNextStatement(false);
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
     this.setTooltip(Blockly.Msg.esp8266_init_tooltip)}
    
 };
@@ -617,8 +617,8 @@ Blockly.Blocks["esp8266_send"]={init:function(){
     this.appendDummyInput().appendField(Blockly.Msg.esp8266_send_html_address).appendField(new Blockly.FieldTextInput(""),"address");
     this.appendDummyInput().appendField(Blockly.Msg.esp8266_send_html_execute);
     this.appendStatementInput("ORDERS");
-/*     this.setPreviousStatement(true);
-    this.setNextStatement(true); */
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
     this.setTooltip(Blockly.Msg.esp8266_send_html_tooltip)}
 };
 Blockly.Blocks["esp8266_start"]={init:function(){
@@ -634,6 +634,8 @@ Blockly.Blocks["esp8266_html"]={init:function(){
     this.setHelpUrl(Blockly.Msg.esp8266_url);
     this.appendDummyInput().appendField("HTML :").appendField(new Blockly.FieldTextInput("HEAD"), "HEAD") ;
 	this.appendStatementInput("BODY");
+    this.setPreviousStatement(true);
+    this.setNextStatement(true);
     this.setTooltip(Blockly.Msg.esp8266_html_tooltip)}
 };
 Blockly.Blocks["esp8266_wait_server"]={init:function(){
