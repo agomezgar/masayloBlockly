@@ -1843,7 +1843,7 @@ Blockly.Blocks['otto9_appHumanoid'] = {init: function() {
 }
 };
 Blockly.Arduino['otto9_appHumanoid'] = function(block) {
-  Blockly.Arduino.includes_['otto9h_lib'] = '#include <Otto9Humanoid.h> \nOtto9Humanoid Otto;\n'
+  Blockly.Arduino.includes_['otto9h_lib'] = '#include <Otto9Humanoidapp.h> \nOtto9Humanoidapp Otto;\n'
 + ' #include <SerialCommand.h>\nSoftwareSerial BTserial = SoftwareSerial(11,12);\n'
 +'  SerialCommand SCmd(BTserial);\n';
   Blockly.Arduino.variables_['otto9h_var'] =' int T=1000; \n  int moveId=0;\nint moveSize=15;\n'    
