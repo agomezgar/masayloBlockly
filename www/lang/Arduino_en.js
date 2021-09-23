@@ -15,6 +15,9 @@ Blockly.Msg.yes = "yes";
 Blockly.Msg.no = "no";
 Blockly.Msg.uptodate = "💯 Version is up to date!" ;
 Blockly.Msg.download = "Download completed, the application will install and restart ..."
+Blockly.Msg.compile="Compile"
+Blockly.Msg.insertflash="Flash"
+Blockly.Msg.bin="Export binary"
 // common to all blocks
 Blockly.Msg.HELPURL = "https://wikifactory.com/+OttoDIY/otto-diy"; // do not translate
 Blockly.Msg.pin = "pin";
@@ -442,7 +445,7 @@ Blockly.Msg.OTTO9_DANCE_SIZE_TEXT = "size";
 Blockly.Msg.OTTO9_DANCE_SIZE_CHOICE = [["normal", "25"], ["little", "10"], ["big", "40"]];
 Blockly.Msg.OTTO9_DO_TEXT = "do";
 Blockly.Msg.OTTO9_DO_TOOLTIP = "Otto complex movements";
-Blockly.Msg.OTTO9_DO_CHOICE = [ ["swing", "swing"], ["updown", "updown"], ["tiptoeSwing", "tiptoeSwing"], ["jitter", "jitter"], ["ascendingTurn", "ascendingTurn"]];
+Blockly.Msg.OTTO9_DO_CHOICE = [ ["swing", "swing"], ["updown", "updown"], ["jitter", "jitter"], ["ascendingTurn", "ascendingTurn"]];
 Blockly.Msg.OTTO9_GESTURE_TEXT = "gesture";
 Blockly.Msg.OTTO9_GESTURE_TOOLTIP = "Emotional sounds combined with movements";
 Blockly.Msg.OTTO9_GESTURE_CHOICE = [["😃 happy1", "OttoSuperHappy"],["🙂 happy2", "OttoHappy"], ["🙁 sad", "OttoSad"], ["😴 sleep", "OttoSleeping"], ["😕 confused", "OttoConfused"], ["😰 fretful", "OttoFretful"], ["😍 love", "OttoLove"], ["😡 angry", "OttoAngry"], ["🤩 magic", "OttoMagic"], ["😐 wave", "OttoWave"], [" 😎 victory", "OttoVictory"], ["😞 fail", "OttoFail"], ["💩 fart", "OttoFart"]];
@@ -475,6 +478,8 @@ Blockly.Msg.OTTO9_ARMS_TOOLTIP = "move the arms!";
 Blockly.Msg.OTTO9_ARMS_CHOICE = [["hands up", "HANDSUP"], ["handwave left", "HANDWAVE1"], ["handwave right", "HANDWAVE2"]];
 Blockly.Msg.OTTO9_APP="Save app";
 Blockly.Msg.OTTO9_HUMANOID_TOOLTIP="You can control your Humanoid with an app at your disposal at Google Play Store";
+Blockly.Msg.OTTO9_ORIENTATION="Orientation: ";
+
 ////////////MASAYLO Robot////////// ONLY TRANSLATE THE LEFT PART INSIDE ["THIS YES" ,NOT]
 Blockly.Msg.MASAYLO_START_TEXT = "Start";
 Blockly.Msg.MASAYLO_START_TOOLTIP = "Declare a new robot type Masaylo";

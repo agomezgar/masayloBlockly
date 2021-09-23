@@ -268,7 +268,7 @@ sp.list().then(ports => {
 				var dir=chemin+'/'+appVersion
 				if (!fs.existsSync(dir)){
 					fs.writeFile(dir, appVersion, (err) => {
-						alert("Ummm... Es la primera vez que instalas esta versión. Deja que instale las tarjetas Arduino");
+						alert(Blockly.Msg.initInstall);
 						instalado=false;
 						if(err){
 							console.log("Problema creando el archivo de nueva versión"+ err.message);
@@ -278,34 +278,34 @@ sp.list().then(ports => {
 						exec('instala.bat ' + carte, {cwd: chemin+'/compilation/arduino'}, function(err, stdout, stderr){
 							if (stderr) {
 								console.log(stderr);
-								alert ("error detectado: "+stderr);
+								alert (Blockly.Msg.errorWhenInstalling + stderr);
 								return
 							}
 							console.log(stdout);
-							let iot=confirm("Ya hemos instalado las tarjetas Arduino. ¿Piensas trabajar también con tarjetas ESP8266 o ESP32?");
+							let iot=confirm(Blockly.Msg.doYouWantIoT);
 							if (iot){
-								alert("Esto puede alargarse un poco. Ten paciencia...");
+								alert(Blockly.Msg.youMustWait);
 										exec('instalaESP.bat', {cwd: chemin+'/compilation/arduino/'}, function(err, stdout, stderr){
 										if (err) {
 											console.log('error instalando esp8266/esp32: ' +err);
-											alert('Ummm... Ha habido algún problema. Prueba con el script manual');
+											alert(Blockly.Msg.errorWhenIoT);
 										}										
 									console.log(stdout);
 									
-									alert("Instalación finalizada");
+									alert(Blockly.Msg.installFinished);
 									instalado=true;
 									//extraeLibrerias();
-									alert("Ya deberías poder empezar a trabajar. Empieza de nuevo a compilar");
+									alert(Blockly.Msg.missionAcomplished);
 									instalado=true;
 									
 									messageDiv.innerHTML = "Todo ok" 
 									btn_close_message.style.display = "inline"
 								});
 							}else{
-							alert("Ya deberías poder empezar a trabajar. Empieza de nuevo a compilar");
+							alert(Blockly.Msg.missionAcomplished);
 							instalado=true;
 							
-							messageDiv.innerHTML = "Todo ok" 
+							messageDiv.innerHTML = "Ok" 
 							btn_close_message.style.display = "inline"
 							}
 						

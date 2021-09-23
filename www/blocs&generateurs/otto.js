@@ -1189,7 +1189,9 @@ Blockly.Arduino['otto9_eyesm'] = function(block) {
 
 Blockly.Blocks['otto9_matrix'] = { init: function() {
     this.appendDummyInput() .appendField('  ') .appendField('1') .appendField('  2').appendField('  3') .appendField(' 4') .appendField(' 5') .appendField('  6')
-   Blockly.FieldCheckbox.CHECK_CHAR= '▉'
+    this.appendDummyInput()	.appendField(Blockly.Msg.OTTO9_ORIENTATION).appendField(new Blockly.FieldDropdown([["0°", "1"], ["90°", "4"], ["180°", "2"], ["270°", "3"]]), "Orientation")
+
+    Blockly.FieldCheckbox.CHECK_CHAR= '▉'
     this.appendDummyInput().appendField('1 ')
         .appendField(new Blockly.FieldCheckbox("FALSE"), 'otto9_matrix_pixel0')
         .appendField(new Blockly.FieldCheckbox("TRUE"), 'otto9_matrix_pixel1')
@@ -1234,6 +1236,8 @@ Blockly.Blocks['otto9_matrix'] = { init: function() {
   }
 };
 Blockly.Arduino['otto9_matrix'] = function(block) {
+  var Orientation = this.getFieldValue('Orientation'); 
+
   Blockly.Arduino.includes_['otto9_lib'] = '#include <Otto9Humanoid.h>\n'
 	+ 'Otto9Humanoid Otto;';
   Blockly.Arduino.variables_['otto9_matrix'] = 'const char data[] = "VARIABLE#";\n'
@@ -1241,7 +1245,7 @@ Blockly.Arduino['otto9_matrix'] = function(block) {
   Blockly.Arduino.definitions_['otto9_matrix_def'] = '#define DIN_PIN A3\n'
 	+ '#define CS_PIN A2\n'
 	+ '#define CLK_PIN A1\n'
-	+ '#define LED_DIRECTION 1';
+	+ '#define LED_DIRECTION '+Orientation;
   Blockly.Arduino.setups_['otto9_matrix']='Otto.initMATRIX( DIN_PIN, CS_PIN, CLK_PIN, LED_DIRECTION);'
   var code = 'matrix = 0b';
   for (var i=0; i<30; i++) {
@@ -1257,6 +1261,8 @@ Blockly.Arduino['otto9_matrix'] = function(block) {
 Blockly.Blocks["otto9_matrix8x8"] = {  init: function() {
   this.appendDummyInput().appendField('  ').appendField(' 0').appendField(' 1').appendField(' 2').appendField('  3').appendField('  4').appendField(' 5').appendField(' 6').appendField(' 7');
   Blockly.FieldCheckbox.CHECK_CHAR= '▉'
+  this.appendDummyInput()	.appendField(Blockly.Msg.OTTO9_ORIENTATION).appendField(new Blockly.FieldDropdown([["0°", "1"], ["90°", "4"], ["180°", "2"], ["270°", "3"]]), "Orientation")
+
   this.appendDummyInput().appendField('0 ')
     .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel0')
     .appendField(new Blockly.FieldCheckbox("FALSE"), 'Pixel1')
@@ -1338,23 +1344,72 @@ Blockly.Blocks["otto9_matrix8x8"] = {  init: function() {
 },
 };
 Blockly.Arduino.otto9_matrix8x8 = function() {
+  var Orientation = this.getFieldValue('Orientation'); 
+
   Blockly.Arduino.definitions_['otto9_matrix_def'] = '#define DIN_PIN A3\n'
   + '#define CS_PIN A2\n'
   + '#define CLK_PIN A1\n'
-  + '#define LED_DIRECTION 1';
+  + '#define LED_DIRECTION '+Orientation;
   Blockly.Arduino.setups_['otto9_matrix']='Otto.initMATRIX( DIN_PIN, CS_PIN, CLK_PIN, LED_DIRECTION);';
 var code = '';
 for (var i=0; i<64; i++) {
-
+  //0 º
+if (Orientation==1){
  if (this.getFieldValue('Pixel' + i) != 'rgb(255, 255, 255)') {
      var on = this.getFieldValue('Pixel' + i)== "TRUE"? "1" : "0";
-     var row= i +1
+     var row= i 
      {if  (i >= 0 && i <= 7)row=0}{if  (i >= 8 && i < 16)row=1}{if  (i >= 16 && i < 24)row=2}{if  (i >= 24 && i < 32)row=3}
      {if  (i >= 32 && i < 40)row=4}{if  (i >= 40 && i < 48)row=5}{if  (i >= 48 && i < 56)row=6}{if  (i >= 56 && i < 64)row=7}
      var col= i
      {if  (i > 1 && i <= 7)col=i}{if  (i >= 8 && i < 16)col=i-8}{if  (i >= 16 && i < 24)col=i-16}{if  (i >= 24 && i < 32)col=i-24}
      {if  (i >= 32 && i < 40)col=i-32}{if  (i >= 40 && i < 48)col=i-40}{if  (i >= 48 && i < 56)col=i-48}{if  (i >= 56 && i < 64)col=i-56}
-     code += ' Otto.setLed('+row+','+col+',' + on + ');\n'
+     code += ' Otto.setLed('+col+','+row+',' + on + ');\n'
+ }
+}
+//180 º
+if (Orientation==2){
+  if (this.getFieldValue('Pixel' + i) != 'rgb(255, 255, 255)') {
+    var on = this.getFieldValue('Pixel' + i)== "TRUE"? "1" : "0";
+    var row= i 
+    {if  (i >= 0 && i <= 7)row=0}{if  (i >= 8 && i < 16)row=1}{if  (i >= 16 && i < 24)row=2}{if  (i >= 24 && i < 32)row=3}
+    {if  (i >= 32 && i < 40)row=4}{if  (i >= 40 && i < 48)row=5}{if  (i >= 48 && i < 56)row=6}{if  (i >= 56 && i < 64)row=7}
+    var col= i
+    {if  (i > 1 && i <= 7)col=i}{if  (i >= 8 && i < 16)col=i-8}{if  (i >= 16 && i < 24)col=i-16}{if  (i >= 24 && i < 32)col=i-24}
+    {if  (i >= 32 && i < 40)col=i-32}{if  (i >= 40 && i < 48)col=i-40}{if  (i >= 48 && i < 56)col=i-48}{if  (i >= 56 && i < 64)col=i-56}
+    {if (col==0){col=7} else if (col==1){col=6} else if (col==2){col=5} else if (col==3){col=4} else if (col==4){col=3 }else if (col==5){col=2 }else if (col==6){col=1} else if (col==7){col=0}}
+    {if (row==0){row=7} else if (row==1){row=6} else if (row==2){row=5} else if (row==3){row=4} else if (row==4){row=3 }else if (row==5){row=2 }else if (row==6){row=1} else if (row==7){row=0}}
+
+    code += ' Otto.setLed('+col+','+row+',' + on + ');\n'
+}
+}
+ 
+ //270 º
+ if (Orientation==3){
+  if (this.getFieldValue('Pixel' + i) != 'rgb(255, 255, 255)') {
+    var on = this.getFieldValue('Pixel' + i)== "TRUE"? "1" : "0";
+    var row= i +1
+    {if  (i >= 0 && i <= 7)row=7}{if  (i >= 8 && i < 16)row=6}{if  (i >= 16 && i < 24)row=5}{if  (i >= 24 && i < 32)row=4}
+    {if  (i >= 32 && i < 40)row=3}{if  (i >= 40 && i < 48)row=2}{if  (i >= 48 && i < 56)row=1}{if  (i >= 56 && i < 64)row=0}
+    var col= i
+    {if  (i > 1 && i <= 7)col=i}{if  (i >= 8 && i < 16)col=i-8}{if  (i >= 16 && i < 24)col=i-16}{if  (i >= 24 && i < 32)col=i-24}
+    {if  (i >= 32 && i < 40)col=i-32}{if  (i >= 40 && i < 48)col=i-40}{if  (i >= 48 && i < 56)col=i-48}{if  (i >= 56 && i < 64)col=i-56}
+    code += ' Otto.setLed('+row+','+col+',' + on + ');\n'
+}
+ }
+ //90 º
+ if (Orientation==4){
+  if (this.getFieldValue('Pixel' + i) != 'rgb(255, 255, 255)') {
+    var on = this.getFieldValue('Pixel' + i)== "TRUE"? "1" : "0";
+    var col= i 
+    {if  (i >= 0 && i <= 7)col=i}{if  (i >= 8 && i < 16)col=i-8}{if  (i >= 16 && i < 24)col=i-16}{if  (i >= 24 && i < 32)col=i-24}
+    {if  (i >= 32 && i < 40)col=i-32}{if  (i >= 40 && i < 48)col=i-40}{if  (i >= 48 && i < 56)col=i-48}{if  (i >= 56 && i < 64)col=i-56}
+    
+    var row= i
+    {if  (i >=0 && i <= 7)row=0}{if  (i >= 8 && i < 16)row=1}{if  (i >= 16 && i < 24)row=2}{if  (i >= 24 && i < 32)row=3}
+    {if  (i >= 32 && i < 40)row=4}{if  (i >= 40 && i < 48)row=5}{if  (i >= 48 && i < 56)row=6}{if  (i >= 56 && i < 64)row=7}
+    {if (col==0){col=7} else if (col==1){col=6} else if (col==2){col=5} else if (col==3){col=4} else if (col==4){col=3 }else if (col==5){col=2 }else if (col==6){col=1} else if (col==7){col=0}}
+    code += ' Otto.setLed('+row+','+col+',' + on + ');\n'
+}
  }
 };
 for (var i=0; i<8; i++) {if (this.getFieldValue('eyes_pixel' + i) == 'TRUE')row = 0;};
@@ -1364,6 +1419,8 @@ return code;
 Blockly.Blocks['otto9_mouth'] = {  init: function() {
     this.appendDummyInput() .appendField(new Blockly.FieldImage('media/matrix.png', 48, 48, "*"))
         .appendField(Blockly.Msg.OTTO9_MOUTH_TEXT).appendField(new Blockly.FieldDropdown(Blockly.Msg.OTTO9_MOUTH_CHOICE), "otto9_mouth_choice");
+        this.appendDummyInput()	.appendField(Blockly.Msg.OTTO9_ORIENTATION).appendField(new Blockly.FieldDropdown([["0°", "1"], ["90°", "4"], ["180°", "2"], ["270°", "3"]]), "Orientation")
+
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -1374,6 +1431,7 @@ Blockly.Blocks['otto9_mouth'] = {  init: function() {
 };
 Blockly.Arduino['otto9_mouth'] = function(block) {
   var dropdown_otto9_mouth_choice = block.getFieldValue('otto9_mouth_choice');
+  var Orientation = this.getFieldValue('Orientation'); 
   Blockly.Arduino.includes_['otto9_lib'] = '#include <Otto9Humanoid.h>\n'
 	+ 'Otto9Humanoid Otto;';
   Blockly.Arduino.variables_['otto9_matrix'] = 'const char data[] = "VARIABLE#";\n'
@@ -1381,7 +1439,7 @@ Blockly.Arduino['otto9_mouth'] = function(block) {
   Blockly.Arduino.definitions_['otto9_matrix_def'] = '#define DIN_PIN A3\n'
 	+ '#define CS_PIN A2\n'
 	+ '#define CLK_PIN A1\n'
-	+ '#define LED_DIRECTION 1';
+	+ '#define LED_DIRECTION '+Orientation;
   Blockly.Arduino.setups_['otto9_matrix']='Otto.initMATRIX( DIN_PIN, CS_PIN, CLK_PIN, LED_DIRECTION);';
   var code = 'Otto.putMouth(' + dropdown_otto9_mouth_choice + ');\n';
   return code;
@@ -1447,6 +1505,8 @@ Blockly.Arduino['otto9_matrixp'] = function(block) {
 
 Blockly.Blocks['otto9_matrix_text'] = { init: function() {
     this.appendDummyInput() .appendField(Blockly.Msg.OTTO9_MATRIXTEXT_TEXT).appendField(new Blockly.FieldTextInput('I AM OTTO'), 'input');
+    this.appendDummyInput()	.appendField(Blockly.Msg.OTTO9_ORIENTATION).appendField(new Blockly.FieldDropdown([["0°", "1"], ["90°", "4"], ["180°", "2"], ["270°", "3"]]), "Orientation")
+
     this.setInputsInline(true);
     this.setPreviousStatement(true);
     this.setNextStatement(true);
@@ -1456,13 +1516,15 @@ Blockly.Blocks['otto9_matrix_text'] = { init: function() {
   }
 };
 Blockly.Arduino['otto9_matrix_text'] = function(block) {
+  var Orientation = this.getFieldValue('Orientation'); 
+
   var text_input = block.getFieldValue('input');
   Blockly.Arduino.includes_['otto9_lib'] = '#include <Otto9Humanoid.h>\n'
 	+ 'Otto9Humanoid Otto;';
   Blockly.Arduino.definitions_['otto9_matrix__def'] = '#define DIN_PIN A3\n'
 	+ '#define CS_PIN A2\n'
 	+ '#define CLK_PIN A1\n'
-	+ '#define LED_DIRECTION 1';
+	+ '#define LED_DIRECTION '+Orientation;
   Blockly.Arduino.setups_['otto9_matrix']='Otto.initMATRIX( DIN_PIN, CS_PIN, CLK_PIN, LED_DIRECTION);';
   var code = 'Otto.writeText ( '+ '"' + text_input +'"' +',100); // limited to CAPITAL LETTERS NUMBERS : ; < >  = @, MAX.9 characters \n';
   return code;

@@ -15,6 +15,9 @@ Blockly.Msg.yes = "sí";
 Blockly.Msg.no = "no";
 Blockly.Msg.uptodate = "💯 ¡Su versión está actualizada!" ;
 Blockly.Msg.download = "Descarga completada, la aplicación se instalará y reiniciará ..."
+Blockly.Msg.compile="Compilar"
+Blockly.Msg.insertflash="Cargar"
+Blockly.Msg.bin="Exportar binario"
 // common to all blocks
 Blockly.Msg.HELPURL = "https://aprendizdetecnologo.com"; // do not translate
 Blockly.Msg.pin = "pin";
@@ -442,13 +445,13 @@ Blockly.Msg.OTTO9_DANCE_SIZE_TEXT = "tamaño";
 Blockly.Msg.OTTO9_DANCE_SIZE_CHOICE = [["normal", "25"], ["pequeño", "10"], ["grande", "40"]];
 Blockly.Msg.OTTO9_DO_TEXT = "hacer";
 Blockly.Msg.OTTO9_DO_TOOLTIP = "movimientos más complejos de Otto";
-Blockly.Msg.OTTO9_DO_CHOICE = [ ["swing", "swing"], ["arribabajo", "updown"], ["sacudetalones", "tiptoeSwing"], ["cosquilleo", "jitter"], ["giroascendente", "ascendingTurn"]];
+Blockly.Msg.OTTO9_DO_CHOICE = [ ["swing", "swing"], ["arribabajo", "updown"], ["cosquilleo", "jitter"], ["giroascendente", "ascendingTurn"]];
 Blockly.Msg.OTTO9_GESTURE_TEXT = "gesto";
 Blockly.Msg.OTTO9_GESTURE_TOOLTIP = "movimientos combinados con sonidos que dotan a Otto de emociones propias";
 Blockly.Msg.OTTO9_GESTURE_CHOICE = [["😃 feliz1", "OttoSuperHappy"],["🙂 feliz2", "OttoHappy"], ["🙁 triste", "OttoSad"], ["😴 dormido", "OttoSleeping"], ["😕 confuso", "OttoConfused"], ["😰 atemorizado", "OttoFretful"], ["😍 amor", "OttoLove"], ["😡 enfadado", "OttoAngry"], ["🤩 magia", "OttoMagic"], ["😐 ola", "OttoWave"], [" 😎 victoria", "OttoVictory"], ["😞 fallo", "OttoFail"], ["💩 pedo", "OttoFart"]];
 Blockly.Msg.OTTO9_SOUND_TEXT = "sonido";
 Blockly.Msg.OTTO9_SOUND_TOOLTIP = "Sonidos emocionales";
-Blockly.Msg.OTTO9_SOUND_CHOICE = [ ["😃 feliz1", "S_superHappy"], ["🙂 feliz2", "S_happy"], ["😊 feliz3", "S_happy_short"], ["🙁 triste", "S_sad"], ["😕 confuso", "S_confused"], ["🤗 animado", "S_cuddly"], ["😮 Oh", "S_OhOoh"], ["😯 OhOoh", "S_OhOoh2"], ["😲 sorpresa", "S_surprise"],["🤖 conectado", "S_connection"], [" 🤖 disconectado", "S_disconnection"], ["👇 empujar", "S_buttonPushed"], ["❗ 1", "S_mode1"], ["❗❗ 2", "S_mode2"], ["❗❗❗ 3", "S_mode3"], ["💤 dormido", "S_sleeping"], ["💩 pedo1", "S_fart1"], ["💩 pedo2", "S_fart2"], ["💩 pedo3", "S_fart3"],];
+Blockly.Msg.OTTO9_SOUND_CHOICE = [ ["😃 feliz1", "S_superHappy"], ["🙂 feliz2", "S_happy"], ["😊 feliz3", "S_happy_short"], ["🙁 triste", "S_sad"], ["😕 confuso", "S_confused"], ["🤗 animado", "S_cuddly"], ["😮 Oh", "S_OhOoh"], ["😯 OhOoh", "S_OhOoh2"], ["😲 sorpresa", "S_surprise"],["🤖 conectado", "S_connection"], [" 🤖 desconectado", "S_disconnection"], ["👇 pulsar", "S_buttonPushed"], ["❗ 1", "S_mode1"], ["❗❗ 2", "S_mode2"], ["❗❗❗ 3", "S_mode3"], ["💤 dormido", "S_sleeping"], ["💩 pedo1", "S_fart1"], ["💩 pedo2", "S_fart2"], ["💩 pedo3", "S_fart3"],];
 Blockly.Msg.OTTO9_GETDISTANCE_TEXT = "distancia [cm]";
 Blockly.Msg.OTTO9_GETDISTANCE_TOOLTIP = "Distancia medida de 2cm a 400cm";
 Blockly.Msg.OTTO9_GETOBSTACLE_TEXT = "obstáculo";
@@ -463,7 +466,7 @@ Blockly.Msg.OTTO9_MOUTH_TOOLTIP = "gestos en boca para la matriz LED 8x8 #0-30";
 Blockly.Msg.OTTO9_MOUTH_CHOICE = [["😃 feliz1", "happyOpen"],["🙂 feliz2", "happyClosed"], ["😊 sonríe", "smile"], ["😦 triste1", "23"], ["🙁 triste2", "24"], ["😮 sorpresa", "smallSurprise"], ["😲 sorpresa2", "bigSurprise"], ["😕 confuso", "confused"],["😛 lengua", "tongueOut"],["🙃 travieso", "culito"],  ["😑 serio", "lineMouth"], ["🙄 nervioso", "21"], ["💖 corazón", "heart"], ["🦇 murciélago", "vamp1"], ["🦇 murciélago2", "vamp2"], ["❌ no", "xMouth"], ["✅ OK", "okMouth"],["❓?", "27"], ["⚡ trueno", "thunder"]];
 Blockly.Msg.OTTO9_EYES_TEXT = "ojos";
 Blockly.Msg.OTTO9_EYES_TOOLTIP = "Movimiento de ojos para la matriz 16x8 i2C LED  ";
-Blockly.Msg.OTTO9_EYES_CHOICE = [["😃 happy1", "happy_bmp"],["🙂 happy2", "eyes_bmp"], ["😦 sad", "sad_bmp"], ["😡 angry1", "angry_bmp"], ["😡 angry2", "angry2_bmp"], ["😰 freetful", "freetful_bmp"], ["😕 confused", "confused_bmp"],["😴 sleep", "sleep_bmp"],["😍 love", "love_bmp"],  ["😑 wave", "wave_bmp"], ["🤩 magic", "magic_bmp"], ["😞 fail", "fail_bmp"], ["🤖 logo", "logo_bmp"], ["❌❌ no", "XX_bmp"], ["x x", "xx_bmp"],["▉", "full_bmp"]];
+Blockly.Msg.OTTO9_EYES_CHOICE = [["😃 feliz1", "happy_bmp"],["🙂 feliz2", "eyes_bmp"], ["😦 triste", "sad_bmp"], ["😡 enfadado1", "angry_bmp"], ["😡 enfadado2", "angry2_bmp"], ["😰 inquieto", "freetful_bmp"], ["😕 confuso", "confused_bmp"],["😴 dormido", "sleep_bmp"],["😍 amor", "love_bmp"],  ["😑 ola", "wave_bmp"], ["🤩 magia", "magic_bmp"], ["😞 fallo", "fail_bmp"], ["🤖 logo", "logo_bmp"], ["❌❌ no", "XX_bmp"], ["x x", "xx_bmp"],["▉", "full_bmp"]];
 Blockly.Msg.OTTO9_EYESTEXT_TEXT = "texto en pantalla de ojos";
 Blockly.Msg.OTTO9_EYES_CLEAR_TEXT = " limpiar ojos";
 Blockly.Msg.OTTO9_MATRIX_TOOLTIP = "limitado a MAYÚSCULAS A a Z NÚMEROS 0 a 9 : ; < >  = @, max.9 caracteres";
@@ -475,6 +478,8 @@ Blockly.Msg.OTTO9_ARMS_TOOLTIP = "¡Mueve los brazos!";
 Blockly.Msg.OTTO9_ARMS_CHOICE = [["manos arriba", "HANDSUP"], ["saluda izquierda", "HANDWAVE1"], ["saluda derecha", "HANDWAVE2"]];
 Blockly.Msg.OTTO9_APP="Grabar app";
 Blockly.Msg.OTTO9_HUMANOID_TOOLTIP="Puedes controlar tu humanoide con una app disponible en Google Play Store";
+Blockly.Msg.OTTO9_ORIENTATION="Orientación: ";
+
 ////////////MASAYLO Robot////////// ONLY TRANSLATE THE LEFT PART INSIDE ["THIS YES" ,NOT]
 Blockly.Msg.MASAYLO_START_TEXT = "Inicio";
 Blockly.Msg.MASAYLO_START_TOOLTIP = "Declara un nuevo robot de clase Masaylo";

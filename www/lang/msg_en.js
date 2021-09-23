@@ -1,3 +1,16 @@
+Blockly.Msg.initInstall='Ummm. Seems the first time you execute this version. We need some libraries. Wait some time and compile again (if you read an error message, wait some more time and try again)...';
+Blockly.Msg.deletingFolder="Deleting previous folder";
+Blockly.Msg.copyingFolders="A ./masaylo folder was created. Now we need to copy some libraries...";
+Blockly.Msg.missionAcomplished="Ok! It seems as we've finished";
+Blockly.Msg.youMustWait="This could last longer that you'd like. Please, be patient..."
+Blockly.Msg.installFinished="Installation process finished";
+Blockly.Msg.doYouWantIoT="We've installed Arduino cards. Maybe you'd like to work with ESP8266/ESP32 too?";
+Blockly.Msg.installationFinished="Then we've finished. You can work now!";
+Blockly.Msg.librariesInstalled='Libraries installed properly. We need to install Arduino cards, too. Wait a moment...';
+Blockly.Msg.allFinished="Installation process finished";
+Blockly.Msg.closeWindowandWait="Close this window and wait a little";
+Blockly.Msg.errorWhenInstalling='Some error just happened...';
+Blockly.Msg.errorWhenIoT='Ummm... I found some problem. Try the manual script';
 Blockly.Msg.survol_check = "CHECK";
 Blockly.Msg.survol_flash = "UPLOAD";
 Blockly.Msg.survol_bin = "EXPORT binaries";

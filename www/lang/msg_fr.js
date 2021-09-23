@@ -1,3 +1,19 @@
+Blockly.Msg.compile="Compiler"
+Blockly.Msg.insertflash="Transférer"
+Blockly.Msg.bin="Exporter (binaire)"
+Blockly.Msg.initInstall='Hummm. Semble la première fois que vous exécutez cette version. Nous avons besoin de bibliothèques. Attendez un peu et compilez à nouveau (si vous lisez un message d\'erreur, attendez encore un peu et réessayez)...';
+Blockly.Msg.deletingFolder="Nous supprimons le dossier précédent";
+Blockly.Msg.copyingFolders="Un dossier ./masaylo a été créé. Maintenant, nous devons copier certaines bibliothèques...";
+Blockly.Msg.missionAcomplished="D'accord! Il semble que nous ayons fini";
+Blockly.Msg.youMustWait="Cela pourrait durer plus longtemps que vous le souhaitez. S'il vous plait, soyez patient..."
+Blockly.Msg.installFinished="Processus d'installation terminé";
+Blockly.Msg.doYouWantIoT="Nous avons installé des cartes Arduino. Peut-être aimeriez-vous aussi travailler avec ESP8266/ESP32 ?";
+Blockly.Msg.installationFinished="Ensuite, nous avons terminé. Vous pouvez travailler maintenant !";
+Blockly.Msg.librariesInstalled='Bibliothèques correctement installées. Nous devons également installer des cartes Arduino. Attendez un moment...';
+Blockly.Msg.allFinished="Processus d'installation terminé";
+Blockly.Msg.closeWindowandWait="Fermez cette fenêtre et attendez un instant";
+Blockly.Msg.errorWhenInstalling='Une erreur est survenue';
+Blockly.Msg.errorWhenIoT='Hummm... Il y a un problème. Essayez le script manuel';
 Blockly.Msg.survol_check = " VERIFIER";
 Blockly.Msg.survol_flash = " TELEVERSER";
 Blockly.Msg.survol_bin = " EXPORTER les binaires";
@@ -22,6 +38,7 @@ Blockly.Msg.CAT_TAB="Tableau";
 Blockly.Msg.CAT_list="Liste";
 Blockly.Msg.CAT_servo="- Servo";
 Blockly.Msg.CAT_del="- DEL";
+Blockly.Msg.span_masaylo=" MASAYLO BLOCKLY "
 
 Blockly.Msg.CAT_LOGIC="Contrôle";
 Blockly.Msg.CAT_MATH="Math";

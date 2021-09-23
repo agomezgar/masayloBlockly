@@ -1,3 +1,17 @@
+Blockly.Msg.initInstall='Ummm. Parece la primera vez que ejecutas esta versión del programa. Hay que utilizar algunas librerías. Espera '+
+'unos segundos y vuelve a compilar (si te da mensaje de error, espera un poco más y vuelve a intentarlo)...';
+Blockly.Msg.deletingFolder="Borrando carpeta anterior...";
+Blockly.Msg.copyingFolders="Se ha creado una carpeta ./masaylo en tu home. Pasamos a hacer copia de tus librerías";
+Blockly.Msg.missionAcomplished="¡Bueno!. Parece que hemos terminado...";
+Blockly.Msg.youMustWait="Esto puede alargarse un poco. Ten paciencia..."
+Blockly.Msg.installFinished="Instalación finalizada";
+Blockly.Msg.doYouWantIoT="Ya hemos instalado las tarjetas Arduino. ¿Piensas trabajar también con tarjetas ESP8266 o ESP32?";
+Blockly.Msg.installationFinished="Entonces ya hemos terminado. ¡Ya puedes empezar!";
+Blockly.Msg.librariesInstalled='Ya hemos instalado las librerías. Falta instalar las tarjetas Arduino...';
+Blockly.Msg.allFinished="Instalación finalizada";
+Blockly.Msg.closeWindowandWait="Cierra esta ventana y espera a que te avise";
+Blockly.Msg.errorWhenInstalling='Se ha producido algún error';
+Blockly.Msg.errorWhenIoT='Ummm... Ha habido algún problema. Prueba con el script manual';
 Blockly.Msg.survol_check = "COMPILAR";
 Blockly.Msg.survol_flash = "CARGAR";
 Blockly.Msg.survol_bin = "EXPORTAR binarios";
