@@ -86,6 +86,7 @@ Code.initLanguage = function() {
   $('#btn_valid_config_ffau').text(Blockly.Msg['btn_valid']);
   $('#btn_close_msg').text(Blockly.Msg['btn_close']);
   $('#btn_valid_msg').text(Blockly.Msg['btn_valid']);
+  $('#btn_reset').text(Blockly.Msg['btn_reset']);
   $('#btn_variable').text(Blockly.Msg['btn_variable']);
   var prog = window.localStorage.prog;
   if (prog != "python") {

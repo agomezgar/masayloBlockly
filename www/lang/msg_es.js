@@ -13,6 +13,7 @@ Blockly.Msg.closeWindowandWait="Cierra esta ventana y espera a que te avise";
 Blockly.Msg.errorWhenInstalling='Se ha producido algún error';
 Blockly.Msg.errorWhenIoT='Ummm... Ha habido algún problema. Prueba con el script manual';
 Blockly.Msg.survol_check = "COMPILAR";
+Blockly.Msg.btn_reset="Vaciar memoria caché";
 Blockly.Msg.survol_flash = "CARGAR";
 Blockly.Msg.survol_bin = "EXPORTAR binarios";
 Blockly.Msg.com1 = "Puerto";

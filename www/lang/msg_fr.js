@@ -1,6 +1,7 @@
 Blockly.Msg.compile="Compiler"
 Blockly.Msg.insertflash="Transférer"
 Blockly.Msg.bin="Exporter (binaire)"
+Blockly.Msg.btn_reset="Réinitialiser les paramètres";
 Blockly.Msg.initInstall='Hummm. Semble la première fois que vous exécutez cette version. Nous avons besoin de bibliothèques. Attendez un peu et compilez à nouveau (si vous lisez un message d\'erreur, attendez encore un peu et réessayez)...';
 Blockly.Msg.deletingFolder="Nous supprimons le dossier précédent";
 Blockly.Msg.copyingFolders="Un dossier ./masaylo a été créé. Maintenant, nous devons copier certaines bibliothèques...";

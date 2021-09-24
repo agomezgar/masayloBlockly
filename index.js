@@ -12,6 +12,12 @@ var messageDiv = document.getElementById('messageDIV')
 var detailDiv = document.getElementById('detailDIV')
 var btn_detail = document.getElementById('btn_detail')
 var btn_close_message = document.getElementById('btn_close_message')
+var btn_verify=document.getElementById('btn_verify');
+btn_verify.title=Blockly.Msg.compile;
+var btn_flash=document.getElementById('btn_flash');
+btn_flash.title=Blockly.Msg.insertflash;
+var btn_bin=document.getElementById('btn_bin');
+btn_bin.title=Blockly.Msg.bin;
 var instalado=true;
 window.addEventListener('load', function load(event){
 	var quitDiv = '<button type="button" class="close" data-dismiss="modal" aria-label="Close">&#215;</button>'
@@ -373,37 +379,37 @@ sp.list().then(ports => {
 				if(err){
 					console.log("Problema creando el archivo de nueva versión"+ err.message);
 				}
-				alert("Ummm... Es la primera vez que instalas esta versión. Deja que instale las tarjetas Arduino");
+				alert(Blockly.Msg.initInstall);
 				messageDiv.innerHTML = Blockly.Msg.check + '<i class="fa fa-spinner fa-pulse fa-1_5x fa-fw"></i>'
 			
 				exec('instala.bat ' + carte, {cwd: chemin+'/compilation/arduino'}, function(err, stdout, stderr){
 					if (stderr) {
 						console.log(stderr);
-						alert ("error detectado: "+stderr);
+						alert (Blockly.Msg.errorWhenInstalling+" "+stderr);
 						return
 					}
 					console.log(stdout);
-					let iot=confirm("Ya hemos instalado las tarjetas Arduino. ¿Piensas trabajar también con tarjetas ESP8266 o ESP32?");
+					let iot=confirm(Blockly.Msg.doYouWantIoT);
 					if (iot){
-						alert("Esto puede alargarse un poco. Ten paciencia...");
+						alert(Blockly.Msg.youMustWait);
 								exec('instalaESP.bat', {cwd: chemin+'/compilation/arduino/'}, function(err, stdout, stderr){
 								if (err) {
 									console.log('error instalando esp8266/esp32: ' +err);
-									alert('Ummm... Ha habido algún problema. Prueba con el script manual');
+									alert(Blockly.Msg.errorWhenIoT);
 								}										
 							console.log(stdout);
 							
-							alert("Instalación finalizada");
+							alert(Blockly.Msg.allFinished);
 							instalado=true;
 							//extraeLibrerias();
-							alert("Ya deberías poder empezar a trabajar. Empieza de nuevo a compilar");
+							alert(Blockly.Msg.missionAcomplished);
 							instalado=true;
 							
 							messageDiv.innerHTML = "Todo ok" 
 							btn_close_message.style.display = "inline"
 						});
 					}else{
-					alert("Ya deberías poder empezar a trabajar. Empieza de nuevo a compilar");
+					alert(Blockly.Msg.missionAcomplished);
 					instalado=true;
 					
 					messageDiv.innerHTML = "Todo ok" 

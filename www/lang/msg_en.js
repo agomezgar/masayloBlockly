@@ -2,6 +2,7 @@ Blockly.Msg.initInstall='Ummm. Seems the first time you execute this version. We
 Blockly.Msg.deletingFolder="Deleting previous folder";
 Blockly.Msg.copyingFolders="A ./masaylo folder was created. Now we need to copy some libraries...";
 Blockly.Msg.missionAcomplished="Ok! It seems as we've finished";
+Blockly.Msg.btn_reset="Reset cache memory";
 Blockly.Msg.youMustWait="This could last longer that you'd like. Please, be patient..."
 Blockly.Msg.installFinished="Installation process finished";
 Blockly.Msg.doYouWantIoT="We've installed Arduino cards. Maybe you'd like to work with ESP8266/ESP32 too?";
