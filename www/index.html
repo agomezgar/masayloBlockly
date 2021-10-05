@@ -158,13 +158,13 @@
 				<select class="my_select" id="portserie" onchange="BlocklyDuino.save_com();"></select>
 			</div>
 			<div class="btn-group">
-				<button id="btn_verify" class="btn btn-default btn_color" data-toggle="tooltip" data-placement="bottom" title="COMPILAR">
+				<button id="btn_verify" class="btn btn-default btn_color" data-toggle="tooltip" data-placement="bottom" title="">
 					<i class="fa fa-check fa-1_5x"></i>
 				</button>
-				<button id="btn_flash" class='btn btn-default btn_color' data-toggle="tooltip" data-placement="bottom" title="CARGAR">
+				<button id="btn_flash" class='btn btn-default btn_color' data-toggle="tooltip" data-placement="bottom" title="">
 					<i class="fa fa-arrow-right fa-1_5x"></i>
 				</button>
-				<button id="btn_bin" class='btn btn-default btn_color' data-toggle="tooltip" data-placement="bottom" title="EXPORTAR binarios">
+				<button id="btn_bin" class='btn btn-default btn_color' data-toggle="tooltip" data-placement="bottom" title="">
 					<i class="fa fa-code-fork fa-1_5x"></i>
 				</button>
 			</div>
@@ -603,16 +603,17 @@
 					<option value="nona4809">Arduino Nano Every</option>
 					<option value="pro8" >Arduino Pro / Pro Mini 3.3V</option>
 					<option value="uno" >Arduino Uno</option>
-					<option value="yun" >Arduino Yun</option>
-					<option value="atmegang" >DAGU RS027</option>
-					<option value="pro16" >DAGU RS040</option>
-				</optgroup>
-				<optgroup label="Python">
 					<option value="esp8266" >ESP 8266</option>
 					<option value="esp32" >ESP 32</option>
+<!-- 					<option value="yun" >Arduino Yun</option>
+					<option value="atmegang" >DAGU RS027</option>
+					<option value="pro16" >DAGU RS040</option> -->
+				</optgroup>
+<!-- 				<optgroup label="Python">
+
 					<option value="microbit" >micro:bit</option>
 					<option value="pyboard" >Pyboard</option>
-				</optgroup>
+				</optgroup> -->
 			</select>
 			<br><br>
 			<span id="span_card_connect"></span><span id="card_connect" style="font-weight:bold;"></span><br>

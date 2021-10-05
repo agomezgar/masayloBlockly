@@ -1051,7 +1051,6 @@ Blockly.Blocks["m_pap"]={init:function(){
 };
 Blockly.Arduino["m_pap"]=function(block){
     var vstepper_choice = block.getFieldValue('motor');
-    console.log("Eleccion "+vstepper_choice);
     var vitesse=Blockly.Arduino.valueToCode(block, "vit", Blockly.Arduino.ORDER_ASSIGNMENT);
     var nb_pas=Blockly.Arduino.valueToCode(block, "pas", Blockly.Arduino.ORDER_ASSIGNMENT);
     var phase1=Blockly.Arduino.valueToCode(block, "ph1", Blockly.Arduino.ORDER_ASSIGNMENT);

@@ -476,6 +476,9 @@ Blockly.Msg.OTTO9_CLEAR_TOOLTIP = "Apaga todos los LED de la matriz 8x8 en la bo
 Blockly.Msg.OTTO9_ARMS_TEXT = "brazos";
 Blockly.Msg.OTTO9_ARMS_TOOLTIP = "¡Mueve los brazos!";
 Blockly.Msg.OTTO9_ARMS_CHOICE = [["manos arriba", "HANDSUP"], ["saluda izquierda", "HANDWAVE1"], ["saluda derecha", "HANDWAVE2"]];
+Blockly.Msg.OTTO9_ARMSANGLE_TEXT="seleccionar ángulo de brazo";
+Blockly.Msg.OTTO9_ARMSANGLE_CHOICE = [["IZQUIERDO", "left"], ["DERECHA", "right"], ["AMBOS", "both"]];
+
 Blockly.Msg.OTTO9_APP="Grabar app";
 Blockly.Msg.OTTO9_HUMANOID_TOOLTIP="Puedes controlar tu humanoide con una app disponible en Google Play Store";
 Blockly.Msg.OTTO9_ORIENTATION="Orientación: ";
