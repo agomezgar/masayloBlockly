@@ -1,0 +1,1 @@
+./arduino-cli compile -e --fqbn $1:$2:$3 sketch

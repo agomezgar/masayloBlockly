@@ -26,9 +26,19 @@ Blockly.Arduino["controls_for"]=function(block){
     var argument0 = Blockly.Arduino.valueToCode(block, "FROM", Blockly.Arduino.ORDER_ASSIGNMENT);
     var argument1 = Blockly.Arduino.valueToCode(block, "TO", Blockly.Arduino.ORDER_ASSIGNMENT);
     var argument2 = Blockly.Arduino.valueToCode(block, "BY", Blockly.Arduino.ORDER_ASSIGNMENT);
+    var argument4=1;
+    console.log("argument 2: "+argument2);
+    var argument3='';
+    if (argument2<0){
+        argument3='>='
+        argument4=-1;
+    }else{
+        argument3='<=';
+        argument4=1;
+    }
     var branch = Blockly.Arduino.statementToCode(block, "DO");
     if (Blockly.Arduino.INFINITE_LOOP_TRAP) branch = Blockly.Arduino.INFINITE_LOOP_TRAP.replace(/%1/g, "'" + block.id + "'") + branch;
-    return "for (" + variable0 + "=" + argument0 + " ; " + variable0 + "<=" + argument1 + " ; " + variable0 + "=" + variable0 + "+" + argument2 + ") {\n" + branch + "}\n"
+    return "for (" + variable0 + "=" + argument0 + " ; " + variable0 + argument3 + argument1 + " ; " + variable0 + "=" + variable0 + "+(" + argument2 +")) {\n" + branch + "}\n"
 };
 Blockly.Arduino["controls_if"]=function(block){
     var n = 0;

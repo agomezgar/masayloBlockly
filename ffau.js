@@ -1,5 +1,5 @@
 ﻿var { ipcRenderer, shell } = require("electron")
-var remote = require('electron').remote 
+var remote = require('electron').remote
 var fs = require("fs")
 var ftpClient = require('ftp')
 var ffau = new Ffau()
@@ -9,7 +9,7 @@ var contentHTML = localStorage.getItem('contentHTML')
 var messageDiv = document.getElementById('messageDIV')
 var ftp_connect = document.getElementById('ftp_connect')
 var new_code = '<!DOCTYPE HTML>\n<html lang="fr">\n  <head>\n    <meta charset="utf-8">\n  </head>\n  <body>\n\n  </body>\n</html>'
-	
+
 function getStringParamFromUrl(name, defaultValue){
 	var val = location.search.match(new RegExp('[?&]' + name + '=([^&]+)'))
 	return val ? decodeURIComponent(val[1].replace(/\+/g, '%20')) : defaultValue
@@ -46,11 +46,11 @@ window.addEventListener('load', function load(event){
 	var urlFile = getStringParamFromUrl('url', '')
 	if (urlFile){
 		var file = urlFile.split("\\")
-		var id = file.length - 1 
+		var id = file.length - 1
 		document.getElementById('span_file').textContent = " - " + file[id]
 		if (urlFile.endsWith(".html")){
 			if (contentHTML=="on") $('#codeORblock').bootstrapToggle("off")
-			$.get(urlFile, function(data){ 
+			$.get(urlFile, function(data){
 				if (data) editor.setValue(data,1)
 			}, 'text')
 		}
@@ -91,7 +91,7 @@ window.addEventListener('load', function load(event){
 		var Ftp = new ftpClient()
 		Ftp.connect({host: localStorage.getItem('host'), port: Number(localStorage.getItem('portFtp')), user: localStorage.getItem('id'), password: localStorage.getItem('pwd')})
 		var data = document.getElementById('blockly_r').srcdoc
-		var path = chemin+'/../compilation/html/'
+		var path = chemin+'/compilation/html/'
 		var localFile = path + maPage.replace(/\s/g, '_') + ".html"
 		var remoteFile = maPage.replace(/\s/g, '_') + ".html"
 		var local = []
@@ -101,7 +101,7 @@ window.addEventListener('load', function load(event){
 		Ftp.on("ready", function(){
 			ftp_connect.innerHTML = '<i class="fa fa-link fa-1_5x fa-fw" style="color: green"></i> connecté'
 			ftp_transfert.innerHTML = '<i class="fa fa-spinner fa-pulse fa-1_5x fa-fw"></i> transfert...'
-			fs.readdir(chemin + "/../compilation/html/media/", function (err, files){
+			fs.readdir(chemin + "/compilation/html/media/", function (err, files){
 				if (err) return console.log(err)
 				base.forEach(function(file){
 					var pos = files.indexOf(file)
@@ -110,7 +110,7 @@ window.addEventListener('load', function load(event){
 				local = files
 				console.log(local)
 				local.forEach(function(file){
-					Ftp.put(chemin+'/../compilation/html/media/'+file, 'media/'+file, function(result){
+					Ftp.put(chemin+'/compilation/html/media/'+file, 'media/'+file, function(result){
 						console.log("img: "+result)
 					})
 				})
@@ -132,7 +132,7 @@ window.addEventListener('load', function load(event){
 			$("#message").modal("show")
 			return
 		}
-		var file = chemin+'/../compilation/html/'
+		var file = chemin+'/compilation/html/'
 		file += maPage.replace(/\s/g, '_')
 		file += ".html"
 		var data = document.getElementById('blockly_r').srcdoc
@@ -218,12 +218,12 @@ window.addEventListener('load', function load(event){
 	})
 	$('#lien1').on('click', function(){
 		if (localStorage.getItem("contentHTML")=="on") {
-			$.get("./examples/html/hello.www", function(data) { 
+			$.get("./examples/html/hello.www", function(data) {
 				document.getElementById('span_file').textContent = " - hello.www"
 				if (data) loadWWW(data)
 			}, 'text')
 		} else {
-			$.get("./examples/html/hello.html", function(data) { 
+			$.get("./examples/html/hello.html", function(data) {
 				document.getElementById('span_file').textContent = " - hello.html"
 				if (data) editor.setValue(data,1)
 			}, 'text')
@@ -231,12 +231,12 @@ window.addEventListener('load', function load(event){
 	})
 	$('#lien2').on('click', function(){
 		if (localStorage.getItem("contentHTML")=="on") {
-			$.get("./examples/html/simple.www", function(data) { 
+			$.get("./examples/html/simple.www", function(data) {
 				document.getElementById('span_file').textContent = " - simple.www"
 				if (data) loadWWW(data)
 			}, 'text')
 		} else {
-			$.get("./examples/html/simple.html", function(data) { 
+			$.get("./examples/html/simple.html", function(data) {
 				document.getElementById('span_file').textContent = " - simple.www"
 				if (data) editor.setValue(data,1)
 			}, 'text')
@@ -244,12 +244,12 @@ window.addEventListener('load', function load(event){
 	})
 	$('#lien3').on('click', function(){
 		if (localStorage.getItem("contentHTML")=="on") {
-			$.get("./examples/html/complexe.www", function(data) { 
+			$.get("./examples/html/complexe.www", function(data) {
 				document.getElementById('span_file').textContent = " - complexe.www"
 				if (data) loadWWW(data)
 			}, 'text')
 		} else {
-			$.get("./examples/html/complexe.html", function(data) { 
+			$.get("./examples/html/complexe.html", function(data) {
 				document.getElementById('span_file').textContent = " - complexe.www"
 				if (data) editor.setValue(data,1)
 			}, 'text')
@@ -257,12 +257,12 @@ window.addEventListener('load', function load(event){
 	})
 	$('#lien4').on('click', function(){
 		if (localStorage.getItem("contentHTML")=="on") {
-			$.get("./examples/html/bootstrap.www", function(data) { 
+			$.get("./examples/html/bootstrap.www", function(data) {
 				document.getElementById('span_file').textContent = " - bootstrap.www"
 				if (data) loadWWW(data)
 			}, 'text')
 		} else {
-			$.get("./examples/html/bootstrap.html", function(data) { 
+			$.get("./examples/html/bootstrap.html", function(data) {
 				document.getElementById('span_file').textContent = " - bootstrap.www"
 				if (data) editor.setValue(data,1)
 			}, 'text')
@@ -272,8 +272,8 @@ window.addEventListener('load', function load(event){
 		ipcRenderer.send('addMedias')
 	})
 	$('#lien6').on('click', function(){
-		fs.readdir(chemin+"/../compilation/html/media", (err, files) => {
-			var dir_img = document.getElementById('span_image_dir') 
+		fs.readdir(chemin+"/compilation/html/media", (err, files) => {
+			var dir_img = document.getElementById('span_image_dir')
 			$("#span_image_dir").empty()
 			if(files.length%2==0){
 				for (var i=0; i < files.length; i=i+2) dir_img.innerHTML += "<tr><td>"+files[i]+"</td><td>"+files[i+1]+"</td></tr>"
@@ -285,14 +285,14 @@ window.addEventListener('load', function load(event){
 		})
 	})
 	$('#lien7').on('click', function(){
-		fs.readdir(chemin+"/../compilation/html/media", function(err, files){
+		fs.readdir(chemin+"/compilation/html/media", function(err, files){
 			base.forEach(function(file){
 				var pos = files.indexOf(file)
 				files.splice(pos,1)
 			})
 			if (files.length!=0){
 				files.forEach(function(file){
-					fs.unlink(chemin+"/../compilation/html/media/"+file, function(err){ if (err) return console.log(err)})
+					fs.unlink(chemin+"/compilation/html/media/"+file, function(err){ if (err) return console.log(err)})
 				})
 			}
 		})
@@ -352,8 +352,8 @@ window.addEventListener('load', function load(event){
 		} else {
 			path.forEach(function(pt) {
 				var name = pt.substring(pt.lastIndexOf("\\"))
-				fs.copyFile(pt, chemin+'/../compilation/html/media/'+name, function(err){ if (err) return console.log(err)})
-				fs.copyFile(pt, chemin+'/../www/media/'+name, function(err){ if (err) return console.log(err)})
+				fs.copyFile(pt, chemin+'/compilation/html/media/'+name, function(err){ if (err) return console.log(err)})
+				fs.copyFile(pt, chemin+'/www/media/'+name, function(err){ if (err) return console.log(err)})
 			})
 		}
 	})
@@ -363,7 +363,7 @@ window.addEventListener('load', function load(event){
 		} else {
 			fs.writeFile(path, editor.getValue(), function(err){ if (err) return console.log(err)})
 			var file = path.split("\\")
-			var id = file.length - 1 
+			var id = file.length - 1
 			document.getElementById('span_file').textContent = " - " + file[id]
 		}
 	})
@@ -371,7 +371,7 @@ window.addEventListener('load', function load(event){
 		if (path){
 			fs.writeFile(path, ffau.generateXML(), function(err){ if (err) return console.log(err)})
 			var file = path.split("\\")
-			var id = file.length - 1 
+			var id = file.length - 1
 			document.getElementById('span_file').textContent = " - " + file[id]
 		}
 	})

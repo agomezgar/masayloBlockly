@@ -1531,7 +1531,7 @@ Blockly.Arduino['otto9_matrix_text'] = function(block) {
 };
 
 Blockly.Blocks["otto9_matrix_brightness"]={init:function(){
-    this.appendValueInput("brightness").setCheck("Number") .appendField(Blockly.Msg.matrice+" intensity");
+    this.appendValueInput("brightness").setCheck("Number") .appendField(Blockly.Msg.matriceIntensity);
     this.setInputsInline(true);
     this.setPreviousStatement(true, null);
     this.setNextStatement(true, null);
@@ -1653,6 +1653,106 @@ var code="";
   break;
 	case 'both':
     code+='sRight.attach(PIN_LA);\nsRight.write('+(180-vAngle)+');\nsLeft.attach(PIN_RA);\nsLeft.write('+vAngle+');\ndelay(500);\nsLeft.detach();\n\nsRight.detach();';
+
+		break;
+  }
+  return code;
+};
+Blockly.Blocks['otto9_legsAngle'] = { init: function() {
+  this.appendDummyInput() .appendField(new Blockly.FieldImage('media/humanoid_arms.png', 48, 48, "*"))
+  .appendField(Blockly.Msg.OTTO9_LEGSANGLE_TEXT).appendField(new Blockly.FieldDropdown(Blockly.Msg.OTTO9_LEGSANGLE_CHOICE), "otto9_leg_angle_choice");
+  this.appendValueInput("angle").setAlign(Blockly.ALIGN_RIGHT);
+
+  this.setInputsInline(true);
+  this.setPreviousStatement(true);
+  this.setNextStatement(true);
+  this.setColour("#59646f");
+  this.setTooltip(Blockly.Msg.OTTO9_ARMS_TOOLTIP);
+  this.setHelpUrl(Blockly.Msg.OTTO9_HUMANOID_URL);
+}
+};
+Blockly.Arduino['otto9_legsAngle'] = function(block) {
+  var dropdown_otto9_legs_choice = block.getFieldValue('otto9_leg_angle_choice');
+  var vAngle=Blockly.Arduino.valueToCode(block,"angle");
+
+  Blockly.Arduino.includes_['otto9_lib'] = '#include <Otto9Humanoid.h>\n'
+	+ 'Otto9Humanoid Otto;';
+Blockly.Arduino.includes_['otto9_servoleg']='#include <Servo.h>\nServo lLeft, lRight;\n';
+  Blockly.Arduino.variables_['otto9_arms'] = 'int moveSize = 20;';
+  Blockly.Arduino.definitions_['otto9_legs'] = '#define PIN_YL 2 // left leg, servo[0]\n'
+	+ '#define PIN_YR 3 // right leg, servo[1]\n'
+	+ '#define PIN_RL 4 // left foot, servo[2]\n'
+  + '#define PIN_RR 5 // right foot, servo[3]\n'
+  + '#define PIN_LA 6 //servo[4]  Left arm\n'
+  + '#define PIN_RA 7 //servo[5]  Right arm\n'
+  + '#define PIN_Trigger 8 // ultrasound \n'
+  + '#define PIN_Echo 9 // ultrasound \n'
+  + '#define PIN_NoiseSensor A6  \n'
+  + '#define PIN_Buzzer  13 ';
+  Blockly.Arduino.setups_['otto9_init']='Otto.initHUMANOID(PIN_YL, PIN_YR, PIN_RL, PIN_RR, PIN_LA, PIN_RA, true, PIN_NoiseSensor, PIN_Buzzer, PIN_Trigger, PIN_Echo);';
+var code="";
+  switch(dropdown_otto9_legs_choice) {
+	case 'right':
+    code+='lRight.attach(PIN_YR);\nlRight.write('+(180-vAngle)+');\ndelay(500);\nlRight.detach();\n';
+
+		break;
+	case 'left':
+   // code +='int A[6]= {0, 0, 0, 0, 0,'+vAngle+'}; // left hand wave\n    int O[6] = {0, 0, 0, 0, 0, 0};\ndouble phase_diff[6] = {0, 0, 0, 0, 0,DEG2RAD(0)};//-- Let\'s oscillate the servos!\n Otto._execute(A, O, 1000, phase_diff, 5);\n' 
+   code+='lLeft.attach(PIN_YL);\nlLeft.write('+vAngle+');\ndelay(500);\nlLeft.detach();\n';
+
+  break;
+	case 'both':
+    code+='lRight.attach(PIN_YR);\nlRight.write('+(180-vAngle)+');\nlLeft.attach(PIN_YL);\nlLeft.write('+vAngle+');\ndelay(500);\nlLeft.detach();\n\nlRight.detach();';
+
+		break;
+  }
+  return code;
+};
+Blockly.Blocks['otto9_footsAngle'] = { init: function() {
+  this.appendDummyInput() .appendField(new Blockly.FieldImage('media/humanoid_arms.png', 48, 48, "*"))
+  .appendField(Blockly.Msg.OTTO9_FOOTANGLE_TEXT).appendField(new Blockly.FieldDropdown(Blockly.Msg.OTTO9_FOOTANGLE_CHOICE), "otto9_foot_angle_choice");
+  this.appendValueInput("angle").setAlign(Blockly.ALIGN_RIGHT);
+
+  this.setInputsInline(true);
+  this.setPreviousStatement(true);
+  this.setNextStatement(true);
+  this.setColour("#59646f");
+  this.setTooltip(Blockly.Msg.OTTO9_ARMS_TOOLTIP);
+  this.setHelpUrl(Blockly.Msg.OTTO9_HUMANOID_URL);
+}
+};
+Blockly.Arduino['otto9_footsAngle'] = function(block) {
+  var dropdown_otto9_foots_choice = block.getFieldValue('otto9_foot_angle_choice');
+  var vAngle=Blockly.Arduino.valueToCode(block,"angle");
+
+  Blockly.Arduino.includes_['otto9_lib'] = '#include <Otto9Humanoid.h>\n'
+	+ 'Otto9Humanoid Otto;';
+Blockly.Arduino.includes_['otto9_servofoot']='#include <Servo.h>\nServo fLeft, fRight;\n';
+  Blockly.Arduino.variables_['otto9_arms'] = 'int moveSize = 20;';
+  Blockly.Arduino.definitions_['otto9_'] = '#define PIN_YL 2 // left leg, servo[0]\n'
+	+ '#define PIN_YR 3 // right leg, servo[1]\n'
+	+ '#define PIN_RL 4 // left foot, servo[2]\n'
+  + '#define PIN_RR 5 // right foot, servo[3]\n'
+  + '#define PIN_LA 6 //servo[4]  Left arm\n'
+  + '#define PIN_RA 7 //servo[5]  Right arm\n'
+  + '#define PIN_Trigger 8 // ultrasound \n'
+  + '#define PIN_Echo 9 // ultrasound \n'
+  + '#define PIN_NoiseSensor A6  \n'
+  + '#define PIN_Buzzer  13 ';
+  Blockly.Arduino.setups_['otto9_init']='Otto.initHUMANOID(PIN_YL, PIN_YR, PIN_RL, PIN_RR, PIN_LA, PIN_RA, true, PIN_NoiseSensor, PIN_Buzzer, PIN_Trigger, PIN_Echo);';
+var code="";
+  switch(dropdown_otto9_foots_choice) {
+	case 'right':
+    code+='fRight.attach(PIN_RR);\nfRight.write('+(180-vAngle)+');\ndelay(500);\nfRight.detach();\n';
+
+		break;
+	case 'left':
+   // code +='int A[6]= {0, 0, 0, 0, 0,'+vAngle+'}; // left hand wave\n    int O[6] = {0, 0, 0, 0, 0, 0};\ndouble phase_diff[6] = {0, 0, 0, 0, 0,DEG2RAD(0)};//-- Let\'s oscillate the servos!\n Otto._execute(A, O, 1000, phase_diff, 5);\n' 
+   code+='fLeft.attach(PIN_RL);\nfLeft.write('+vAngle+');\ndelay(500);\nfLeft.detach();\n';
+
+  break;
+	case 'both':
+    code+='fRight.attach(PIN_RR);\nfRight.write('+(180-vAngle)+');\nfLeft.attach(PIN_RL);\nfLeft.write('+vAngle+');\ndelay(500);\nfLeft.detach();\n\nfRight.detach();';
 
 		break;
   }

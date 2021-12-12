@@ -477,8 +477,11 @@ Blockly.Msg.OTTO9_ARMS_TEXT = "brazos";
 Blockly.Msg.OTTO9_ARMS_TOOLTIP = "¡Mueve los brazos!";
 Blockly.Msg.OTTO9_ARMS_CHOICE = [["manos arriba", "HANDSUP"], ["saluda izquierda", "HANDWAVE1"], ["saluda derecha", "HANDWAVE2"]];
 Blockly.Msg.OTTO9_ARMSANGLE_TEXT="seleccionar ángulo de brazo";
-Blockly.Msg.OTTO9_ARMSANGLE_CHOICE = [["IZQUIERDO", "left"], ["DERECHA", "right"], ["AMBOS", "both"]];
-
+Blockly.Msg.OTTO9_ARMSANGLE_CHOICE = [["IZQUIERDO", "left"], ["DERECHO", "right"], ["AMBOS", "both"]];
+Blockly.Msg.OTTO9_LEGSANGLE_TEXT="seleccionar ángulo de pierna";
+Blockly.Msg.OTTO9_LEGSANGLE_CHOICE = [["IZQUIERDA", "left"], ["DERECHA", "right"], ["AMBOS", "both"]];
+Blockly.Msg.OTTO9_FOOTANGLE_TEXT="seleccionar ángulo de pie";
+Blockly.Msg.OTTO9_FOOTANGLE_CHOICE = [["IZQUIERDO", "left"], ["DERECHO", "right"], ["AMBOS", "both"]];
 Blockly.Msg.OTTO9_APP="Grabar app";
 Blockly.Msg.OTTO9_HUMANOID_TOOLTIP="Puedes controlar tu humanoide con una app disponible en Google Play Store";
 Blockly.Msg.OTTO9_ORIENTATION="Orientación: ";
@@ -565,6 +568,8 @@ Blockly.Msg.MASAYLO_PLAYBUZZER_TEXT="Tocar nota: ";
 Blockly.Msg.MASAYLO_FREQUENCY_TEXT="Frecuencia (Hz): ";
 Blockly.Msg.MASAYLO_TIME_TEXT="Duración (ms): ";
 Blockly.Msg.MASAYLO_BUZZER_PLAY_TOOLTIP="Indica la frecuencia en Hz y la duración en milisegundos de tu nota...";
+Blockly.Msg.MASAYLO_GORJEO_TEXT="Gorjeo";
+Blockly.Msg.MASAYLO_GORJEO_TOOLTIP="Masaylo emite un ruidito parecido al del robot R2-D2 de Star Wars";
 
 ////////////ESCORNABOT Robot////////// ONLY TRANSLATE THE LEFT PART INSIDE ["THIS YES" ,NOT]
 Blockly.Msg.ESCORNABOT_MODE_TEXT="Iniciar Escornabot";
@@ -625,6 +630,7 @@ Blockly.Msg.STOCK3="leer datos EEPROM";
 Blockly.Msg.STOCK3_TOOLTIP="lee un dato en la memoria EEPROM en la dirección especificada";
 Blockly.Msg.STEPPERCHOICE=[["Motor 1", "1"], ["Motor 2", "2"]];
 Blockly.Msg.matrice="Matriz de LED";
+Blockly.Msg.matriceIntensity="Intensidad en matriz de LED";
 Blockly.Msg.matrice8x8_symbole = "definir símbolo";
 Blockly.Msg.matrice8x8_symbole_tooltip = "definición de un símbolo para la matriz de leds \n 0 apaga el LED\n 1 enciende el LED";
 Blockly.Msg.matrice8x8_aff="dibujar símbolo";

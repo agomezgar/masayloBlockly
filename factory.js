@@ -1,4 +1,4 @@
-var remote = require('electron').remote 
+var remote = require('electron').remote
 var { ipcRenderer } = require("electron")
 var fs = require('fs')
 var chemin = process.resourcesPath
@@ -7,7 +7,7 @@ var appendData = ""
 var place
 
 function loadBF(file) {
-	$.get(file, function(data){ 
+	$.get(file, function(data){
 		if (data) {
 			var xml = Blockly.Xml.textToDom(data)
 			mainWorkspace.clear()
@@ -44,7 +44,7 @@ window.addEventListener('load', function load(event){
 		selectTool.size = "7"
 		selectTool.multiple = "multiple"
 		selectTool.id = "toolchoice"
-		for (var i = 0; i < cat.length; i++) { 
+		for (var i = 0; i < cat.length; i++) {
 			var opt = document.createElement('option')
 			opt.value = i;
             opt.innerHTML = Blockly.Msg[cat[i]]
@@ -61,9 +61,9 @@ window.addEventListener('load', function load(event){
 			new_element.appendChild(document.createTextNode(dataG))
 			xml.insertBefore(new_element, xml.childNodes[0])
 			var dataX = Blockly.Xml.domToPrettyText(xml)
-			fs.writeFileSync(chemin+'/../www/blocs&generateurs/factory/' +blockType+ '.bf', dataX)
+			fs.writeFileSync(chemin+'/www/blocs&generateurs/factory/' +blockType+ '.bf', dataX)
 			appendData = dataB + "\n" + dataG + "\n////////////////////\n"
-			fs.appendFileSync(chemin+'/../www/blocs&generateurs/factory/append.js', appendData)
+			fs.appendFileSync(chemin+'/www/blocs&generateurs/factory/append.js', appendData)
 			place = $("#toolchoice").val()
 			ipcRenderer.send("appendBlock", blockType, appendData, place[0])
 			window.close()
@@ -112,8 +112,8 @@ window.addEventListener('load', function load(event){
 		ipcRenderer.send('addImg')
 	})
 	$('#lien6').on('click', function(){
-		fs.readdir(chemin+"/../www/media/factory", function(err, files) {
-			var dir_img = document.getElementById('span_image_dir') 
+		fs.readdir(chemin+"/www/media/factory", function(err, files) {
+			var dir_img = document.getElementById('span_image_dir')
 			$("#span_image_dir").empty()
 			if(files.length%2==0){
 				for (var i=0; i < files.length; i=i+2) dir_img.innerHTML += "<tr><td>"+files[i]+"</td><td>"+files[i+1]+"</td></tr>"
@@ -125,12 +125,12 @@ window.addEventListener('load', function load(event){
 		})
 	})
 	$('#lien7').on('click', function(){
-		fs.readdir(chemin+"/../www/media/factory", function(err, files){
+		fs.readdir(chemin+"/www/media/factory", function(err, files){
 			var file1 = files.filter(word => word!="gamepad.png")
 			var file2 = file1.filter(word => word!="keyboard.png")
 			file2.forEach(function(file){
 				if (file2.length!=0){
-					fs.unlink(chemin+"/../www/media/factory/"+file, function(err){ if (err) return console.log(err)})
+					fs.unlink(chemin+"/www/media/factory/"+file, function(err){ if (err) return console.log(err)})
 				}
 			})
 		})
@@ -145,7 +145,7 @@ window.addEventListener('load', function load(event){
 		} else {
 			path.forEach(function(pt) {
 				var name = pt.substring(pt.lastIndexOf("\\"))
-				fs.copyFile(pt, chemin+'/../www/media/factory/'+name, function(err){ if (err) return console.log(err)})
+				fs.copyFile(pt, chemin+'/www/media/factory/'+name, function(err){ if (err) return console.log(err)})
 			})
 		}
 	})

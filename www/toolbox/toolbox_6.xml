@@ -47,10 +47,8 @@
 			<block type="masaylo_BUZZER_PLAY">
 				<value name="frecuencia"><shadow type="math_number"><field name="NUM">1000</field></shadow></value>
 				<value name="duracion"><shadow type="math_number"><field name="NUM">1000</field></shadow></value>
-
-	
 			</block>
-
+			<block type="masaylo_GORJEO"></block>
 	</category>
 	<category name="CAT_ESCORNABOT" colour="#C39BD3">
 			<block type="escornabot_init"></block>
@@ -110,6 +108,12 @@
 			<block type="otto9_gestureh"></block>
 			<block type="otto9_arms"></block>
 			<block type="otto9_armsAngle">
+			<value name="angle"><shadow type="math_number"><field name="NUM">90</field></shadow></value>
+			</block>
+			<block type="otto9_legsAngle">
+			<value name="angle"><shadow type="math_number"><field name="NUM">90</field></shadow></value>
+			</block>
+			<block type="otto9_footsAngle">
 			<value name="angle"><shadow type="math_number"><field name="NUM">90</field></shadow></value>
 			</block>
 			<block type="otto9_obstacle"></block>

@@ -83,6 +83,7 @@ Code.initLanguage = function() {
   $('#span_contact').text(Blockly.Msg['span_contact']);
   $('#btn_close_config').text(Blockly.Msg['btn_close']);
   $('#btn_valid_config').text(Blockly.Msg['btn_valid']);
+  $('#btn_valid_config').text(Blockly.Msg['btn_valid']);
   $('#btn_valid_config_ffau').text(Blockly.Msg['btn_valid']);
   $('#btn_close_msg').text(Blockly.Msg['btn_close']);
   $('#btn_valid_msg').text(Blockly.Msg['btn_valid']);

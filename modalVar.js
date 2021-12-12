@@ -14,7 +14,6 @@ document.getElementById('btn_variable').onclick = function() {
 }
 window.onload=function() {
 	document.getElementById("var_name").focus()
-	
 	var options = ipcRenderer.sendSync("openDialog", "")
 	var params = JSON.parse(options)
 	document.getElementById("title").innerHTML = params.label

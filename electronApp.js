@@ -1,29 +1,41 @@
-//AVISO A NAVEGANTES: TENGO QUE MEJORAR EL CONTROL DEL MÓDULO SERIAL PORT
-/* 
-He probado todo esto (no sé qué ha funcionado y qué no):
-npm install --save-dev electron-rebuild
-npm install --save serialport
-npm rebuild
-	app.allowRendererProcessReuse=false (en la función app.on('ready'))
-
-*/
 var {electron, ipcMain, app, BrowserWindow, globalShortcut, dialog} = require('electron')
-var { autoUpdater } = require("electron-updater")
-var path = require('path')
+
+app.allowRendererProcessReuse = false
+var iconPath='';
+var windowURL='';
+var pathtermWindow='';
+var pathmodalVar='';
+var path = require('path');
 var mainWindow, termWindow, factoryWindow, promptWindow, promptOptions, promptAnswer, htmlWindow, gamesWindow
-autoUpdater.autoDownload = false
-autoUpdater.logger = null
+
+//Función de creación de ventana principal
 function createWindow() {
-	mainWindow = new BrowserWindow({ width: 1000, height: 625,
-		 icon: path.join(__dirname, '/www/media/logo.ico'), 
-		 frame: false, movable: true,        webPreferences: {
-		contextIsolation: false,
-        nodeIntegration: true,
-        nodeIntegrationInWorker: true,
-        enableRemoteModule: true
-	}})
+
+
+	if (process.platform=='win32'){
+iconPath='./www/media/icon.png';
+windowURL=path.join(__dirname, './www/index.html');
+pathtermWindow=path.join(__dirname, "./www/term.html");
+pathmodalVar=path.join(__dirname, "./www/modalVar.html");
+
+	}
+	if (process.platform=='linux'){
+iconPath= path.join(__dirname, '/www/media/logo.png');
+windowURL='file://' + __dirname + '/www/index.html';
+pathtermWindow='file://' + __dirname + '/www/term.html';
+pathmodalVar='file://' + __dirname + '/www/modalVar.html';
+	}
+	mainWindow = new BrowserWindow({width: 1000, height: 625, 
+		icon:iconPath , frame: false, movable: true,
+	//	icon: path.join(__dirname, '/www/media/logoCabecera.png')
+webPreferences:{
+	contextIsolation: false,
+	nodeIntegration: true,
+	nodeIntegrationInWorker: true,
+	enableRemoteModule: true
+}})
+//Si es Windows y se ha hecho click en archivos de extensión x, estos se cargan
 	if (process.platform == 'win32' && process.argv.length >= 2) {
-		console.log(path.join(__dirname, './www/index.html'));
 		var file = process.argv[1]
 		if (file.endsWith(".bloc")||file.endsWith(".ino")||file.endsWith(".py")) {
 			mainWindow.loadURL(path.join(__dirname, './www/index.html?url='+file))
@@ -31,81 +43,85 @@ function createWindow() {
         if (file.endsWith(".www")||file.endsWith(".html")) {
 			mainWindow.loadURL(path.join(__dirname, './www/ffau.html?url='+file))
 		}
-		console.log('cargando...');
-		mainWindow.loadURL(path.join(__dirname, './www/index.html'))
-
+		mainWindow.loadURL(windowURL);
 	} else {
-		console.log('no es windows?')
-		mainWindow.loadURL(path.join(__dirname, './www/index.html'))
+		console.log(process.platform);
+		console.log("comando anterior: "+iconPath)
+		console.log('comando: '+windowURL);
+	mainWindow.loadURL(windowURL)
 	}
 	mainWindow.setMenu(null)
 	mainWindow.on('closed', function () {
 		mainWindow = null
 	})
 }
+//Función de creación de consola
 function createTerm() {
-	termWindow = new BrowserWindow({ webPreferences: {
-		contextIsolation: false,
-		nodeIntegrationInWorker: true,
-		nodeIntegration: true,
-		enableRemoteModule: true
-	  },width: 640, height: 560, 'parent': mainWindow, resizable: false, movable: true, frame: false, modal: true}) 
-	termWindow.loadURL(path.join(__dirname, "./www/term.html"))
+	termWindow = new BrowserWindow({width: 640, height: 560, 'parent': mainWindow, 
+	webPreferences:{
+		nodeIntegration:true,contextIsolation:false,enableRemoteModule:true
+	},resizable: false, movable: true, frame: false, modal: true})
+	termWindow.loadURL(pathtermWindow)
 	termWindow.setMenu(null)
-	termWindow.on('closed', function () { 
-		termWindow = null 
+	termWindow.on('closed', function () {
+		termWindow = null
 	})
 }
+//Esta función parece replicar la de creación de consola
 function createRepl() {
-	termWindow = new BrowserWindow({ webPreferences: {
-		nodeIntegration: true
-	  },width: 640, height: 515, 'parent': mainWindow, resizable: false, movable: true, frame: false, modal: true}) 
-	termWindow.loadURL(path.join(__dirname, "./www/repl.html"))
+	termWindow = new BrowserWindow({width: 640, height: 515, 'parent': mainWindow,
+	webPreferences:{
+		nodeIntegration:true
+	}, resizable: false, movable: true, frame: false, modal: true})
+	termWindow.loadURL('file://' + __dirname + '/www/term.html')
 	termWindow.setMenu(null)
-	termWindow.on('closed', function () { 
-		termWindow = null 
+	termWindow.on('closed', function () {
+		termWindow = null
 	})
 }
+//Creación de nuevos bloques (a eliminar)
 function createfactory() {
-	factoryWindow = new BrowserWindow({webPreferences: {
-		nodeIntegration: true
-	  },width: 1000, height: 625, 'parent': mainWindow, resizable: true, movable: true, frame: false})
-	factoryWindow.loadURL(path.join(__dirname, "./www/factory.html"))
+	factoryWindow = new BrowserWindow({width: 1000, height: 625, 'parent': mainWindow, resizable: true, movable: true, frame: false})
+	factoryWindow.loadURL('file://' + __dirname + '/www/factory.html')
 	factoryWindow.setMenu(null)
-	factoryWindow.on('closed', function () { 
-		factoryWindow = null 
+	factoryWindow.on('closed', function () {
+		factoryWindow = null
 	})
 }
+//Creo que esta es la capa principal de la ventana
 function createHTML() {
-	htmlWindow = new BrowserWindow({webPreferences: {
-		nodeIntegration: true
-	  },width: 1000, height: 625, resizable: true, movable: true, frame: false})
-	htmlWindow.loadURL(path.join(__dirname, "./www/ffau.html"))
+	htmlWindow = new BrowserWindow({width: 1000, height: 625,
+		webPreferences:{
+			nodeIntegration:true
+		},
+		 resizable: true, movable: true, frame: false})
+	htmlWindow.loadURL('file://' + __dirname + '/www/fau.html')
 	htmlWindow.setMenu(null)
-	htmlWindow.on('closed', function () { 
-		htmlWindow = null 
+	htmlWindow.on('closed', function () {
+		htmlWindow = null
 	})
 }
 function createGames() {
-	gamesWindow = new BrowserWindow({webPreferences: {
-		nodeIntegration: true
-	  },width: 1000, height: 625, icon: './www/media/gamepad.png', resizable: true, movable: true})
-	gamesWindow.loadURL(path.join(__dirname, "./www/games/index.html"))
-	gamesWindow.on('closed', function () { 
-		gamesWindow = null 
+	gamesWindow = new BrowserWindow({width: 1000, height: 625, icon: '/www/media/gamepad.png',
+	webPreferences:{
+		nodeIntegration:true
+	},
+	 resizable: true, movable: true})
+	gamesWindow.loadURL('file://' + __dirname + '/www/games/index.html')
+	gamesWindow.on('closed', function () {
+		gamesWindow = null
 	})
 }
 function promptModal(options, callback) {
 	promptOptions = options
-	promptWindow = new BrowserWindow({webPreferences: {
-		contextIsolation: false,
-		nodeIntegrationInWorker: true,
-		nodeIntegration: true,
-		enableRemoteModule: true
-	  },width:360, height: 135, 'parent': mainWindow, resizable: false, movable: true, frame: false, modal: true})
-	promptWindow.loadURL(path.join(__dirname, "./www/modalVar.html"))
-	promptWindow.on('closed', function () { 
-		promptWindow = null 
+	promptWindow = new BrowserWindow({width:360, height: 135, 'parent': mainWindow
+	,webPreferences:{
+		nodeIntegration:true,contextIsolation:false
+	},
+	 resizable: false, movable: true, frame: false, modal: true})
+	promptWindow.loadURL(pathmodalVar);
+	promptWindow.on('closed', function () {
+		promptWindow = null
 		callback(promptAnswer)
 	})
 }
@@ -116,8 +132,6 @@ function refresh(mainWindow = BrowserWindow.getFocusedWindow()) {
 	mainWindow.webContents.reloadIgnoringCache()
 }
 app.on('ready',  function() {
-	app.allowRendererProcessReuse=false
-
 	createWindow()
 	globalShortcut.register('F8', open_console)
 	globalShortcut.register('F5', refresh)
@@ -134,29 +148,27 @@ app.on('window-all-closed', function() {
 	if (htmlWindow) htmlWindow.webContents.executeJavaScript('localStorage.setItem("pwd", "")')
 	if (process.platform !== 'darwin') app.quit()
 })
-ipcMain.on("version", function() {
-	autoUpdater.checkForUpdates()  
-})
+
 ipcMain.on("prompt", function() {
-	createTerm()  
+	createTerm()
 })
 ipcMain.on("repl", function() {
-	createRepl()  
+	createRepl()
 })
 ipcMain.on("factory", function() {
-	createfactory()       
+	createfactory()
 })
 ipcMain.on("html", function() {
-	createHTML()       
+	createHTML()
 })
 ipcMain.on("games", function() {
-	createGames()       
+	createGames()
 })
 ipcMain.on("appendBlock", function(event, data1, data2, data3) {
     mainWindow.webContents.send('BlockAppended', data1, data2, data3)
 })
 ipcMain.on("reload", function(event) {
-	mainWindow.loadURL(path.join(__dirname, './www/index.html'))
+	mainWindow.loadURL('file://' + __dirname + '/www/index.html')
 })
 ipcMain.on("openDialog", function(event, data) {
     event.returnValue = JSON.stringify(promptOptions, null, '')
@@ -166,35 +178,74 @@ ipcMain.on("closeDialog", function(event, data) {
 })
 ipcMain.on("modalVar", function(event, arg) {
 	promptModal(
-		{"label": arg, "value": "", "ok": "OK"}, 
+		{"label": arg, "value": "", "ok": "OK"},
 	    function(data) {
 	       event.returnValue = data
         }
-	)       
+	)
 })
 ipcMain.on('save-bin', function(event) {
-	dialog.showSaveDialog(mainWindow,{
-		title: 'Exporter les binaires',
-		defaultPath: 'Programme.hex',
-		filters: [{ name: 'Binaires', extensions: ['hex']}]
-	},
-	function(filename){
-		event.sender.send('saved-bin', filename)
+	
+	var archivo=dialog.showSaveDialog(mainWindow,{
+		title: 'Exportar los binarios',
+		defaultPath: 'Programa.hex',
+		filters: [{ name: 'Binarios', extensions: ['hex']}]
+	})
+	.then(result=>{
+	
+		archivo=result.filePath;
+		if (path.extname(archivo)==""){archivo=archivo+'.hex'}
+		event.sender.send('saved-bin', archivo)
 	})
 })
+ipcMain.on('save-png', function(event) {
+	var archivo=dialog.showSaveDialog(mainWindow,{
+		title: 'Guardar en formato.PNG',
+		defaultPath: 'Captura',
+		filters: [{ name: 'Images', extensions: ['png'] }]
+	}
+	).then(result=>{
+		archivo=result.filePath;
+		if (path.extname(archivo)==""){archivo=archivo+'.png'}
+		event.sender.send('saved-png', archivo);
 
+	})
+})
 ipcMain.on('save-png-html', function(event) {
 	dialog.showSaveDialog(htmlWindow,{
-		title: 'Enregistrer au format .PNG',
-		defaultPath: 'Capture',
+		title: 'Guardar en formato .PNG',
+		defaultPath: 'Captura',
 		filters: [{ name: 'Images', extensions: ['png'] }]
 	},
 	function(filename){
-		event.sender.send('saved-png-html', filename)
+		archivo=result.filePath;
+		if (path.extname(archivo)==""){archivo=archivo+'.png'}
+		event.sender.send('saved-png-html', archivo)
 	})
 })
+ipcMain.on('save-png-factory', function(event) {
+	dialog.showSaveDialog(factoryWindow,{
+		title: 'Guardar en formato .PNG',
+		defaultPath: 'Captura',
+		filters: [{ name: 'Images', extensions: ['png'] }]
+	},
+	function(filename){
+		event.sender.send('saved-png-factory', filename)
+	})
+})
+ipcMain.on('save-ino', function(event) {
+	 var archivo=dialog.showSaveDialog(mainWindow,{
+		title: 'Guardar en formato.INO',
+		defaultPath: 'Programa',
+		filters: [{ name: 'Arduino', extensions: ['ino'] }]
+	}).then(result=>{
+		archivo=result.filePath;
+		if (path.extname(archivo)==""){archivo=archivo+'.ino'}
+		event.sender.send('saved-ino', archivo);
 
+	});
 
+})
 ipcMain.on('save-py', function(event) {
 	dialog.showSaveDialog(mainWindow,{
 		title: 'Enregistrer au format .PY',
@@ -206,43 +257,21 @@ ipcMain.on('save-py', function(event) {
 	})
 })
 ipcMain.on('save-bloc', function(event) {
-	dialog.showSaveDialog(mainWindow,{
-		title: 'Guardar en formato .BLOC',
+
+	var archivo=dialog.showSaveDialog(mainWindow,{
+		title: 'Guardar el diagrama .BLOC',
 		defaultPath: 'Programa',
-		filters: [{ name: 'Blocklino', extensions: ['bloc'] }]
-	}).then((result)=>{
-		
-	event.sender.send('saved-bloc',result.filePath)
-})
-})
-ipcMain.on('save-png-factory', function(event) {
-	dialog.showSaveDialog(factoryWindow,{
-		title: 'Guardar imagen en formato .PNG',
-		defaultPath: 'Imagen',
-		filters: [{ name: 'Images', extensions: ['png'] }]
-	},
-	function(filename){
-		event.sender.send('saved-png-factory', filename)
-	})
-})
-ipcMain.on('save-ino', function(event) {
-	dialog.showSaveDialog(mainWindow,{
-		title: 'Guardar en formato .INO',
-		defaultPath: 'Programa',
-		filters: [{ name: 'Arduino', extensions: ['ino'] }]
+		properties:[{showOverwriteConfirmation:'true'}],
+		filters: [{ name: 'MasayloBlockly', extensions: ['bloc']}]
+	}).then(result => {
+		archivo=result.filePath;
+		if (path.extname(archivo)==""){archivo=archivo+'.bloc'}
+
+		event.sender.send('saved-bloc',archivo);
+
 	}
-	).then((result)=>{
-		event.sender.send('saved-ino',result.filePath)
-	})
-})
-ipcMain.on('save-png', function(event) {
-	dialog.showSaveDialog(mainWindow,{
-		title: 'Guardar en formato .PNG',
-		defaultPath: 'Imagen',
-		filters: [{ name: 'Images', extensions: ['png'] }]
-	}).then((result)=>{
-		event.sender.send('saved-png',result.filePath)
-	})
+)
+event.sender.send('saved-bloc',archivo);
 })
 ipcMain.on('save-html', function(event) {
 	dialog.showSaveDialog(htmlWindow,{
@@ -275,15 +304,16 @@ ipcMain.on('save-bf', function(event) {
 	})
 })
 ipcMain.on('save-csv', function(event) {
-	
-dialog.showSaveDialog(mainWindow,{
-		title: 'Exportar datos en formato CSV',
+	var archivo=dialog.showSaveDialog(mainWindow,{
+		title: 'Guardar los datos en formato .CSV',
 		defaultPath: 'Programa',
 		filters: [{ name: 'donnees', extensions: ['csv'] }]
-	}).then((result)=>{
-		event.sender.send('saved-csv', result.filePath);
-
-	})
+	}).then(result=> {
+		archivo=result.filePath;
+		if (path.extname(archivo)==""){archivo=archivo+'.csv'}
+		event.sender.send('saved-csv', archivo);
+	}
+	)
 })
 ipcMain.on('addMedias', function(event) {
 	dialog.showOpenDialog(htmlWindow,{
@@ -316,42 +346,8 @@ ipcMain.on('openBF', function(event) {
 		event.sender.send('openedBF', filename)
 	})
 })
-autoUpdater.on('error', function(error) {
-	dialog.showErrorBox('Error: ', error == null ? "unknown" : (error.stack || error).toString())
-})
-autoUpdater.on('update-available', function() {
-	dialog.showMessageBox(mainWindow,{
-		type: 'none',
-		title: 'Mise à jour',
-		message: "Une nouvelle version est disponible, voulez-vous la télécharger et l'installer maintenant ?",
-		buttons: ['oui', 'non'],
-		cancelId: 1,
-		noLink: true
-	},
-	function(buttonIndex)  {
-		if (buttonIndex === 0) {
-			autoUpdater.downloadUpdate()
-		}
-		else {
-			return
-		}
-	})
-})
-autoUpdater.on('update-not-available', function() {
-	dialog.showMessageBox(mainWindow,{
-		title: 'Mise à jour',
-		message: 'Votre version est à jour.'
-	})
-})
-autoUpdater.on('update-downloaded', function() {
-	dialog.showMessageBox(mainWindow,{
-		title: 'Mise à jour',
-		message: "Téléchargement terminé, l'application va s'installer puis redémarrer..."
-	}, function() {
-		setImmediate(function(){
-			autoUpdater.quitAndInstall()
-		})
-	})
-})
+
+
+
 module.exports.open_console = open_console
 module.exports.refresh = refresh

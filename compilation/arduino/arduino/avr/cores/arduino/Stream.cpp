@@ -27,7 +27,7 @@
 
 #define PARSE_TIMEOUT 1000  // default number of milli-seconds to wait
 
-// private method to read stream with timeout
+// protected method to read stream with timeout
 int Stream::timedRead()
 {
   int c;
@@ -39,7 +39,7 @@ int Stream::timedRead()
   return -1;     // -1 indicates timeout
 }
 
-// private method to peek stream with timeout
+// protected method to peek stream with timeout
 int Stream::timedPeek()
 {
   int c;
@@ -218,7 +218,6 @@ size_t Stream::readBytes(char *buffer, size_t length)
 
 size_t Stream::readBytesUntil(char terminator, char *buffer, size_t length)
 {
-  if (length < 1) return 0;
   size_t index = 0;
   while (index < length) {
     int c = timedRead();

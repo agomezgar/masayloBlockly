@@ -687,18 +687,7 @@ function looseEscape(input) {
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;")
-        .replace(/á/g, "&aacute;")
-        .replace(/é/g, "&eacute;")
-        .replace(/í/g, "&iacute;")
-        .replace(/ó/g, "&oacute;")
-        .replace(/ú/g, "&uacute;")
-        .replace(/Á/g, "&Aacute;")
-        .replace(/É/g, "&Eacute;")
-        .replace(/Í/g, "&Iacute;")
-        .replace(/Ó/g, "&Oacute;")
-        .replace(/Ú/g, "&Uacute;")
-        .replace(/º/g,"&deg;");
+        .replace(/'/g, "&#039;");
 }
 function CSSEscape(input) {
     return input
