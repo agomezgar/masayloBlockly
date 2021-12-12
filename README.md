@@ -15,7 +15,7 @@ Tools without which nothing would not have been possible :
 - [Blockly](https://developers.google.com/blockly)
 - [Bootstrap](http://getbootstrap.com)
 - [Font Awesome](http://fontawesome.io)
-- [JQuerry](https://jquery.com)
+- [JQuery](https://jquery.com)
 - [electron](https://electronjs.org/)
 - [electron-builder](https://github.com/electron-userland/electron-builder)
 - [Serialport](https://github.com/node-serialport/node-serialport)
