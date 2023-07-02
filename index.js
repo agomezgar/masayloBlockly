@@ -1,11 +1,13 @@
 ﻿var { ipcRenderer, shell, clipboard } = require("electron")
-var remote = require('electron').remote
+var remote = require('@electron/remote')
 var { exec } = require('child_process')
+const { SerialPort } = require('serialport')
 var sp = require('serialport')
 var fs = require('fs')
 var fs2 = require("fs-extra");
 var tableify = require('tableify')
-var appVersion = window.require('electron').remote.app.getVersion()
+
+var appVersion = require('@electron/remote').app.getVersion(); 
 var chemin = process.resourcesPath
 var checkBox = document.getElementById('verifyUpdate')
 var portserie = document.getElementById('portserie')
@@ -21,7 +23,42 @@ var btn_bin=document.getElementById('btn_bin')
 btn_bin.title=Blockly.Msg.bin 
 const homedir = require('os').homedir();
 const extract = require('extract-zip');
-
+async function listSerialPorts() {
+	await SerialPort.list().then((ports, err) => {
+	  if(err) {
+		console.log(err.message);
+		return
+	  } 
+	  var opt = document.createElement('option')
+		opt.value = "com"
+		opt.text = Blockly.Msg.com1
+		portserie.appendChild(opt)
+		ports.forEach(function(port) {
+			if (port.vendorId){
+				var opt = document.createElement('option')
+				opt.value = port.path
+				opt.text = port.path
+				portserie.appendChild(opt)
+			}
+		});
+		localStorage.setItem("nb_com",ports.length)
+		if (portserie.options.length > 1) {
+			portserie.selectedIndex = 1
+			localStorage.setItem("com",portserie.options[1].value)
+		} else {
+			localStorage.setItem("com","com")
+		}
+  
+	  if (ports.length === 0) {
+		document.getElementById('error').textContent = 'No ports discovered'
+	  }
+	  else {
+		
+	  }
+  
+return ports
+	})
+  }
 //Pendiente de resolver la sincronicidad
 var instalado=true;
 /* function instalarArduino(callback1, callback2, callback3,callback4,callback5){
@@ -250,7 +287,9 @@ window.addEventListener('load', function load(event){
 			messageUSB.innerHTML = tableHTML
 		}
 	}) */
-	sp.list().then(ports => {
+	 SerialPort.list().then((ports, err) => {
+	
+		console.log("Puertos "+ports)
 		var opt = document.createElement('option')
 		opt.value = "com"
 		opt.text = Blockly.Msg.com1
@@ -271,7 +310,7 @@ window.addEventListener('load', function load(event){
 			localStorage.setItem("com","com")
 		}
 	})
-	sp.list().then(ports => {
+	SerialPort.list().then(ports => {
 		var messageUSB = document.getElementById('usb')
 		if (ports.length === 0) {
 			messageUSB.innerHTML = "No hay puertos disponibles"
@@ -281,7 +320,7 @@ window.addEventListener('load', function load(event){
 		}
 	});
 	$('#portserie').mouseover(function(){
-		sp.list().then(ports =>  {
+		SerialPort.list().then(ports =>  {
 			var nb_com = localStorage.getItem("nb_com"), menu_opt = portserie.getElementsByTagName('option')
 			if(ports.length > nb_com){
 				ports.forEach(function(port){
@@ -757,6 +796,10 @@ if (instalado){
 				})
 			} else {
 				console.log('grabando hex');
+				console.log("Type: "+type);
+				console.log("Micro: "+micro);
+				console.log("Build:"+build);
+				console.log("cpu: "+cpu)
 				var dir2=homedir+('/.masaylo/arduino/flash.sh ');
 				exec(dir2 + com+ ' ' + ' '+type+' '+micro+' '+build+' '+cpu , {cwd: homedir+'/.masaylo/arduino'} , function(err, stdout, stderr){
 					console.log("Puerto: "+com)
