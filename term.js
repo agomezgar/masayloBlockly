@@ -1,7 +1,15 @@
 var { ipcRenderer } = require("electron")
-var remote = require('electron')
+var remote = require('@electron/remote')
 var fs = require('fs')
-const {BrowserWindow} = require('electron').remote
+const {SerialPort} = require("serialport")
+const { ReadlineParser } = require('@serialport/parser-readline')
+//var line = SerialPort.parsers.Readline;
+var moniteur = document.getElementById('fenetre_term')
+var baud = parseInt(localStorage.getItem("baudrate"))
+var com = localStorage.getItem("com")
+var s_p = new SerialPort({path: com, baudRate:baud})		
+
+//const {BrowserWindow} = require('electron').remote
 window.addEventListener('load', function load(event) {
 	var win = remote;
 	var connexion = false;
@@ -24,13 +32,10 @@ window.addEventListener('load', function load(event) {
 		window.close()
 	}
 	document.getElementById('btn_connect').onclick = function(event) {
-		const SerialPort = require("serialport")
-		var line = SerialPort.parsers.Readline;
-		var moniteur = document.getElementById('fenetre_term')
-		var baud = parseInt(localStorage.getItem("baudrate"))
-		var com = localStorage.getItem("com")
-		var s_p = new SerialPort(com,{baudRate:baud, autoOpen:false})
-		var parser = s_p.pipe(new line({ delimiter: '\n' }))
+
+		//const port = new SerialPort({ path: '/dev/ROBOT', baudRate: 14400 })
+		const parser = s_p.pipe(new ReadlineParser({ delimiter: '\r\n' }))
+		//var parser = s_p.pipe(new line({ delimiter: '\n' }))
 		if (connexion){
 			document.getElementById('btn_connect').innerHTML="<span class='fa fa-play'> Arrancar</span>"
 			document.getElementById('btn_envoi').disabled=true
