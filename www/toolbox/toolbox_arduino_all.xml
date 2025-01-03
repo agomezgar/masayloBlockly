@@ -101,6 +101,49 @@
 				<block type="otto9_app"></block>
 
 	</category>
+		<category name="CAT_RUPERTOBOT" colour="#f5b041">
+				<block type="rupertobot_arranca"></block>
+				<block type="rupertobot_avanza_vueltas">
+				<value name="spinNumber"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+				</block>
+				<block type="rupertobot_retrocede_vueltas">
+				<value name="spinNumber"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+				</block>
+				<block type="rupertobot_avanza_distancia">
+				<value name="distance"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+				</block>
+				<block type="rupertobot_retrocede_distancia">
+				<value name="distance"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+				</block>
+				<block type="rupertobot_izquierda_vueltas">
+				<value name="spinNumber"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+				</block>
+				<block type="rupertobot_derecha_vueltas">
+				<value name="spinNumber"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+				</block>
+				<block type="rupertobot_izquierda_grados">
+				<value name="spinNumber"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+				</block>
+				<block type="rupertobot_derecha_grados">
+				<value name="spinNumber"><shadow type="math_number"><field name="NUM">1</field></shadow></value>
+				</block>
+				<block type="rupertobot_stop"></block>
+				<block type="rupertobot_buzzer_init">
+				<value name="buzzer"><shadow type="math_number"><field name="NUM">12</field></shadow></value>
+				</block>
+				<block type="rupertobot_buzzer_play">
+				<value name="frecuencia"><shadow type="math_number"><field name="NUM">1000</field></shadow></value>
+				<value name="duracion"><shadow type="math_number"><field name="NUM">1000</field></shadow></value>
+			</block>
+				<block type="rupertobot_ir_init"></block>
+			<block type="rupertobot_blackleft"></block>
+			<block type="rupertobot_blackright"></block>
+			<block type="rupertobot_blankleft"></block>
+			<block type="rupertobot_blankright"></block>
+			<block type="rupertobot_us_init"></block>
+			<block type="rupertobot_get_distance"></block>
+			<block type="rupertobot_gorjeo"></block>
+	</category>
 	<category name="CAT_OTTOH" colour="#747F8A">
 			<block type="otto9_homeh"></block>
 			<block type="otto9_calibrationh"></block>
@@ -479,3 +522,4 @@
 		</category>
 	</category>
 </toolbox>
+
