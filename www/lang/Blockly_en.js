@@ -1,7 +1,7 @@
 'use strict';
 goog.provide ( 'Blockly.Msg.fr');
 goog.require ( 'Blockly.Msg');
-
+Blockly.Msg.alreadyCompiled="The program was compiled previously";
 Blockly.Msg.INOUT_HIGH_LEVEL = "1(high state)";
 Blockly.Msg.INOUT_LOW_LEVEL = "0(low state)";
 Blockly.Msg.ARD_TYPE_CHAR = "character";

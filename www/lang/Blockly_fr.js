@@ -1,7 +1,7 @@
 'use strict';
 goog.provide('Blockly.Msg.fr');
 goog.require('Blockly.Msg');
-
+Blockly.Msg.alreadyCompiled="Ce programme avait déjà été compilé";
 Blockly.Msg.INOUT_HIGH_LEVEL="1(état haut)";
 Blockly.Msg.INOUT_LOW_LEVEL="0(état bas)";
 Blockly.Msg.ARD_TYPE_CHAR="caractère";

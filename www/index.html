@@ -5,18 +5,18 @@
 	<title> MASAYLO BLOCKLY </title>
 	<!-- JavaScript -->
 	<!-- <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script> -->
-
+	<script  type="text/javascript"  src="js/jquery.min.2.1.3.js"></script>
 	<script  type="text/javascript"  src="js/blockly.min.js"></script>
 	<script  type="text/javascript" src="js/type.js"></script>
 	<script  type="text/javascript" src="js/types.js"></script>
 	<script  type="text/javascript" src="js/typings.js"></script>
 	<script  type="text/javascript" src="js/generate_python.js"></script>
 	<script  type="text/javascript" src="js/generate_cpp.js"></script>
-	<script  type="text/javascript" src="js/blocklino.js"></script>
 	<script  type="text/javascript" src="js/boards.js"></script>
-	<script type="text/javascript"  src="js/jquery.min.2.1.3.js" onload="window.$ = window.jQuery = module.exports;"></script>
-	<script  type="text/javascript" src="js/bootstrap.toggle.min.js"></script>
-	<script  type="text/javascript" src="js/bootstrap.min.3.3.6.js"></script>
+<!-- Aquí iban las cargas de los script jquery, bootstrap, bootstraptoggle y blocklino-->
+<script  type="text/javascript" src="js/blocklino.js"></script>
+<script  type="text/javascript" src="js/bootstrap.toggle.min.js"></script>
+<script  type="text/javascript" src="js/bootstrap.min.3.3.6.js"></script>
 	<script  type="text/javascript" src="js/prettify.min.js"></script>
 	<script  type="text/javascript" src="js/rvb.js"></script>
 	<script  type="text/javascript" src="blocs&generateurs/blockly_blocs.js"></script>
@@ -34,6 +34,7 @@
 	<script  type="text/javascript" src="blocs&generateurs/FRESNEL/Addon_Arduino.js"></script>
 	<script  type="text/javascript" src="blocs&generateurs/masaylo.js"></script>
 	<script  type="text/javascript" src="blocs&generateurs/escornabot.js"></script>
+	<script  type="text/javascript" src="blocs&generateurs/rupertobot.js"></script>
 	<script type="text/javascript"  src="blocs&generateurs/otto.js"></script>
 	<script type="text/javascript"  src="blocs&generateurs/FRESNEL/Bitwise_operators_blocs.js"></script>
 	<script type="text/javascript"  src="blocs&generateurs/FRESNEL/Fresnel_serial_console.js"></script>
@@ -139,8 +140,6 @@
 						<option value="pro8" >Arduino Pro / Pro Mini 3.3V</option>
 						<option value="uno" >Arduino Uno</option>
 						<option value="yun" >Arduino Yun</option>
-						<option value="atmegang" >DAGU RS027</option>
-						<option value="pro16" >DAGU RS040</option>
 						<option value="esp8266">Node MCU v2</option>
 						<option value="esp32">ESP 32</option>  
 						<!-- <option value="micro_bit" >micro_bit</option> -->
@@ -840,11 +839,19 @@
 	</div>
 </body>
 <script>
-	$(window).load(function(){$(".loading").fadeOut("slow")});
+	// Asegurarse de que jQuery se haya cargado antes de usarlo
+	if (window.jQuery) {
+	  // Ocultar la pantalla de carga cuando la ventana esté completamente cargada
+	  $(window).on('load', function() {
+		$(".loading").fadeOut("slow");
+	  });
+	}
+  
+	// Cargar y configurar el editor ACE
 	ace.require("ace/ext/language_tools");
 	var editor = ace.edit("content_code");
 	editor.session.setTabSize(2);
 	editor.setShowPrintMargin(false);
-	require('../index')
-</script>
+  </script>
+<script src="../index.js"></script>
 </html>

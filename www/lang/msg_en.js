@@ -8,13 +8,15 @@ Blockly.Msg.doYouWantIoT="We've installed Arduino cards. Maybe you'd like to wor
 Blockly.Msg.installationFinished="Then we've finished. You can work now!";
 Blockly.Msg.librariesInstalled='Libraries installed properly. We need to install Arduino cards, too. Wait a moment...';
 Blockly.Msg.allFinished="Installation process finished";
-Blockly.Msg.closeWindowandWait="Close this window and wait a little";
+Blockly.Msg.closeWindowandWait="Installation successful. Close this window and repeat the process.";
 Blockly.Msg.survol_check = "CHECK";
 Blockly.Msg.survol_flash = "UPLOAD";
 Blockly.Msg.survol_bin = "EXPORT binaries";
 Blockly.Msg.com1 = "Port";
 Blockly.Msg.com2 = "Select a port !" ;
 Blockly.Msg.check = "Check";
+Blockly.Msg.installing = "Installing...";
+
 Blockly.Msg.upload = "Upload";
 Blockly.Msg.error = "ERROR= Blocks not connected";
 Blockly.Msg.verif = "Check the program first !"

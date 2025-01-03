@@ -92,6 +92,7 @@ window.addEventListener('load', function load(event){
 	$('#btn_open').on('click', function(){
 		ipcRenderer.send('openBF')
 	})
+
 	$('#lien1').on('click', function(){
 		loadBF("./examples/factory/model1.bf")
 		$("#exampleModal").modal("hide")

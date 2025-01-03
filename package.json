@@ -1,5 +1,5 @@
 {
- "name": "masaylo",
+ "name": "masayloblockly",
  "version": "1.2.1",
  "description": "Entorno de desarrollo para programación en robótica",
  "author": "Antonio Gómez García y Lola Nogueras Atance, about a great job made by Fontaine Jean Philippe <antonio@aprendizdetecnologo.com>",
@@ -32,8 +32,9 @@
  ],
  "scripts": {
   "start": "electron .",
-  "compilerlinux": "build --linux --x64",
-  "compilerlinux32": "build --linux --ia32",
+  "compilerlinux": "electron-builder --linux --x64",
+  "compilerlinux32": "electron-builder --linux --ia32",
+  "build": "electron-packager . app --platform win32 --arch x64 --out dist/",
   "builder": "electron-builder",
   "pack": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds",
   "deb64": "electron-installer-debian --src dist/linux-unpacked --dest dist/installers/ --arch amd64 --config debconfig.json",
@@ -46,7 +47,7 @@
  },
  "build": {
   "appId": "com.electron.masaylo",
-  "buildDependenciesFromSource": true,
+  "buildDependenciesFromSource": false,
   "asar": false,
   "directories": {
    "buildResources": "./build",
@@ -84,7 +85,7 @@
     "deb",
     "AppImage"
    ],
-   "icon": "build/appM2.png"
+   "icon": "build/images/iconsLinux"
   },
   "fileAssociations": [
    {
@@ -136,6 +137,10 @@
      "**/*"
     ]
    },
+   {
+    "from": "node_modules/serialport/build/Release",
+    "to": "app.asar.unpacked/node_modules/serialport/build/Release"
+   },
    "README.md",
    "LICENSE.md",
    "config.json",
@@ -163,23 +168,23 @@
   "url": "https://github.com/agomezgar/masayloBlockly"
  },
  "devDependencies": {
-  "electron": "latest",
+  "electron": "^33.2.1",
   "electron-builder": "^23.6.0",
-  "electron-packager": "^17.1.1",
+  "electron-packager": "^17.1.2",
   "electron-rebuild": "^3.2.9"
  },
  "dependencies": {
   "@electron/remote": "^2.0.10",
   "ajv": "^6.10.0",
+  "blockly": "^11.1.1",
   "build": "^0.1.4",
   "child_process": "1.0.2",
   "decompress-zip": "^0.2.2",
-  "electron-installer-debian": "^3.1.0",
   "extract-zip": "^2.0.1",
   "fs-extra": "^8.1.0",
   "ftp": "0.3.10",
   "node-gyp": "^7.1.2",
-  "serialport": "^10.3.0",
+  "serialport": "^13.0.0",
   "tableify": "^1.1.0",
   "virtual-serialport": "^4.0.0"
  }

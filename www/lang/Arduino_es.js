@@ -5,6 +5,8 @@ goog.require ( 'Blockly.Msg');
 Blockly.Msg.com1 = "Seleccione puerto USB";
 Blockly.Msg.com2 = "🔔 Debe seleccionar el puerto USB" ;
 Blockly.Msg.check = "Compilar...";
+Blockly.Msg.installing = "Instalando...";
+
 Blockly.Msg.upload = "Cargar...";
 Blockly.Msg.error = "🔔 ERROR: Bloques no conectados.";
 Blockly.Msg.verif = "🔔 Compile primero, por favor. "
@@ -66,6 +68,7 @@ Blockly.Msg.CAT_DFPLAYER = "♫ Audio";
 Blockly.Msg.CAT_OTTO = "🤖 Otto";
 Blockly.Msg.CAT_OTTOH = "🦸‍♂️ Humanoide";
 Blockly.Msg.CAT_MASAYLO="🚗 Masaylo";
+Blockly.Msg.CAT_RUPERTOBOT="🎃 Rupertobot"
 Blockly.Msg.CAT_ESCORNABOT="🚜 Escornabot";
 Blockly.Msg.CAT_OLED_U8G = "▀ OLED";
 Blockly.Msg.CAT_NEOPIXEL = "☄ NeoPixel";
@@ -570,6 +573,30 @@ Blockly.Msg.MASAYLO_TIME_TEXT="Duración (ms): ";
 Blockly.Msg.MASAYLO_BUZZER_PLAY_TOOLTIP="Indica la frecuencia en Hz y la duración en milisegundos de tu nota...";
 Blockly.Msg.MASAYLO_GORJEO_TEXT="Gorjeo";
 Blockly.Msg.MASAYLO_GORJEO_TOOLTIP="Masaylo emite un ruidito parecido al del robot R2-D2 de Star Wars";
+////////////RUPERTOBOT Robot////////// ONLY TRANSLATE THE LEFT PART INSIDE ["THIS YES" ,NOT]
+Blockly.Msg.RUPERTOBOT_START_TEXT = "Inicio";
+Blockly.Msg.RUPERTOBOT_START_TOOLTIP="Declara un nuevo robot de la clase rupertobot";
+Blockly.Msg.RUPERTOBOT_URL="https://agomezgar.github.io/rupertobot";
+Blockly.Msg.RUPERTOBOT_MODE_CHOICE= [["Débil", "(1)"], ["Fuerte", "(2)"]];
+Blockly.Msg.RUPERTOBOT_SPIN_FORWARD="Mover adelante por vueltas: ";
+Blockly.Msg.RUPERTOBOT_SPIN_BACKWARD="Mover atrás por vueltas: ";
+Blockly.Msg.RUPERTOBOT_SPIN_NUMBER="Nº: ";
+Blockly.Msg.RUPERTOBOT_SPIN_TOOLTIP="Indicar número de vueltas y velocidad en rpm"
+Blockly.Msg.RUPERTOBOT_SPIN_VELOCITY_TEXT="Velocidad: "
+Blockly.Msg.RUPERTOBOT_SPIN_VELOCITY=[["Lento", "5"], ["Intermedio", "10"], ["Rápido", "15"]];
+Blockly.Msg.RUPERTOBOT_DISTANCE_FORWARD="Avanzar distancia: ";
+Blockly.Msg.RUPERTOBOT_DISTANCE_BACKWARD="Retroceder distancia: ";
+Blockly.Msg.RUPERTOBOT_DISTANCE_TEXT="cm ";
+Blockly.Msg.RUPERTOBOT_DISTANCE_TOOLTIP="Indicar la distancia en cm ";
+Blockly.Msg.RUPERTOBOT_SPIN_LEFT_TOOLTIP="Girar a la izquierda indicando el número de vueltas."
+Blockly.Msg.RUPERTOBOT_SPIN_LEFT="Giro a izquierda por vueltas: "
+Blockly.Msg.RUPERTOBOT_SPIN_RIGHT_TOOLTIP="Girar a la derecha indicando el número de vueltas."
+Blockly.Msg.RUPERTOBOT_SPIN_RIGHT="Giro a derecha por vueltas: "
+Blockly.Msg.RUPERTOBOT_GRADES_LEFT_TOOLTIP="Girar a la izquierda indicando el número de grados sexagesimales."
+Blockly.Msg.RUPERTOBOT_GRADES_LEFT="Giro a izquierda por grados: "
+Blockly.Msg.RUPERTOBOT_GRADES_RIGHT_TOOLTIP="Girar a la derecha indicando el número de grados sexagesimales."
+Blockly.Msg.RUPERTOBOT_GRADES_RIGHT="Giro a derecha por grados: "
+Blockly.Msg.RUPERTOBOT_IR_TOOLTIP="Para usar al Rupertobot como siguelíneas";
 
 ////////////ESCORNABOT Robot////////// ONLY TRANSLATE THE LEFT PART INSIDE ["THIS YES" ,NOT]
 Blockly.Msg.ESCORNABOT_MODE_TEXT="Iniciar Escornabot";

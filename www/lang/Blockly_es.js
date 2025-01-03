@@ -300,7 +300,7 @@ Blockly.Msg.TEXT_PRINT_TITLE = "mostrar %1";
 Blockly.Msg.TEXT_PRINT_TOOLTIP = "Muestra un texto, número o cualquier otro tipo de valor";
 Blockly.Msg.TEXT_TEXT_TOOLTIP = "Una letra, palabra o frase";
 Blockly.Msg.TEXT_TEXT2_TOOLTIP = "Sólo un carácter";
-
+Blockly.Msg.alreadyCompiled="Este programa ya se había compilado";
 Blockly.Msg.TODAY = "Hoy";
 Blockly.Msg.UNDO = "Cancelar";
 Blockly.Msg.VARIABLES_AS = "tipo";

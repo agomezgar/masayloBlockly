@@ -2,6 +2,7 @@
 
 goog.provide('Blockly.Blocks.otto_');
 goog.provide('Blockly.Blocks.masaylo_');
+goog.provide('Blockly.Blockls.rupertobot_');
 goog.provide('Blockly.Blocks.arduino');
 goog.require('Blockly.Blocks');
 goog.require('Blockly.Types');

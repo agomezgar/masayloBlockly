@@ -9,13 +9,14 @@ Blockly.Msg.doYouWantIoT="Ya hemos instalado las tarjetas Arduino. ¿Piensas tra
 Blockly.Msg.installationFinished="Entonces ya hemos terminado. ¡Ya puedes empezar!";
 Blockly.Msg.librariesInstalled='Ya hemos instalado las librerías. Falta instalar las tarjetas Arduino...';
 Blockly.Msg.allFinished="Instalación finalizada";
-Blockly.Msg.closeWindowandWait="Cierra esta ventana y espera a que te avise";
+Blockly.Msg.closeWindowandWait="Todo instalado. Cierra esta ventana y repite el proceso.";
 Blockly.Msg.survol_check = "COMPILAR";
 Blockly.Msg.survol_flash = "CARGAR";
 Blockly.Msg.survol_bin = "EXPORTAR binarios";
 Blockly.Msg.com1 = "Puerto";
 Blockly.Msg.com2 = "¡Seleccione un puerto!" ;
 Blockly.Msg.check = "Compilar";
+Blockly.Msg.installing = "Instalando...";
 Blockly.Msg.upload = "Cargar";
 Blockly.Msg.error = "ERROR= ¡Bloques no conectados";
 Blockly.Msg.verif = "¡Compile primero el programa !"

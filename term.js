@@ -1,67 +1,78 @@
-var { ipcRenderer } = require("electron")
-var remote = require('@electron/remote')
-var fs = require('fs')
-const {SerialPort} = require("serialport")
-const { ReadlineParser } = require('@serialport/parser-readline')
+
 //var line = SerialPort.parsers.Readline;
 var moniteur = document.getElementById('fenetre_term')
-var baud = parseInt(localStorage.getItem("baudrate"))
 var com = localStorage.getItem("com")
-var s_p = new SerialPort({path: com, baudRate:baud})		
-
-//const {BrowserWindow} = require('electron').remote
-window.addEventListener('load', function load(event) {
-	var win = remote;
-	var connexion = false;
-	if (localStorage.getItem('baudrate')==null){
-		alert('no se había definido velocidad de conexión. Se pone por defecto a 9600 baudios');
-		localStorage.setItem("baudrate","9600");
+var connexion=false;
+var velocidad=document.getElementById('velocidad');
+var baud=parseInt(velocidad.value);
+localStorage.setItem("baudrate",baud);
+	velocidad.onchange=function(){
+		alert("Cambiando velocidad a: "+velocidad.value+" baudios.");
+		localStorage.setItem("baudrate",velocidad.value);
+		baud=parseInt(localStorage.getItem("baudrate"));
 	}
+
 	document.getElementById('btn_envoi').disabled=true
+	document.getElementById('fenetre_term').disabled=true;
+	document.getElementById('schbox').disabled=true;
+	velocidad.disabled=false;
 	document.getElementById('btn_efface').onclick = function() {
 		document.getElementById('fenetre_term').textContent = ''
 	}
 	document.getElementById('btn_envoi').onclick = function() {
 		var entree = document.getElementById('schbox').value
-		if (s_p.isOpen) {
+		if (connexion){
+			window.api.enviar("escribirPuertoSerie",(entree));
+
 			document.getElementById('fenetre_term').innerHTML += entree+"<br>"
-			s_p.write(entree)
+			document.getElementById('schbox').value='';
 		}
 	}
 	document.getElementById('btn_quit').onclick = function() {
 		window.close()
+		if (connexion){
+			window.api.enviar("cierraPuertoSerie");
+		}
 	}
 	document.getElementById('btn_connect').onclick = function(event) {
 
-		//const port = new SerialPort({ path: '/dev/ROBOT', baudRate: 14400 })
-		const parser = s_p.pipe(new ReadlineParser({ delimiter: '\r\n' }))
-		//var parser = s_p.pipe(new line({ delimiter: '\n' }))
+		
 		if (connexion){
-			document.getElementById('btn_connect').innerHTML="<span class='fa fa-play'> Arrancar</span>"
-			document.getElementById('btn_envoi').disabled=true
-			s_p.close(function (err) { moniteur.innerHTML += 'paro<br>' })
+			document.getElementById('btn_connect').innerHTML="<span class='fa fa-play'> Arrancar</span>";
+			document.getElementById('btn_envoi').disabled=true;
+			document.getElementById('schbox').disabled=true;
+			document.getElementById('velocidad').disabled=false;
 			connexion = false
+			window.api.enviar("cierraPuertoSerie");
 		} else {
 			document.getElementById('btn_connect').innerHTML="<span class='fa fa-pause'> Parar</span>"
-			document.getElementById('btn_envoi').disabled=false
-			s_p.open(function (err) { moniteur.innerHTML += 'inicio de la comunicación<br>' ;
-		console.log(err.message);
-	})
-			connexion = true
-			parser.on('data', function(data){
-				if (connexion){
-					console.log('data');
-					moniteur.innerHTML += data + "<br>"
-					moniteur.scrollTop = moniteur.scrollHeight;
-					moniteur.animate({scrollTop: moniteur.scrollHeight})
-				}
-			})
+			document.getElementById('btn_envoi').disabled=false;
+			document.getElementById('schbox').disabled=false;
+			document.getElementById('velocidad').disabled=true;
+			var puerto={path:localStorage.getItem("com"),
+				baud:localStorage.getItem("baudrate")
+			}
+			console.log("Abriendo puerto: "+puerto.path+" a velocidad "+puerto.baud+" baudios");
+			window.api.enviar("abrePuertoSerie",puerto);
+
+			connexion = true;
+
 		}
 	}
-	document.getElementById('btn_csv').onclick = function(event) {
-		ipcRenderer.send('save-csv')
-	}
-	ipcRenderer.on('saved-csv', function(event, path){
+ 	window.api.recibir("leerDatosSerie",(data)=>{
+		if (connexion){
+			console.log('data');
+			moniteur.innerHTML += data + "<br>"
+			moniteur.scrollTop = moniteur.scrollHeight;
+			moniteur.animate({scrollTop: moniteur.scrollHeight})
+		}
+	}) 
+ 	document.getElementById('btn_csv').onclick = function(event) {
+		var code = document.getElementById('fenetre_term').innerHTML
+		code = code.split('<br>').join('\n')
+		window.api.enviar('save-csv',code)
+	} 
+/* 	ipcRenderer.on('saved-csv', function(event, path){
 		var code = document.getElementById('fenetre_term').innerHTML
 		code = code.split('<br>').join('\n')
 		if (path === null) {
@@ -72,4 +83,4 @@ window.addEventListener('load', function load(event) {
 			})
 		}
 	})
-})
+ */
