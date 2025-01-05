@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Serial API Example</title>
+</head>
+<body>
+  <h1>Conexión al puerto serie</h1>
+  <button onclick="requestPort()">Conectar al puerto serie</button>
+  <button onclick="readData()">Leer datos</button>
+  <input id="dataInput" type="text" placeholder="Escribe algo...">
+  <button onclick="writeData(document.getElementById('dataInput').value)">Enviar datos</button>
+  <button onclick="closePort()">Cerrar puerto</button>
+
+  <script src="serial.js"></script>
+</body>
+</html>
