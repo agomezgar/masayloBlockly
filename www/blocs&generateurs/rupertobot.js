@@ -428,22 +428,22 @@ this.setColour("#a1ee44");
 };
 Blockly.Arduino['rupertobot_gorjeo']=function(block){
 
-Blockly.Arduino.includes_['rupertobot_gorjeo']='int k = 0;\nint i = 0;\nint v = 0;\nlong random_int(int a,int b)\n'+
-' {\n  if (a > b) {\n    int c = a;\n    a = b;\n    b = c;\n  }\n  return random(a,b);\n}\n'+
-'void frase2() {\n  k = random_int(1000, 2001);\n  for (i=0 ; i<=random_int(100, 2001) ; i=i+(1)) {\n'+
-'ruperti.tono(k + i * 2,random_int(0.9, 3));\n  }\n  for (i=0 ; i<=random_int(100, 1001) ; i=i+(1)) {\n'+
-'ruperti.tono(k + i * -10,random_int(0.9, 3));\n  }\n}\nvoid frase1() {\n  k = random_int(1000, 2001);\n'+
-'for (i=0 ; i<=random_int(100, 2001) ; i=i+(1)) {\n    ruperti.tono(k + i * -2,random_int(0.9, 3));\n'+
-'  }\n  for (i=0 ; i<=random_int(100, 1001) ; i=i+(1)) {\n    ruperti.tono(k + i * 10,random_int(0.9, 3));\n  }\n}\n'+
-'void gorjeo() {\n  v = random_int(1, 8);\n  switch (v) {\n  case 1:\n    frase1();\n'+
-'    break;\n   case 2:\n    frase2();\n    break;\n   case 3:\n    frase1();\n    frase2();\n'+
-'    break;\n   case 4:\n    frase1();\n    frase2();\n    frase1();\n    break;\n   case 5:\n'+
-'    frase1();\n    frase2();\n    frase1();\n    frase2();\n    frase1();\n    break;\n'+
-'   case 6:\n    frase2();\n    frase1();\n    frase2();\n    break;\n  }\n  k = 2000;\n'+
-'  for (i=0 ; i<=random_int(3, 10) ; i=i+(1)) {\n    ruperti.tono(k + random_int(-1700, 2001),random_int(70, 171));\n'+
-'    delay(random_int(0, 31));\n  }\n}';
-Blockly.Arduino.setups_['masaylo_gorjeo_init']='randomSeed(analogRead(A0));\n';
-
-var code = 'gorjeo();\n';
-return code;
-};
+  Blockly.Arduino.includes_['rupertobot_gorjeo']='int k = 0;\nint i = 0;\nint v = 0;\nlong random_int2(int a,int b)\n'+
+  ' {\n  if (a > b) {\n    int c = a;\n    a = b;\n    b = c;\n  }\n  return random(a,b);\n}\n'+
+  'void frase2() {\n  k = random_int2(1000, 2001);\n  for (i=0 ; i<=random_int2(100, 2001) ; i=i+(1)) {\n'+
+  'ruperti.tono(k + i * 2,random_int2(0.9, 3));\n  }\n  for (i=0 ; i<=random_int2(100, 1001) ; i=i+(1)) {\n'+
+  'ruperti.tono(k + i * -10,random_int2(0.9, 3));\n  }\n}\nvoid frase1() {\n  k = random_int2(1000, 2001);\n'+
+  'for (i=0 ; i<=random_int2(100, 2001) ; i=i+(1)) {\n    ruperti.tono(k + i * -2,random_int2(0.9, 3));\n'+
+  '  }\n  for (i=0 ; i<=random_int2(100, 1001) ; i=i+(1)) {\n    ruperti.tono(k + i * 10,random_int2(0.9, 3));\n  }\n}\n'+
+  'void gorjeo() {\n  v = random_int2(1, 8);\n  switch (v) {\n  case 1:\n    frase1();\n'+
+  '    break;\n   case 2:\n    frase2();\n    break;\n   case 3:\n    frase1();\n    frase2();\n'+
+  '    break;\n   case 4:\n    frase1();\n    frase2();\n    frase1();\n    break;\n   case 5:\n'+
+  '    frase1();\n    frase2();\n    frase1();\n    frase2();\n    frase1();\n    break;\n'+
+  '   case 6:\n    frase2();\n    frase1();\n    frase2();\n    break;\n  }\n  k = 2000;\n'+
+  '  for (i=0 ; i<=random_int2(3, 10) ; i=i+(1)) {\n    ruperti.tono(k + random_int2(-1700, 2001),random_int2(70, 171));\n'+
+  '    delay(random_int2(0, 31));\n  }\n}';
+  Blockly.Arduino.setups_['rupertobot_gorjeo_init']='randomSeed(analogRead(A0));\n';
+  
+  var code = 'gorjeo();\n';
+  return code;
+  };
