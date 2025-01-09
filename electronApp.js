@@ -775,6 +775,7 @@ async function creaMasaylo() {
         console.log("Creando directorio ./masaylo: "+dir);
 		try{
 		fs.mkdirSync(dir);
+		fs.mkdirSync(path.join(dir,'drivers'));
 		console.log('1. directorio creado correctamente: ');
 			}catch (err){
 			console.log("Error creando carpeta ./masaylo: "+err);
@@ -817,6 +818,8 @@ async function copiaArchivosCompilacion(){
 try{
 	console.log("Copiando los archivos de "+fuente+" a "+dir);
 	fs.cpSync(fuente, dir,{recursive:true});
+	fs.cpSync(path.join(__dirname,'drivers'),path.join(dir,'drivers'),{recursive:true});
+
 	console.log("3.Copiados los archivos");
 	mainWindow.webContents.send("archivosCopiados");
 
